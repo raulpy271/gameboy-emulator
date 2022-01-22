@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    int t = 10;
-    gameboy::console game;
-    gameboy::memory mem;
+  int t = 10;
+  gameboy::Console game;
+  gameboy::Memory mem;
 }

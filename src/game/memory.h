@@ -1,16 +1,17 @@
 
 #include "primitives.h"
 
-namespace gameboy
+namespace gameboy {
+
+class Memory 
 {
-    class memory 
-    {
-        private:
-            byte cartridge[32 * KB];
+ private:
+  Byte cartridge[32 * KB];
 
-        public:
-            byte get_in_addr(address add);
+ public:
+  Byte GetInAddr(Address add);
 
-            void set_in_addr(address add, byte byte_to_insert);
-    };
+  void SetInAddr(Address add, Byte byte_to_insert);
+};
+
 }
