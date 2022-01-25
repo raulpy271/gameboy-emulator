@@ -4,6 +4,7 @@ IMPLEMENTATIONS=`find src/ | grep ".cpp"`
 OBJECT_DIR=objects
 MAIN_FILE=main.cpp
 CMAKE_BUILD=build
+TEST_EXE=tests/unit_test
 
 clean:
 	rm -rf $(OBJECT_DIR)/* $(EXE_FILE) $(CMAKE_BUILD)/*
@@ -20,6 +21,9 @@ build-cmake:
 
 run-cmake: build-cmake
 	./$(CMAKE_BUILD)/$(EXE_FILE)
+
+run-tests: build-cmake
+	./$(CMAKE_BUILD)/$(TEST_EXE)
 
 run: build
 	./$(EXE_FILE)
