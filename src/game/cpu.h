@@ -20,6 +20,7 @@ struct Registers {
 class CPU {
  private:
   void JP_a16_Instruction(Memory mem);
+  void LD_d8_Instruction(Memory mem);
 
  public:
   struct Registers reg;
