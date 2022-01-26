@@ -16,8 +16,11 @@ build-obj:
 build: build-obj
 	g++ $(MAIN_FILE) $(OBJECT_DIR)/*.o -o $(EXE_FILE)
 
+generate-buildsystem: 
+	cd $(CMAKE_BUILD) && cmake ..
+
 build-cmake:
-	cd $(CMAKE_BUILD) && cmake .. && cmake --build .
+	 cmake --build $(CMAKE_BUILD)
 
 run-cmake: build-cmake
 	./$(CMAKE_BUILD)/$(EXE_FILE)
