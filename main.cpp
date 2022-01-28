@@ -4,16 +4,7 @@
 
 using namespace std;
 
-int main()
-{
-  int t = 10;
+int main() {
   gameboy::Console game;
-  game.mem.SetInAddr(0x100, 0xc3);
-  game.mem.SetInAddr(0x101, 0x50);
-  game.mem.SetInAddr(0x102, 0x01);
-  game.mem.SetInAddr(0x150, 0xff);
-  game.cpu.reg.PC = 0x100;
-  cout << game.cpu.reg.PC << endl;
-  game.cpu.execute_intruction(game.mem);
-  cout << game.cpu.reg.PC << endl;
+  return 0;
 }
