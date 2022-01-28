@@ -6,4 +6,6 @@
 
 #define LD_d8 0x3E
 
+#define LD_a16 0xEA
+
 #endif  // GAME_OPCODES_H_
