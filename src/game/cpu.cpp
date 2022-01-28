@@ -16,7 +16,7 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::LD_d8_Instruction(mem);
     break;
 
-  case (LD_a16):
+  case (LD_a16_A):
     CPU::LD_a16_Instruction(mem);
     break;
 

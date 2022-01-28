@@ -32,7 +32,7 @@ TEST(Instructions, LD_d8_instruction) {
 TEST(Instructions, LD_a16_instruction) {
   gameboy::Console game;
   Address address_to_store = 0x150;
-  game.mem.SetInAddr(0x100, LD_a16);
+  game.mem.SetInAddr(0x100, LD_a16_A);
   game.mem.SetInAddr(0x101, 0x50);
   game.mem.SetInAddr(0x102, 0x01);
   game.mem.SetInAddr(address_to_store, 0x0);
