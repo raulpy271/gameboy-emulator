@@ -19,13 +19,14 @@ struct Registers {
 
 class CPU {
  private:
-  void JP_a16_Instruction(Memory mem);
-  void LD_d8_Instruction(Memory mem);
+  void JP_a16_Instruction(Memory* mem);
+  void LD_d8_Instruction(Memory* mem);
+  void LD_a16_Instruction(Memory* mem);
 
  public:
   struct Registers reg;
 
-  void execute_intruction(Memory mem);
+  void execute_intruction(Memory* mem);
 };
 
 }
