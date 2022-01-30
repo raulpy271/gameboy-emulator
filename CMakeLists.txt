@@ -12,8 +12,6 @@ FetchContent_Declare(
   URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
 )
 
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(GTKMM REQUIRED gtkmm-3.0)
 
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
@@ -21,6 +19,8 @@ FetchContent_MakeAvailable(googletest)
 
 if(NOT DEFINED ENV{test_setup})
     message("No tests")
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(GTKMM REQUIRED gtkmm-3.0)
     add_executable(main main.cpp)
     target_link_libraries(main PRIVATE game)
     target_link_libraries(main PRIVATE ${GTKMM_LIBRARIES})
