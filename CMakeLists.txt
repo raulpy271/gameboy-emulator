@@ -11,9 +11,16 @@ FetchContent_Declare(
   googletest
   URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
 )
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK REQUIRED gtkmm-3.0)
+
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 add_executable(main main.cpp)
-target_link_libraries(main PRIVATE game)
+target_link_libraries(main PRIVATE game ${GTKMM_LIBRARIES})
+
+target_include_directories(main PRIVATE ${GTKMM_INCLUDE_DIRS})
+target_link_directories(main PRIVATE ${GTKMM_LIBRARY_DIRS})
 
