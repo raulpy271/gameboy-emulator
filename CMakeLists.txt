@@ -18,10 +18,17 @@ pkg_check_modules(GTKMM REQUIRED gtkmm-3.0)
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-add_executable(main main.cpp)
-target_link_libraries(main PRIVATE game ${GTKMM_LIBRARIES})
 
-target_include_directories(main PRIVATE ${GTKMM_INCLUDE_DIRS})
-target_link_directories(main PRIVATE ${GTKMM_LIBRARY_DIRS})
-target_compile_options(main PRIVATE ${GTKMM_CFLAGS_OTHER})
+if(NOT DEFINED ENV{test_setup})
+    message("No tests")
+    add_executable(main main.cpp)
+    target_link_libraries(main PRIVATE game)
+    target_link_libraries(main PRIVATE ${GTKMM_LIBRARIES})
+    target_include_directories(main PRIVATE ${GTKMM_INCLUDE_DIRS})
+    target_link_directories(main PRIVATE ${GTKMM_LIBRARY_DIRS})
+    target_compile_options(main PRIVATE ${GTKMM_CFLAGS_OTHER})
+else()
+    message("Test building")
+endif()
+
 
