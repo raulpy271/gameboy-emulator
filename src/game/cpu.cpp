@@ -1,4 +1,6 @@
 
+#include <bitset>
+
 #include "cpu.h"
 #include "../utils/functions.h"
 
@@ -22,6 +24,10 @@ void CPU::execute_intruction(Memory* mem) {
 
   case (LD_A_a16):
     CPU::LD_A_a16_Instruction(mem);
+    break;
+
+  case (CP_d8):
+    CPU::CP_d8_Instruction(mem);
     break;
 
   default:
@@ -63,6 +69,17 @@ void CPU::LD_A_a16_Instruction(Memory* mem) {
   Address addr_to_load_A = utils::create_address_from_two_bytes(higher_byte, lower_byte);
   reg.A = mem->GetInAddr(addr_to_load_A);
   reg.PC = reg.PC + 3;
+}
+
+void CPU::CP_d8_Instruction(Memory* mem) {
+  Address byte_to_compare_address = reg.PC + 1;
+  Byte byte_to_compare =  mem->GetInAddr(byte_to_compare_address);
+  if (byte_to_compare == reg.A) {
+    std::bitset<8> reg_F_bitset(reg.F);
+    reg_F_bitset.set(7);
+    reg.F = reg_F_bitset.to_ullong();
+  }
+  reg.PC = reg.PC + 2;
 }
 
 }
