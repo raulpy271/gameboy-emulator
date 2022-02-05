@@ -22,7 +22,13 @@ bool GameBoyWindow::cycle_handler() {
   if (cycle % 2 == 0) {
     screen_pixbuf = GameBoyWindow::create_pixbuf(100, 100, 255, 0, 0);
   } else {
-    screen_pixbuf = GameBoyWindow::create_pixbuf(100, 100, 0, 255, 0);
+    Byte tiledata[16] =
+    { 
+      0x00,0x7e, 0x2a,0x7e, 0xd5,0x7e, 0x2a,0x7e, 0x54,0x7e, 0xff,0x00, 0xff,0x00, 0x00,0x00 
+    };
+    gameboy::Tile* tile = gameboy::Tile::create_tile(&(tiledata[0]));
+    screen_pixbuf = GameBoyWindow::create_pixbuf_from_tile(tile);
+    screen_pixbuf = screen_pixbuf->scale_simple(100, 100, Gdk::InterpType::INTERP_NEAREST);
   }
   cycle++;
   screen.set(screen_pixbuf);
@@ -47,3 +53,25 @@ Glib::RefPtr<Gdk::Pixbuf> GameBoyWindow::create_pixbuf(int width, int height, in
   );
   return pixbuf;
 }
+
+Glib::RefPtr<Gdk::Pixbuf>  GameBoyWindow::create_pixbuf_from_tile(gameboy::Tile* tile) {
+  guint8* array_pixel = new guint8[3 * 8 * 8];
+  int next_pos = 0;
+  for (int i = 0; i < (8*8); i++) {
+    array_pixel[next_pos]     = tile->data[i] * 80;
+    array_pixel[next_pos + 1] = tile->data[i] * 80;
+    array_pixel[next_pos + 2] = tile->data[i] * 80;
+    next_pos += 3;
+  }
+  Glib::RefPtr<Gdk::Pixbuf> pixbuf = Gdk::Pixbuf::create_from_data(
+    array_pixel,
+    Gdk::COLORSPACE_RGB,
+    false,
+    8,
+    8,
+    8,
+    3 * 8
+  );
+  return pixbuf;
+
+} 

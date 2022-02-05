@@ -5,6 +5,8 @@ add_library(gui
     gameboy_gui.cpp
 )
 
+target_link_libraries(gui PRIVATE game)
+
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTKMM REQUIRED gtkmm-3.0)
 target_link_libraries(gui PRIVATE ${GTKMM_LIBRARIES})
