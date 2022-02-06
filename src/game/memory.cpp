@@ -14,15 +14,26 @@ MemorySegment Memory::choose_segment(Address add) {
 }
 
 Byte Memory::GetInAddr(Address add) {
-  if (add < (32 * 1024)) {
+  switch (Memory::choose_segment(add))
+  {
+  case MemorySegment::CARTRIDGE_ROM:
     return cartridge_ROM[add];
+  case MemorySegment::NO_SEGMENT:
+    return 0xff;
+  default:
+    return 0xff;
   }
-  return 0x0;
 };
 
 void Memory::SetInAddr(Address add, Byte byte_to_insert) {
-  if (add < (32 * 1024)) {
+  switch (Memory::choose_segment(add))
+  {
+  case MemorySegment::CARTRIDGE_ROM:
     cartridge_ROM[add] = byte_to_insert;
+  case MemorySegment::NO_SEGMENT:
+    return;
+  default:
+    return;
   }
 };
 
