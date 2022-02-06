@@ -10,6 +10,15 @@ MemorySegment Memory::choose_segment(Address add) {
   if (add < 0xA000) {
     return MemorySegment::VRAM;
   }
+  if (add < 0xC000) {
+    return MemorySegment::CARTRIDGE_RAM;
+  }
+  if (add < 0xD000) {
+    return MemorySegment::WRAM_0;
+  }
+  if (add < 0xE000) {
+    return MemorySegment::WRAM_N;
+  }
   return MemorySegment::NO_SEGMENT;
 }
 
