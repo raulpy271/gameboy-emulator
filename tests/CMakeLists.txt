@@ -3,7 +3,10 @@ project(unit_tests)
 
 enable_testing()
 
-add_executable(unit_test unit_test.cpp)
+add_executable(unit_test 
+  unit_test.cpp
+  memory.cpp
+)
 
 target_link_libraries(unit_test 
   gtest_main
