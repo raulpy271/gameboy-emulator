@@ -11,6 +11,7 @@ add_executable(unit_test
 target_link_libraries(unit_test 
   gtest_main
   game
+  utils
 )
 
 include(GoogleTest)

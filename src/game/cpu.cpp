@@ -3,6 +3,7 @@
 
 #include "cpu.h"
 #include "../utils/functions.h"
+#include "../utils/register_F_manipulate.h"
 
 namespace gameboy {
 
@@ -98,8 +99,7 @@ void CPU::PUSH_BC_Instruction(Memory* mem) {
 }
 
 void CPU::JP_C_a16_Instruction(Memory* mem) {
-  std::bitset<8> reg_F_bitset(reg.F);
-  if (reg_F_bitset[4]) {
+  if (utils::carry_flag(&reg.F)) {
     Address lower_byte_addr = reg.PC + 1;
     Address higher_byte_addr = reg.PC + 2;
     Byte lower_byte =  mem->GetInAddr(lower_byte_addr);
