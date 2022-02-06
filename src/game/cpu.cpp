@@ -1,6 +1,4 @@
 
-#include <bitset>
-
 #include "cpu.h"
 #include "../utils/functions.h"
 #include "../utils/register_F_manipulate.h"
@@ -84,9 +82,7 @@ void CPU::CP_d8_Instruction(Memory* mem) {
   Address byte_to_compare_address = reg.PC + 1;
   Byte byte_to_compare =  mem->GetInAddr(byte_to_compare_address);
   if (byte_to_compare == reg.A) {
-    std::bitset<8> reg_F_bitset(reg.F);
-    reg_F_bitset.set(7);
-    reg.F = reg_F_bitset.to_ullong();
+    utils::set_zero_flag(&reg.F, true);
   }
   reg.PC = reg.PC + 2;
 }

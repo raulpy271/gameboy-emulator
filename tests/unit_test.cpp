@@ -77,7 +77,7 @@ TEST(Instructions, CP_d8_instruction_true_case) {
   game.cpu.reg.F = 0b01000000;
   game.cpu.execute_intruction(&game.mem);
 
-  EXPECT_EQ(game.cpu.reg.F, 0b11000000);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), true);
   EXPECT_EQ(game.cpu.reg.PC, 0x102);
 
 }
