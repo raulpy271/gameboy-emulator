@@ -14,4 +14,6 @@
 
 #define PUSH_BC 0xC5
 
+#define JP_C_a16 0xDA
+
 #endif  // GAME_OPCODES_H_

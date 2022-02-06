@@ -25,6 +25,7 @@ class CPU {
   void LD_A_a16_Instruction(Memory* mem);
   void CP_d8_Instruction(Memory* mem);
   void PUSH_BC_Instruction(Memory* mem);
+  void JP_C_a16_Instruction(Memory* mem);
 
  public:
   struct Registers reg;

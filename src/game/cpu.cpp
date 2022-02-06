@@ -34,6 +34,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::PUSH_BC_Instruction(mem);
     break;
 
+  case (JP_C_a16):
+    CPU::JP_C_a16_Instruction(mem);
+    break;
+
   default:
     break;
   }
@@ -91,6 +95,20 @@ void CPU::PUSH_BC_Instruction(Memory* mem) {
   mem->SetInAddr(reg.SP - 2, reg.C);
   reg.SP = reg.SP - 2;
   reg.PC = reg.PC + 1;
+}
+
+void CPU::JP_C_a16_Instruction(Memory* mem) {
+  std::bitset<8> reg_F_bitset(reg.F);
+  if (reg_F_bitset[4]) {
+    Address lower_byte_addr = reg.PC + 1;
+    Address higher_byte_addr = reg.PC + 2;
+    Byte lower_byte =  mem->GetInAddr(lower_byte_addr);
+    Byte higher_byte = mem->GetInAddr(higher_byte_addr);
+    Address next_addr = utils::create_address_from_two_bytes(higher_byte, lower_byte);
+    reg.PC = next_addr;
+  } else {
+    reg.PC = reg.PC + 3;
+  }
 }
 
 }
