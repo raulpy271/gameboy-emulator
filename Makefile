@@ -1,20 +1,10 @@
 
 EXE_FILE=main
-IMPLEMENTATIONS=`find src/ | grep ".cpp"` 
-OBJECT_DIR=objects
-MAIN_FILE=main.cpp
 CMAKE_BUILD=build
 TEST_EXE=tests/unit_test
 
 clean:
-	rm -rf $(OBJECT_DIR)/* $(EXE_FILE) $(CMAKE_BUILD)/*
-
-build-obj:
-	g++ -c $(IMPLEMENTATIONS)
-	mv *.o $(OBJECT_DIR)
-
-build: build-obj
-	g++ $(MAIN_FILE) $(OBJECT_DIR)/*.o -o $(EXE_FILE)
+	rm -rf  $(EXE_FILE) $(CMAKE_BUILD)/*
 
 generate-buildsystem: 
 	cd $(CMAKE_BUILD) && cmake ..
@@ -22,11 +12,12 @@ generate-buildsystem:
 build-cmake:
 	 cmake --build $(CMAKE_BUILD)
 
+build-tests:
+	cd $(CMAKE_BUILD) && make unit_test
+
 run-cmake: build-cmake
 	./$(CMAKE_BUILD)/$(EXE_FILE)
 
-run-tests: build-cmake
+run-tests: build-tests
 	./$(CMAKE_BUILD)/$(TEST_EXE)
 
-run: build
-	./$(EXE_FILE)
