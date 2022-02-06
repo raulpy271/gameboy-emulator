@@ -94,4 +94,21 @@ TEST(Instructions, CP_d8_instruction_false_case) {
   EXPECT_EQ(game.cpu.reg.PC, 0x102);
 }
 
+TEST(Instructions, PUSH_BC_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  Address sp_old_position = game.cpu.reg.SP; 
+  game.mem.SetInAddr(0x100, PUSH_BC);
+  game.cpu.reg.B = 0x01;
+  game.cpu.reg.C = 0x02;
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP), 0x02);
+  EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP + 1), 0x01);
+  EXPECT_EQ(game.cpu.reg.SP, sp_old_position - 2);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}
+
+
+
 
