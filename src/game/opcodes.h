@@ -12,4 +12,6 @@
 
 #define CP_d8 0xFE
 
+#define PUSH_BC 0xC5
+
 #endif  // GAME_OPCODES_H_

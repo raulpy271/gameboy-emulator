@@ -30,6 +30,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::CP_d8_Instruction(mem);
     break;
 
+  case (PUSH_BC):
+    CPU::PUSH_BC_Instruction(mem);
+    break;
+
   default:
     break;
   }
@@ -80,6 +84,13 @@ void CPU::CP_d8_Instruction(Memory* mem) {
     reg.F = reg_F_bitset.to_ullong();
   }
   reg.PC = reg.PC + 2;
+}
+
+void CPU::PUSH_BC_Instruction(Memory* mem) {
+  mem->SetInAddr(reg.SP - 1, reg.B);
+  mem->SetInAddr(reg.SP - 2, reg.C);
+  reg.SP = reg.SP - 2;
+  reg.PC = reg.PC + 1;
 }
 
 }
