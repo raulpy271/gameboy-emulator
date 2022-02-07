@@ -14,6 +14,10 @@ class Console {
   CPU cpu;
 
   void initialize_registers();
+
+  void run_a_instruction_cycle();
+
+  void load_rom(Byte* rom);
 };
 
 }
