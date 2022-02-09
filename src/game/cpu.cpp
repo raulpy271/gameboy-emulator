@@ -37,6 +37,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::JP_C_a16_Instruction(mem);
     break;
 
+  case (LD_DE_d16):
+    CPU::LD_DE_a16_Instruction(mem);
+    break;
+
   default:
     break;
   }
@@ -105,6 +109,15 @@ void CPU::JP_C_a16_Instruction(Memory* mem) {
   } else {
     reg.PC = reg.PC + 3;
   }
+}
+void CPU::LD_DE_a16_Instruction(Memory* mem) {
+  Address lower_byte_addr = reg.PC + 1;
+  Address higher_byte_addr = reg.PC + 2;
+  Byte lower_byte =  mem->GetInAddr(lower_byte_addr);
+  Byte higher_byte = mem->GetInAddr(higher_byte_addr);
+  reg.D = higher_byte;
+  reg.E = lower_byte;
+  reg.PC = reg.PC + 3;
 }
 
 }

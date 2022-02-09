@@ -16,4 +16,6 @@
 
 #define JP_C_a16 0xDA
 
+#define LD_DE_d16 0x11
+
 #endif  // GAME_OPCODES_H_
