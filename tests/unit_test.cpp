@@ -137,4 +137,17 @@ TEST(Instructions, JP_C_a16_case_C_flag_set) {
   EXPECT_EQ(game.cpu.reg.PC, 0x150);
 }
 
+TEST(Instructions, LD_DE_d16_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  Address sp_old_position = game.cpu.reg.SP; 
+  game.mem.SetInAddr(0x100, LD_DE_d16);
+  game.mem.SetInAddr(0x101, 147);
+  game.mem.SetInAddr(0x102, 1);
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.D, 1);
+  EXPECT_EQ(game.cpu.reg.E, 147);
+  EXPECT_EQ(game.cpu.reg.PC, 0x103);
+}
 
