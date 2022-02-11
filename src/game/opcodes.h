@@ -18,4 +18,6 @@
 
 #define LD_DE_d16 0x11
 
+#define LD_HL_d16 0x21
+
 #endif  // GAME_OPCODES_H_
