@@ -1,5 +1,6 @@
 
 #include "cpu.h"
+#include "cpu_utils.h"
 #include "../utils/functions.h"
 #include "../utils/register_F_manipulate.h"
 
@@ -116,23 +117,11 @@ void CPU::JP_C_a16_Instruction(Memory* mem) {
 }
 
 void CPU::LD_DE_d16_Instruction(Memory* mem) {
-  Address lower_byte_addr = reg.PC + 1;
-  Address higher_byte_addr = reg.PC + 2;
-  Byte lower_byte =  mem->GetInAddr(lower_byte_addr);
-  Byte higher_byte = mem->GetInAddr(higher_byte_addr);
-  reg.D = higher_byte;
-  reg.E = lower_byte;
-  reg.PC = reg.PC + 3;
+  LD_XX_d16_Instruction(mem, &reg.PC, &reg.D, &reg.E);
 }
 
 void CPU::LD_HL_d16_Instruction(Memory* mem) {
-  Address lower_byte_addr = reg.PC + 1;
-  Address higher_byte_addr = reg.PC + 2;
-  Byte lower_byte =  mem->GetInAddr(lower_byte_addr);
-  Byte higher_byte = mem->GetInAddr(higher_byte_addr);
-  reg.H = higher_byte;
-  reg.L = lower_byte;
-  reg.PC = reg.PC + 3;
+  LD_XX_d16_Instruction(mem, &reg.PC, &reg.H, &reg.L);
 }
 
 }
