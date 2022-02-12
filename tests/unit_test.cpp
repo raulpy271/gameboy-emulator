@@ -194,3 +194,34 @@ TEST(Instructions, LD_A_aDE_instruction) {
   EXPECT_EQ(game.cpu.reg.A, value_to_load_in_A);
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
 }
+
+TEST(Instructions, LD_aHLI_A_instruction_increment_L) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, LD_aHLI_A);
+  game.mem.SetInAddr(0x150, 0x0);
+  game.cpu.reg.A = 0x10;
+  game.cpu.reg.H = 0x01;
+  game.cpu.reg.L = 0x50;
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.mem.GetInAddr(0x0150), game.cpu.reg.A);
+  EXPECT_EQ(game.cpu.reg.L, 0x51);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}
+
+TEST(Instructions, LD_aHLI_A_instruction_increment_both_registers) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, LD_aHLI_A);
+  game.mem.SetInAddr(0x01ff, 0x0);
+  game.cpu.reg.A = 0x10;
+  game.cpu.reg.H = 0x01;
+  game.cpu.reg.L = 0xff;
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.mem.GetInAddr(0x01ff), game.cpu.reg.A);
+  EXPECT_EQ(game.cpu.reg.H, 0x02);
+  EXPECT_EQ(game.cpu.reg.L, 0x00);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}
