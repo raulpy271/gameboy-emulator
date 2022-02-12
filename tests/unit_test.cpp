@@ -178,3 +178,19 @@ TEST(Instructions, LD_BC_d16_instruction) {
   EXPECT_EQ(game.cpu.reg.C, 0x0b);
   EXPECT_EQ(game.cpu.reg.PC, 0x103);
 }
+
+TEST(Instructions, LD_A_aDE_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  Byte value_to_load_in_A = 0x0a;
+  Address sp_old_position = game.cpu.reg.SP; 
+  game.mem.SetInAddr(0x100, LD_A_aDE);
+  game.mem.SetInAddr(0x150, value_to_load_in_A);
+  game.cpu.reg.A = 0x0;
+  game.cpu.reg.D = 0x01;
+  game.cpu.reg.E = 0x50;
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.A, value_to_load_in_A);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}
