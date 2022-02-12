@@ -30,4 +30,6 @@
 
 #define DEC_BC 0x0B
 
+#define LD_A_B 0x78
+
 #endif  // GAME_OPCODES_H_
