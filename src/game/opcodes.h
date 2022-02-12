@@ -28,4 +28,6 @@
 
 #define INC_DE 0x13
 
+#define DEC_BC 0x0B
+
 #endif  // GAME_OPCODES_H_

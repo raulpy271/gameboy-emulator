@@ -62,6 +62,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::INC_DE_Instruction(mem);
     break;
 
+  case (DEC_BC):
+    CPU::DEC_BC_Instruction(mem);
+    break;
+
   default:
     break;
   }
@@ -159,6 +163,11 @@ void CPU::LD_aHLI_A_Instruction(Memory* mem) {
 
 void CPU::INC_DE_Instruction(Memory* mem) {
   utils::increment_registers_pair(&reg.D, &reg.E);
+  reg.PC += 1;
+}
+
+void CPU::DEC_BC_Instruction(Memory* mem) {
+  utils::decrement_registers_pair(&reg.B, &reg.C);
   reg.PC += 1;
 }
 
