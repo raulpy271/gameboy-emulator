@@ -26,4 +26,6 @@
 
 #define LD_aHLI_A 0x22
 
+#define INC_DE 0x13
+
 #endif  // GAME_OPCODES_H_

@@ -58,6 +58,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::LD_aHLI_A_Instruction(mem);
     break;
 
+  case (INC_DE):
+    CPU::INC_DE_Instruction(mem);
+    break;
+
   default:
     break;
   }
@@ -150,6 +154,11 @@ void CPU::LD_aHLI_A_Instruction(Memory* mem) {
   Address add_of_value_to_store_A = utils::create_address_from_two_bytes(reg.H, reg.L);
   mem->SetInAddr(add_of_value_to_store_A, reg.A);
   utils::increment_registers_pair(&reg.H, &reg.L);
+  reg.PC += 1;
+}
+
+void CPU::INC_DE_Instruction(Memory* mem) {
+  utils::increment_registers_pair(&reg.D, &reg.E);
   reg.PC += 1;
 }
 
