@@ -54,6 +54,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::LD_A_aDE_Instruction(mem);
     break;
 
+  case (LD_aHLI_A):
+    CPU::LD_aHLI_A_Instruction(mem);
+    break;
+
   default:
     break;
   }
@@ -139,6 +143,13 @@ void CPU::LD_BC_d16_Instruction(Memory* mem) {
 void CPU::LD_A_aDE_Instruction(Memory* mem) {
   Address add_of_value_to_load_in_A = utils::create_address_from_two_bytes(reg.D, reg.E);
   reg.A = mem->GetInAddr(add_of_value_to_load_in_A);
+  reg.PC += 1;
+}
+
+void CPU::LD_aHLI_A_Instruction(Memory* mem) {
+  Address add_of_value_to_store_A = utils::create_address_from_two_bytes(reg.H, reg.L);
+  mem->SetInAddr(add_of_value_to_store_A, reg.A);
+  utils::increment_registers_pair(&reg.H, &reg.L);
   reg.PC += 1;
 }
 
