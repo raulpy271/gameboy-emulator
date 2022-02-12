@@ -46,6 +46,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::LD_HL_d16_Instruction(mem);
     break;
 
+  case (LD_BC_d16):
+    CPU::LD_BC_d16_Instruction(mem);
+    break;
+
   default:
     break;
   }
@@ -122,6 +126,10 @@ void CPU::LD_DE_d16_Instruction(Memory* mem) {
 
 void CPU::LD_HL_d16_Instruction(Memory* mem) {
   LD_XX_d16_Instruction(mem, &reg.PC, &reg.H, &reg.L);
+}
+
+void CPU::LD_BC_d16_Instruction(Memory* mem) {
+  LD_XX_d16_Instruction(mem, &reg.PC, &reg.B, &reg.C);
 }
 
 }

@@ -16,6 +16,8 @@
 
 #define JP_C_a16 0xDA
 
+#define LD_BC_d16 0x01
+
 #define LD_DE_d16 0x11
 
 #define LD_HL_d16 0x21
