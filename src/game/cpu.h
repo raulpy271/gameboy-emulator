@@ -29,6 +29,7 @@ class CPU {
   void LD_DE_d16_Instruction(Memory* mem);
   void LD_HL_d16_Instruction(Memory* mem);
   void LD_BC_d16_Instruction(Memory* mem);
+  void LD_A_aDE_Instruction(Memory* mem);
 
  public:
   struct Registers reg;

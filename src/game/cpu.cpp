@@ -50,6 +50,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::LD_BC_d16_Instruction(mem);
     break;
 
+  case (LD_A_aDE):
+    CPU::LD_A_aDE_Instruction(mem);
+    break;
+
   default:
     break;
   }
@@ -130,6 +134,12 @@ void CPU::LD_HL_d16_Instruction(Memory* mem) {
 
 void CPU::LD_BC_d16_Instruction(Memory* mem) {
   LD_XX_d16_Instruction(mem, &reg.PC, &reg.B, &reg.C);
+}
+
+void CPU::LD_A_aDE_Instruction(Memory* mem) {
+  Address add_of_value_to_load_in_A = utils::create_address_from_two_bytes(reg.D, reg.E);
+  reg.A = mem->GetInAddr(add_of_value_to_load_in_A);
+  reg.PC += 1;
 }
 
 }
