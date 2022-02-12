@@ -165,3 +165,16 @@ TEST(Instructions, LD_HL_d16_instruction) {
   EXPECT_EQ(game.cpu.reg.PC, 0x103);
 }
 
+TEST(Instructions, LD_BC_d16_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  Address sp_old_position = game.cpu.reg.SP; 
+  game.mem.SetInAddr(0x100, LD_BC_d16);
+  game.mem.SetInAddr(0x101, 0x0b);
+  game.mem.SetInAddr(0x102, 0xbb);
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.B, 0xbb);
+  EXPECT_EQ(game.cpu.reg.C, 0x0b);
+  EXPECT_EQ(game.cpu.reg.PC, 0x103);
+}
