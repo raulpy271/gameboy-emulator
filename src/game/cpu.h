@@ -35,6 +35,7 @@ class CPU {
   void DEC_BC_Instruction(Memory* mem);
   void LD_A_B_Instruction(Memory* mem);
   void OR_A_C_Instruction(Memory* mem);
+  void JP_NZ_a16_Instruction(Memory* mem);
 
  public:
   struct Registers reg;

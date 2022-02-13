@@ -34,4 +34,6 @@
 
 #define OR_A_C 0xB1
 
+#define JP_NZ_a16 0xC2
+
 #endif  // GAME_OPCODES_H_
