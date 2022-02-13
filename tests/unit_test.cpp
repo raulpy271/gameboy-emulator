@@ -318,7 +318,7 @@ TEST(Instructions, JP_NZ_a16_instruction_zero) {
 
   game.cpu.execute_intruction(&game.mem);
 
-  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+  EXPECT_EQ(game.cpu.reg.PC, 0x103);
 }
 
 TEST(Instructions, JP_NZ_a16_instruction_nonzero) {

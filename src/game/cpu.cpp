@@ -199,7 +199,7 @@ void CPU::OR_A_C_Instruction(Memory* mem) {
 
 void CPU::JP_NZ_a16_Instruction(Memory* mem) {
   if (utils::zero_flag(&reg.F)) {
-    reg.PC += 1;
+    reg.PC += 3;
   } else {
     Address lower_byte_addr = reg.PC + 1;
     Address higher_byte_addr = reg.PC + 2;
