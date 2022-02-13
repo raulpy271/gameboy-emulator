@@ -70,6 +70,11 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::LD_A_B_Instruction(mem);
     break;
 
+  case (OR_A_C):
+    CPU::OR_A_C_Instruction(mem);
+    break;
+
+
   default:
     break;
   }
@@ -177,6 +182,14 @@ void CPU::DEC_BC_Instruction(Memory* mem) {
 
 void CPU::LD_A_B_Instruction(Memory* mem) {
   reg.A = reg.B;
+  reg.PC += 1;
+}
+
+void CPU::OR_A_C_Instruction(Memory* mem) {
+  reg.A = reg.A | reg.C;
+  if (reg.A == 0) {
+    utils::set_zero_flag(&reg.F, true);
+  }
   reg.PC += 1;
 }
 

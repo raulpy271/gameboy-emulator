@@ -32,4 +32,6 @@
 
 #define LD_A_B 0x78
 
+#define OR_A_C 0xB1
+
 #endif  // GAME_OPCODES_H_
