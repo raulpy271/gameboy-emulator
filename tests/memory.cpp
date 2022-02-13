@@ -81,3 +81,13 @@ TEST(Memory, get_and_set_in_io_reg_and_ie) {
   EXPECT_EQ(mem.GetInAddr(0xff00), 0x50);
   EXPECT_EQ(mem.GetInAddr(0xffff), 0xf0);
 }
+
+TEST(Memory, get_and_set_in_vram) {
+  gameboy::Memory mem;
+
+  mem.SetInAddr(0x8000, 0x50);
+  mem.SetInAddr(0x9FFF, 0x60);
+
+  EXPECT_EQ(mem.GetInAddr(0x8000), 0x50);
+  EXPECT_EQ(mem.GetInAddr(0x9FFF), 0x60);
+}

@@ -32,6 +32,8 @@ Byte Memory::GetInAddr(Address add) {
     return cartridge_ROM[add];
   case MemorySegment::IO_REG_and_HRAM_and_IE:
     return IO_REG_and_HRAM_and_IE[add - 0xFF00];
+  case MemorySegment::VRAM:
+    return VRAM[add - 0x8000];
   case MemorySegment::NO_SEGMENT:
     return 0xff;
   default:
@@ -47,6 +49,9 @@ void Memory::SetInAddr(Address add, Byte byte_to_insert) {
     return;
   case MemorySegment::IO_REG_and_HRAM_and_IE:
     IO_REG_and_HRAM_and_IE[add - 0xFF00] = byte_to_insert;
+    return;
+  case MemorySegment::VRAM:
+    VRAM[add - 0x8000] = byte_to_insert;
     return;
   case MemorySegment::NO_SEGMENT:
     return;
