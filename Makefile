@@ -15,7 +15,7 @@ build-cmake:
 build-tests:
 	cd $(CMAKE_BUILD) && make unit_test
 
-run-cmake: build-cmake
+run: build-cmake
 	./$(CMAKE_BUILD)/$(EXE_FILE)
 
 run-tests: build-tests
