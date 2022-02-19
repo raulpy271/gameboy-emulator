@@ -5,12 +5,15 @@
 #include <gtkmm.h>
 
 #include "../game/tile.h"
+#include "../game/game.h"
 
 class GameBoyWindow: public Gtk::Window {
 public:
-  GameBoyWindow();
+  GameBoyWindow(gameboy::Console* game);
 
 private:
+
+  gameboy::Console* game;
 
   int cycle = 0;
 
@@ -22,9 +25,7 @@ private:
 
   bool cycle_handler();
 
-  Glib::RefPtr<Gdk::Pixbuf> create_pixbuf(int width, int height, int r, int g, int b);
-
-  Glib::RefPtr<Gdk::Pixbuf> create_pixbuf_from_tile(gameboy::Tile* tile); 
+  Glib::RefPtr<Gdk::Pixbuf> create_pixbuf_from_ppu_data();
 
 };
 

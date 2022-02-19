@@ -26,4 +26,8 @@ void decrement_registers_pair(Byte* higher_byte_reg, Byte* lower_byte_reg) {
   }
 }
 
+unsigned int integer_division(unsigned int n, unsigned int d) {
+  return (unsigned int)(n - (n % d))/d;
+}
+
 }

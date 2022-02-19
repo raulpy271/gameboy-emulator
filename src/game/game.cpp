@@ -4,6 +4,7 @@
 namespace gameboy {
 
 void Console::initialize_registers() {
+  ppu.SetMemory(&mem);
   cpu.reg.PC = 0x0100;
   cpu.reg.SP = 0xfffe;
 }

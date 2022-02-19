@@ -7,6 +7,7 @@ add_library(${PROJECT_NAME}
     game.cpp
     memory.cpp
     tile.cpp
+    ppu.cpp
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE utils)
 

@@ -5,12 +5,14 @@
 #include "primitives.h"
 #include "memory.h"
 #include "cpu.h"
+#include "ppu.h"
 
 namespace gameboy {
 
 class Console {
  public:
   Memory mem;
+  PPU ppu;
   CPU cpu;
 
   void initialize_registers();
