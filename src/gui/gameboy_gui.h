@@ -21,9 +21,9 @@ private:
 
   Glib::RefPtr<Gdk::Pixbuf> screen_pixbuf;
 
-  sigc::connection m_connection_timeout;
+  sigc::connection draw_screen_connection;
 
-  bool cycle_handler();
+  bool draw_screen_handler();
 
   Glib::RefPtr<Gdk::Pixbuf> create_pixbuf_from_ppu_data();
 

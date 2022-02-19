@@ -7,9 +7,9 @@ GameBoyWindow::GameBoyWindow(gameboy::Console* game) {
 
   set_default_size(256, 256);
 
-  m_connection_timeout = Glib::signal_timeout().connect(sigc::mem_fun(*this, &GameBoyWindow::cycle_handler), 1000);
+  sigc::slot<bool()> draw_screen_ptr = sigc::mem_fun(*this, &GameBoyWindow::draw_screen_handler);
 
-  cycle_handler();
+  draw_screen_connection = Glib::signal_timeout().connect(draw_screen_ptr, 100);
 
   screen.set(screen_pixbuf);
 
@@ -19,7 +19,10 @@ GameBoyWindow::GameBoyWindow(gameboy::Console* game) {
   show();
 }
 
-bool GameBoyWindow::cycle_handler() {
+bool GameBoyWindow::draw_screen_handler() {
+  for (int i = 0; i < 2000; i++) {
+    game->run_a_instruction_cycle();
+  }
   game->ppu.UpdateImageData();
   screen_pixbuf = GameBoyWindow::create_pixbuf_from_ppu_data();
   screen.set(screen_pixbuf);

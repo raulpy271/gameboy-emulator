@@ -20,11 +20,10 @@ public:
 
 private:
 
-  Memory* mem = 0x0;
+  Memory* mem;
 
   void ScanLine(ColorNumber* line_data, int line_number);
 
-  bool black;
 };
 
 }

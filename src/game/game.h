@@ -15,6 +15,8 @@ class Console {
   PPU ppu;
   CPU cpu;
 
+  Console();
+
   void initialize_registers();
 
   void run_a_instruction_cycle();
