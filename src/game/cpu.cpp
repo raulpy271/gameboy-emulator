@@ -1,4 +1,5 @@
 
+#include <iostream>
 #include "cpu.h"
 #include "cpu_utils.h"
 #include "../utils/functions.h"
@@ -16,6 +17,10 @@ void CPU::execute_intruction(Memory* mem) {
   
   case (LD_d8):
     CPU::LD_d8_Instruction(mem);
+    break;
+
+  case (LD_B_d8):
+    CPU::LD_B_d8_Instruction(mem);
     break;
 
   case (LD_a16_A):
@@ -79,6 +84,7 @@ void CPU::execute_intruction(Memory* mem) {
     break;
 
   default:
+    std::cout << "Invalid opcode: " << (unsigned int) opcode << std::endl;
     break;
   }
 }
@@ -96,6 +102,13 @@ void CPU::LD_d8_Instruction(Memory* mem) {
   Address add_of_value = reg.PC + 1;
   Byte value_to_load_in_A = mem->GetInAddr(add_of_value);
   reg.A = value_to_load_in_A;
+  reg.PC = reg.PC + 2;
+}
+
+void CPU::LD_B_d8_Instruction(Memory* mem) {
+  Address add_of_value = reg.PC + 1;
+  Byte value_to_load_in_B = mem->GetInAddr(add_of_value);
+  reg.B = value_to_load_in_B;
   reg.PC = reg.PC + 2;
 }
 
