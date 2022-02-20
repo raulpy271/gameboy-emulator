@@ -13,4 +13,11 @@ void LD_XX_d16_Instruction(Memory* mem, Address* PC, Byte* higher_byte_reg, Byte
   *PC = (*PC) + 3;
 }
 
+void LD_X_d8_Instruction(Memory* mem, Address* PC, Byte* X) {
+  Address add_of_value = (*PC) + 1;
+  Byte value_to_load_in_C = mem->GetInAddr(add_of_value);
+  *X = value_to_load_in_C;
+  *PC = (*PC) + 2;
+}
+
 }

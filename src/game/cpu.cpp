@@ -23,6 +23,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::LD_B_d8_Instruction(mem);
     break;
 
+  case (LD_C_d8):
+    CPU::LD_C_d8_Instruction(mem);
+    break;
+
   case (LD_a16_A):
     CPU::LD_a16_A_Instruction(mem);
     break;
@@ -99,17 +103,15 @@ void CPU::JP_a16_Instruction(Memory* mem) {
 }
 
 void CPU::LD_d8_Instruction(Memory* mem) {
-  Address add_of_value = reg.PC + 1;
-  Byte value_to_load_in_A = mem->GetInAddr(add_of_value);
-  reg.A = value_to_load_in_A;
-  reg.PC = reg.PC + 2;
+  LD_X_d8_Instruction(mem, &reg.PC, &reg.A);
 }
 
 void CPU::LD_B_d8_Instruction(Memory* mem) {
-  Address add_of_value = reg.PC + 1;
-  Byte value_to_load_in_B = mem->GetInAddr(add_of_value);
-  reg.B = value_to_load_in_B;
-  reg.PC = reg.PC + 2;
+  LD_X_d8_Instruction(mem, &reg.PC, &reg.B);
+}
+
+void CPU::LD_C_d8_Instruction(Memory* mem) {
+  LD_X_d8_Instruction(mem, &reg.PC, &reg.C);
 }
 
 void CPU::LD_a16_A_Instruction(Memory* mem) {
