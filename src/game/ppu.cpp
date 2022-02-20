@@ -38,25 +38,21 @@ void PPU::ReadTileLine(ColorNumber* arr_to_store, Address tile_line_address) {
   }
 }
 
-void PPU::ScanLine(ColorNumber* line_data, int line_number) {
+void PPU::ScanLine(ColorNumber* arr_to_store_line, int background_Y_line) {
   unsigned int tile_data_position = 0;
   unsigned int tile_reference = 0;
-  unsigned int tile_line = line_number % 8;
+  unsigned int tile_line = background_Y_line % 8;
   for (int tile_number = 0; tile_number < 32; tile_number++) {
-    tile_reference = mem->GetInAddr(0x9800 + (32 * utils::integer_division(line_number, 8)) + tile_number);
+    tile_reference = mem->GetInAddr(0x9800 + (32 * utils::integer_division(background_Y_line, 8)) + tile_number);
     tile_data_position = 0x8000 + (tile_reference * 16) + (2*tile_line);
-    ReadTileLine(line_data + (tile_number * 8), tile_data_position);
+    ReadTileLine(arr_to_store_line + (tile_number * 8), tile_data_position);
   }
 }
 
 void PPU::UpdateImageData() {
-  int i;
-  ColorNumber current_line_data[256];
+  ColorNumber* image_data_pt = &(imageData[0]);
   for (int current_line = 0; current_line < 256; current_line++) {
-    ScanLine(&current_line_data[0], current_line);
-    for (i = 0; i < 256; i++) {
-      imageData[(current_line * 256) + i] = current_line_data[i];
-    }
+    ScanLine(image_data_pt + (256 * current_line), current_line);
   }
 }
 
