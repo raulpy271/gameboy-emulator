@@ -24,6 +24,8 @@ private:
 
   void ScanLine(ColorNumber* line_data, int line_number);
 
+  void ReadTileLine(ColorNumber* arr_to_store, Address tile_line_address);
+
 };
 
 }
