@@ -87,6 +87,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::JP_NZ_a16_Instruction(mem);
     break;
 
+  case (JP_Z_a16):
+    CPU::JP_Z_a16_Instruction(mem);
+    break;
+
   default:
     std::cout << "Invalid opcode: " << (unsigned int) opcode << std::endl;
     break;
@@ -214,6 +218,19 @@ void CPU::OR_A_C_Instruction(Memory* mem) {
 
 void CPU::JP_NZ_a16_Instruction(Memory* mem) {
   if (utils::zero_flag(&reg.F)) {
+    reg.PC += 3;
+  } else {
+    Address lower_byte_addr = reg.PC + 1;
+    Address higher_byte_addr = reg.PC + 2;
+    Byte lower_byte =  mem->GetInAddr(lower_byte_addr);
+    Byte higher_byte = mem->GetInAddr(higher_byte_addr);
+    Address next_addr = utils::create_address_from_two_bytes(higher_byte, lower_byte);
+    reg.PC = next_addr;
+  }
+}
+
+void CPU::JP_Z_a16_Instruction(Memory* mem) {
+  if (!utils::zero_flag(&reg.F)) {
     reg.PC += 3;
   } else {
     Address lower_byte_addr = reg.PC + 1;
