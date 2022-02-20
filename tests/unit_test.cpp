@@ -361,3 +361,29 @@ TEST(Instructions, JP_NZ_a16_instruction_nonzero) {
 
   EXPECT_EQ(game.cpu.reg.PC, 0x0150);
 }
+
+TEST(Instructions, JP_Z_a16_instruction_zero) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, JP_Z_a16);
+  game.mem.SetInAddr(0x101, 0x50);
+  game.mem.SetInAddr(0x102, 0x10);
+  game.cpu.reg.F = 0x0;
+  utils::set_zero_flag(&game.cpu.reg.F, true);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x1050);
+}
+
+TEST(Instructions, JP_Z_a16_instruction_nonzero) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, JP_Z_a16);
+  game.cpu.reg.F = 0x0;
+  utils::set_zero_flag(&game.cpu.reg.F, false);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x103);
+}
