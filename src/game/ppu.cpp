@@ -50,9 +50,15 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int background_Y_line) {
 }
 
 void PPU::UpdateImageData() {
+  int x;
   ColorNumber* image_data_pt = &(imageData[0]);
   for (int current_line = 0; current_line < 256; current_line++) {
     ScanLine(image_data_pt + (256 * current_line), current_line);
+  }
+  for (int y = 0; y < SCREEN_Y_SIZE; y++) {
+    for (x = 0; x < SCREEN_X_SIZE; x++) {
+      screen[(y * SCREEN_Y_SIZE) + x] = imageData[(y * BACKGROUND_Y_SIZE) + x];
+    }
   }
 }
 

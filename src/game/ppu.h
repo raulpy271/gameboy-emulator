@@ -3,6 +3,7 @@
 #define GAME_PPU_H_
 
 #include "primitives.h"
+#include "hardware_definitions.h"
 #include "memory.h"
 
 namespace gameboy {
@@ -10,10 +11,9 @@ namespace gameboy {
 class PPU {
 
 public:
-  ColorNumber imageData[256 * 256];
+  ColorNumber imageData[BACKGROUND_X_SIZE * BACKGROUND_Y_SIZE];
+  ColorNumber screen[SCREEN_X_SIZE * SCREEN_Y_SIZE];
 
-  const unsigned int imageSize = 256 * 256;
-  
   void SetMemory(Memory* mem);
 
   void UpdateImageData();

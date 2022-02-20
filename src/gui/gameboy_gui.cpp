@@ -1,5 +1,6 @@
 
 #include "gameboy_gui.h"
+#include "../game/hardware_definitions.h"
 
 GameBoyWindow::GameBoyWindow(gameboy::Console* game) {
 
@@ -30,12 +31,12 @@ bool GameBoyWindow::draw_screen_handler() {
 }
 
 Glib::RefPtr<Gdk::Pixbuf> GameBoyWindow::create_pixbuf_from_ppu_data() {
-  guint8* array_pixel = new guint8[3 * game->ppu.imageSize];
+  guint8* array_pixel = new guint8[3 * SCREEN_X_SIZE * SCREEN_Y_SIZE];
   int next_pos = 0;
-  for (int i = 0; i < game->ppu.imageSize; i++) {
-    array_pixel[next_pos    ] = 80 * game->ppu.imageData[i];
-    array_pixel[next_pos + 1] = 80 * game->ppu.imageData[i];
-    array_pixel[next_pos + 2] = 80 * game->ppu.imageData[i];
+  for (int i = 0; i < SCREEN_X_SIZE * SCREEN_Y_SIZE; i++) {
+    array_pixel[next_pos    ] = 80 * game->ppu.screen[i];
+    array_pixel[next_pos + 1] = 80 * game->ppu.screen[i];
+    array_pixel[next_pos + 2] = 80 * game->ppu.screen[i];
     next_pos += 3;
   }
   Glib::RefPtr<Gdk::Pixbuf> pixbuf = Gdk::Pixbuf::create_from_data(
@@ -43,9 +44,9 @@ Glib::RefPtr<Gdk::Pixbuf> GameBoyWindow::create_pixbuf_from_ppu_data() {
     Gdk::COLORSPACE_RGB,
     false,
     8,
-    256,
-    256,
-    3 * 256 
+    SCREEN_X_SIZE,
+    SCREEN_Y_SIZE,
+    3 * SCREEN_Y_SIZE
   );
   return pixbuf;
 }
