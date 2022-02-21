@@ -57,7 +57,7 @@ void PPU::UpdateImageData() {
   }
   for (int y = 0; y < SCREEN_Y_SIZE; y++) {
     for (x = 0; x < SCREEN_X_SIZE; x++) {
-      screen[(y * SCREEN_Y_SIZE) + x] = imageData[(y * BACKGROUND_Y_SIZE) + x];
+      screen[(SCREEN_X_SIZE * y) + x] = imageData[(BACKGROUND_X_SIZE * y) + x];
     }
   }
 }

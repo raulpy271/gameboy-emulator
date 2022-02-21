@@ -6,7 +6,7 @@ GameBoyWindow::GameBoyWindow(gameboy::Console* game) {
 
   this->game = game;
 
-  set_default_size(256, 256);
+  set_default_size(SCREEN_X_SIZE, SCREEN_Y_SIZE);
 
   sigc::slot<bool()> draw_screen_ptr = sigc::mem_fun(*this, &GameBoyWindow::draw_screen_handler);
 
@@ -46,7 +46,7 @@ Glib::RefPtr<Gdk::Pixbuf> GameBoyWindow::create_pixbuf_from_ppu_data() {
     8,
     SCREEN_X_SIZE,
     SCREEN_Y_SIZE,
-    3 * SCREEN_Y_SIZE
+    3 * SCREEN_X_SIZE
   );
   return pixbuf;
 }
