@@ -21,18 +21,18 @@ void PPU::ReadTileLine(ColorNumber* arr_to_store, Address tile_line_address) {
   );
   for (int j = 0; j < 8; j++) {
     if (part_1_of_an_line[j] && part_2_of_an_line[j]) {
-      arr_to_store[8 - j] = 0;
+      arr_to_store[7 - j] = 3;
       continue;
     }
     if (part_1_of_an_line[j]) {
-      arr_to_store[(8 - j)] = 1;
+      arr_to_store[(7 - j)] = 1;
       continue;
     }
     if (part_2_of_an_line[j]) {
-      arr_to_store[(8 - j)] = 2;
+      arr_to_store[(7 - j)] = 2;
       continue;
     } else {
-      arr_to_store[(8 - j)] = 3;
+      arr_to_store[(7 - j)] = 0;
       continue;
     }
   }
