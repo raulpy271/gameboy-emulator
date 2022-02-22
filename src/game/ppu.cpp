@@ -53,20 +53,28 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int background_Y_line) {
 
 void PPU::UpdateImageData() {
   int x;
+  int y;
   const int scx = mem->GetInAddr(SCX);
+  const int scy = mem->GetInAddr(SCY);
   int x_deslocated;
+  int y_deslocated;
   ColorNumber* image_data_pt = &(imageData[0]);
   for (int current_line = 0; current_line < 256; current_line++) {
     ScanLine(image_data_pt + (256 * current_line), current_line);
   }
-  for (int y = 0; y < SCREEN_Y_SIZE; y++) {
+  for (int y = 0, y_deslocated = scy; y < SCREEN_Y_SIZE; y++) {
     for (x = 0, x_deslocated = scx; x < SCREEN_X_SIZE; x++) {
-      screen[(SCREEN_X_SIZE * y) + x] = imageData[(BACKGROUND_X_SIZE * y) + x_deslocated];
+      screen[(SCREEN_X_SIZE * y) + x] = imageData[(BACKGROUND_X_SIZE * y_deslocated) + x_deslocated];
       if (x_deslocated >= (BACKGROUND_X_SIZE - 1)) {
         x_deslocated = 0;
       } else {
         x_deslocated++;
       }
+    }
+    if (y_deslocated >= (BACKGROUND_Y_SIZE - 1)) {
+      y_deslocated = 0;
+    } else {
+      y_deslocated++;
     }
   }
 }
