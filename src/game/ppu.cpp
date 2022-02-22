@@ -1,6 +1,8 @@
 
 #include <bitset>
+
 #include "ppu.h"
+#include "hardware_registers.h"
 #include "../utils/functions.h"
 
 namespace gameboy {
@@ -51,13 +53,20 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int background_Y_line) {
 
 void PPU::UpdateImageData() {
   int x;
+  const int scx = mem->GetInAddr(SCX);
+  int x_deslocated;
   ColorNumber* image_data_pt = &(imageData[0]);
   for (int current_line = 0; current_line < 256; current_line++) {
     ScanLine(image_data_pt + (256 * current_line), current_line);
   }
   for (int y = 0; y < SCREEN_Y_SIZE; y++) {
-    for (x = 0; x < SCREEN_X_SIZE; x++) {
-      screen[(SCREEN_X_SIZE * y) + x] = imageData[(BACKGROUND_X_SIZE * y) + x];
+    for (x = 0, x_deslocated = scx; x < SCREEN_X_SIZE; x++) {
+      screen[(SCREEN_X_SIZE * y) + x] = imageData[(BACKGROUND_X_SIZE * y) + x_deslocated];
+      if (x_deslocated >= (BACKGROUND_X_SIZE - 1)) {
+        x_deslocated = 0;
+      } else {
+        x_deslocated++;
+      }
     }
   }
 }
