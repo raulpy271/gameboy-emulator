@@ -141,8 +141,11 @@ void CPU::LD_A_a16_Instruction(Memory* mem) {
 void CPU::CP_d8_Instruction(Memory* mem) {
   Address byte_to_compare_address = reg.PC + 1;
   Byte byte_to_compare =  mem->GetInAddr(byte_to_compare_address);
+  reg.F = 0;
   if (byte_to_compare == reg.A) {
     utils::set_zero_flag(&reg.F, true);
+  } else {
+    utils::set_zero_flag(&reg.F, false);
   }
   reg.PC = reg.PC + 2;
 }
