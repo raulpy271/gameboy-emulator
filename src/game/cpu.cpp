@@ -1,5 +1,7 @@
 
 #include <iostream>
+#include <utility>
+
 #include "cpu.h"
 #include "cpu_utils.h"
 #include "../utils/functions.h"
@@ -89,6 +91,10 @@ void CPU::execute_intruction(Memory* mem) {
 
   case (JP_Z_a16):
     CPU::JP_Z_a16_Instruction(mem);
+    break;
+
+  case (CALL_a16):
+    CPU::CALL_a16_Instruction(mem);
     break;
 
   default:
@@ -243,6 +249,19 @@ void CPU::JP_Z_a16_Instruction(Memory* mem) {
     Address next_addr = utils::create_address_from_two_bytes(higher_byte, lower_byte);
     reg.PC = next_addr;
   }
+}
+
+void CPU::CALL_a16_Instruction(Memory* mem) {
+  Address lower_byte_addr = reg.PC + 1;
+  Address higher_byte_addr = reg.PC + 2;
+  Byte lower_byte =  mem->GetInAddr(lower_byte_addr);
+  Byte higher_byte = mem->GetInAddr(higher_byte_addr);
+  Address next_addr = utils::create_address_from_two_bytes(higher_byte, lower_byte);
+  std::pair<Byte, Byte> PC_pair = utils::create_two_bytes_from_address(reg.PC);
+  mem->SetInAddr(reg.SP - 1, PC_pair.first);
+  mem->SetInAddr(reg.SP - 2, PC_pair.second);
+  reg.SP -= 2;
+  reg.PC = next_addr;
 }
 
 }

@@ -42,4 +42,6 @@
 
 #define JP_Z_a16 0xCA
 
+#define CALL_a16 0xCD
+
 #endif  // GAME_OPCODES_H_
