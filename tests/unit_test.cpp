@@ -387,3 +387,19 @@ TEST(Instructions, JP_Z_a16_instruction_nonzero) {
 
   EXPECT_EQ(game.cpu.reg.PC, 0x103);
 }
+
+TEST(Instructions, CALL_a16_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.cpu.reg.PC = 0x150;
+
+  game.mem.SetInAddr(0x150, CALL_a16);
+  game.mem.SetInAddr(0x151, 0x90);
+  game.mem.SetInAddr(0x152, 0x02);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x290);
+  EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP), 0x50);
+  EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP + 1), 0x01);
+}
