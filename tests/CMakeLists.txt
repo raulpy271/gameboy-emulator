@@ -7,6 +7,7 @@ add_executable(unit_test
   unit_test.cpp
   memory.cpp
   initialize_registers.cpp
+  utils.cpp
 )
 
 target_link_libraries(unit_test 
