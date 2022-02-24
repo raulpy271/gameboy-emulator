@@ -44,4 +44,6 @@
 
 #define CALL_a16 0xCD
 
+#define RET 0xC9
+
 #endif  // GAME_OPCODES_H_

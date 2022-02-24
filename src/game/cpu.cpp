@@ -97,6 +97,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::CALL_a16_Instruction(mem);
     break;
 
+  case (RET):
+    CPU::RET_Instruction(mem);
+    break;
+
   default:
     std::cout << "Invalid opcode: " << (unsigned int) opcode << std::endl;
     break;
@@ -262,6 +266,14 @@ void CPU::CALL_a16_Instruction(Memory* mem) {
   mem->SetInAddr(reg.SP - 1, PC_pair.first);
   mem->SetInAddr(reg.SP - 2, PC_pair.second);
   reg.SP -= 2;
+  reg.PC = next_addr;
+}
+
+void CPU::RET_Instruction(Memory* mem) {
+  Byte lower_byte =  mem->GetInAddr(reg.SP);
+  Byte higher_byte = mem->GetInAddr(reg.SP + 1);
+  reg.SP += 2;
+  Address next_addr = utils::create_address_from_two_bytes(higher_byte, lower_byte);
   reg.PC = next_addr;
 }
 
