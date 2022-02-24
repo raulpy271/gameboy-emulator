@@ -2,8 +2,8 @@
 #ifndef GAME_CPU_UTILS_H_
 #define GAME_CPU_UTILS_H_
 
-#include "primitives.h"
-#include "memory.h"
+#include "../primitives.h"
+#include "../memory.h"
 
 namespace gameboy {
 

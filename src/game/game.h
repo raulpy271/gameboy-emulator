@@ -4,7 +4,7 @@
 
 #include "primitives.h"
 #include "memory.h"
-#include "cpu.h"
+#include "cpu/cpu.h"
 #include "ppu.h"
 
 namespace gameboy {

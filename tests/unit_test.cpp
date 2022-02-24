@@ -3,7 +3,7 @@
 
 #include "../src/game/game.h"
 #include "../src/game/primitives.h"
-#include "../src/game/opcodes.h"
+#include "../src/game/cpu/opcodes.h"
 #include "../src/utils/register_F_manipulate.h"
 
 TEST(Instructions, JP_a16_instruction) {

@@ -2,9 +2,9 @@
 #ifndef GAME_CPU_H_
 #define GAME_CPU_H_
 
-#include "primitives.h"
 #include "opcodes.h"
-#include "memory.h"
+#include "../primitives.h"
+#include "../memory.h"
 
 namespace gameboy {
 

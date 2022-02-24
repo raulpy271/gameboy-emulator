@@ -4,8 +4,8 @@
 
 #include "cpu.h"
 #include "cpu_utils.h"
-#include "../utils/functions.h"
-#include "../utils/register_F_manipulate.h"
+#include "../../utils/functions.h"
+#include "../../utils/register_F_manipulate.h"
 
 namespace gameboy {
 
