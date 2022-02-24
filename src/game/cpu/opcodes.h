@@ -14,6 +14,8 @@
 
 #define LD_A_a16 0xFA
 
+#define LD_aC_A 0xE2
+
 #define CP_d8 0xFE
 
 #define PUSH_BC 0xC5

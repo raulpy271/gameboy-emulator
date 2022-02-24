@@ -72,6 +72,20 @@ TEST(Instructions, LD_a16_A_instruction) {
   EXPECT_EQ(game.mem.GetInAddr(address_to_store), game.cpu.reg.A);
 }
 
+TEST(Instructions, LD_aC_A_instruction) {
+  gameboy::Console game;
+  Byte byte_to_store = 0x15;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, LD_aC_A);
+  game.cpu.reg.A = byte_to_store;
+  game.cpu.reg.C = 0xf0;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+  EXPECT_EQ(game.mem.GetInAddr(0xFF00 + game.cpu.reg.C), byte_to_store);
+}
+
 TEST(Instructions, LD_A_a16_instruction) {
   gameboy::Console game;
   Address address_to_store = 0x150;
