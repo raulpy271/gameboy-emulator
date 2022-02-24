@@ -439,3 +439,16 @@ TEST(Instructions, CALL_and_RET_instruction) {
 
   EXPECT_EQ(game.cpu.reg.PC, 0x153);
 }
+
+TEST(Instructions, JR_s8_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+
+  game.mem.SetInAddr(0x100, JR_s8);
+  game.mem.SetInAddr(0x101, 0x4e);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x102 + 0x4e);
+}
+
