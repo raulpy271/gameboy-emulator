@@ -403,3 +403,39 @@ TEST(Instructions, CALL_a16_instruction) {
   EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP), 0x53);
   EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP + 1), 0x01);
 }
+
+TEST(Instructions, RET_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+
+  game.mem.SetInAddr(0x100, RET);
+  game.mem.SetInAddr(game.cpu.reg.SP - 1, 0x01);
+  game.mem.SetInAddr(game.cpu.reg.SP - 2, 0x50);
+  Address old_sp = game.cpu.reg.SP;
+  game.cpu.reg.SP -= 2;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x150);
+  EXPECT_EQ(game.cpu.reg.SP, old_sp);
+}
+
+TEST(Instructions, CALL_and_RET_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.cpu.reg.PC = 0x150;
+
+  game.mem.SetInAddr(0x150, CALL_a16);
+  game.mem.SetInAddr(0x151, 0x90);
+  game.mem.SetInAddr(0x152, 0x02);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x290);
+
+  game.mem.SetInAddr(0x290, RET);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x153);
+}
