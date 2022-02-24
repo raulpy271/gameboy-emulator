@@ -3,6 +3,7 @@ project(game)
 
 add_library(${PROJECT_NAME}
     cpu/cpu.cpp
+    cpu/cpu_instructions.cpp
     cpu/cpu_utils.cpp
     game.cpp
     memory.cpp
