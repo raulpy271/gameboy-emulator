@@ -6,6 +6,7 @@ enable_testing()
 add_executable(unit_test 
   unit_test.cpp
   memory.cpp
+  prefixed_instructions.cpp
   initialize_registers.cpp
   utils.cpp
 )
