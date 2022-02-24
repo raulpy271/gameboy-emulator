@@ -41,6 +41,7 @@ class CPU {
   void JP_Z_a16_Instruction(Memory* mem);
   void CALL_a16_Instruction(Memory* mem);
   void RET_Instruction(Memory* mem);
+  void JR_s8_Instruction(Memory* mem);
 
  public:
   struct Registers reg;

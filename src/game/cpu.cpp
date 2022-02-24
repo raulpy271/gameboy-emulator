@@ -101,6 +101,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::RET_Instruction(mem);
     break;
 
+  case (JR_s8):
+    CPU::JR_s8_Instruction(mem);
+    break;
+
   default:
     std::cout << "Invalid opcode: " << (unsigned int) opcode << std::endl;
     break;
@@ -275,6 +279,11 @@ void CPU::RET_Instruction(Memory* mem) {
   reg.SP += 2;
   Address next_addr = utils::create_address_from_two_bytes(higher_byte, lower_byte);
   reg.PC = next_addr;
+}
+
+void CPU::JR_s8_Instruction(Memory* mem) {
+  Byte steps = mem->GetInAddr(reg.PC + 1);
+  reg.PC = reg.PC + 2 + steps;
 }
 
 }

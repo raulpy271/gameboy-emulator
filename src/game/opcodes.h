@@ -46,4 +46,6 @@
 
 #define RET 0xC9
 
+#define JR_s8 0x18
+
 #endif  // GAME_OPCODES_H_
