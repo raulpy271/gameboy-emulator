@@ -400,6 +400,6 @@ TEST(Instructions, CALL_a16_instruction) {
   game.cpu.execute_intruction(&game.mem);
 
   EXPECT_EQ(game.cpu.reg.PC, 0x290);
-  EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP), 0x50);
+  EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP), 0x53);
   EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP + 1), 0x01);
 }
