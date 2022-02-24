@@ -2,7 +2,6 @@
 #ifndef GAME_CPU_H_
 #define GAME_CPU_H_
 
-#include "opcodes.h"
 #include "../primitives.h"
 #include "../memory.h"
 
@@ -42,6 +41,11 @@ class CPU {
   void CALL_a16_Instruction(Memory* mem);
   void RET_Instruction(Memory* mem);
   void JR_s8_Instruction(Memory* mem);
+  
+
+  void execute_prefixed_instruction(Memory* mem);
+
+  void RES_7_aHL_Instruction(Memory* mem);
 
  public:
   struct Registers reg;

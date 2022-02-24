@@ -1,0 +1,9 @@
+
+#ifndef GAME_PREFIXED_OPCODES_H_
+#define GAME_PREFIXED_OPCODES_H_
+
+#define OPCODE_PREFIX 0xCB
+
+#define RES_7_aHL 0xBE
+
+#endif  // GAME_PREFIXED_OPCODES_H_

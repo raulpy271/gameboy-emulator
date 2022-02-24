@@ -2,6 +2,8 @@
 #include <iostream>
 
 #include "cpu.h"
+#include "opcodes.h"
+#include "cb_prefixed_opcodes.h"
 
 namespace gameboy {
 
@@ -101,10 +103,29 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::JR_s8_Instruction(mem);
     break;
 
+  case (OPCODE_PREFIX):
+    CPU::execute_prefixed_instruction(mem);
+    break;
+
   default:
     std::cout << "Invalid opcode: " << (unsigned int) opcode << std::endl;
     break;
   }
+}
+
+void CPU::execute_prefixed_instruction(Memory* mem) {
+  Byte opcode = mem->GetInAddr(reg.PC + 1);
+  switch (opcode)
+  {
+  case (RES_7_aHL):
+    CPU::RES_7_aHL_Instruction(mem);
+    break;
+
+  default:
+    std::cout << "Invalid prefixed opcode: " << (unsigned int) opcode << std::endl;
+    break;
+  }
+
 }
 
 }
