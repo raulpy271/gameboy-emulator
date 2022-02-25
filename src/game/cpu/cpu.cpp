@@ -27,6 +27,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::LD_C_d8_Instruction(mem);
     break;
 
+  case (LD_a8_A):
+    CPU::LD_a8_A_Instruction(mem);
+    break;
+
   case (LD_a16_A):
     CPU::LD_a16_A_Instruction(mem);
     break;
@@ -117,6 +121,7 @@ void CPU::execute_intruction(Memory* mem) {
 
   default:
     std::cout << "Invalid opcode: " << (unsigned int) opcode << std::endl;
+    std::cout << "After opcode: " << (unsigned int) mem->GetInAddr(reg.PC + 1) << std::endl;
     break;
   }
 }

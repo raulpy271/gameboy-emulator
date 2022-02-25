@@ -39,6 +39,13 @@ void CPU::LD_a16_A_Instruction(Memory* mem) {
   reg.PC = reg.PC + 3;
 }
 
+void CPU::LD_a8_A_Instruction(Memory* mem) {
+  Address lower_byte_addr = reg.PC + 1;
+  Byte lower_byte = mem->GetInAddr(lower_byte_addr);
+  mem->SetInAddr(0xFF00 + lower_byte, reg.A);
+  reg.PC = reg.PC + 2;
+}
+
 void CPU::LD_aC_A_Instruction(Memory* mem) {
   Address addr_to_store_A = 0xFF00 + reg.C;
   mem->SetInAddr(addr_to_store_A, reg.A);
