@@ -30,4 +30,15 @@ void CPU::SET_7_aHL_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::SET_1_aHL_Instruction(Memory* mem) {
+  Address higher_byte = reg.H;
+  Address lower_byte = reg.L;
+  Address addr_to_set = utils::create_address_from_two_bytes(higher_byte, lower_byte);
+  Byte value_to_set = mem->GetInAddr(addr_to_set);
+  std::bitset<8> value(value_to_set);
+  value.set(1);
+  mem->SetInAddr(addr_to_set, value.to_ulong());
+  reg.PC += 2;
+}
+
 }
