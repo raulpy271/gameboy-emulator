@@ -42,6 +42,8 @@
 
 #define LD_A_B 0x78
 
+#define LD_A_C 0x79
+
 #define OR_A_C 0xB1
 
 #define XOR_A_A 0xAF
