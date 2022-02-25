@@ -46,6 +46,8 @@
 
 #define XOR_A_A 0xAF
 
+#define JR_NZ_s8 0x20
+
 #define JP_NZ_a16 0xC2
 
 #define JP_Z_a16 0xCA

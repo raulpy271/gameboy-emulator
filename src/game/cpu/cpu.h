@@ -40,6 +40,7 @@ class CPU {
   void LD_A_B_Instruction(Memory* mem);
   void OR_A_C_Instruction(Memory* mem);
   void XOR_A_A_Instruction(Memory* mem);
+  void JR_NZ_s8_Instruction(Memory* mem);
   void JP_NZ_a16_Instruction(Memory* mem);
   void JP_Z_a16_Instruction(Memory* mem);
   void CALL_a16_Instruction(Memory* mem);
