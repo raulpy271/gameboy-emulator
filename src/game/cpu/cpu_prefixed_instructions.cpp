@@ -9,35 +9,17 @@
 namespace gameboy {
 
 void CPU::RES_7_aHL_Instruction(Memory* mem) {
-  Address higher_byte = reg.H;
-  Address lower_byte = reg.L;
-  Address addr_to_reset = utils::create_address_from_two_bytes(higher_byte, lower_byte);
-  Byte value_to_reset = mem->GetInAddr(addr_to_reset);
-  std::bitset<8> value(value_to_reset);
-  value.reset(7);
-  mem->SetInAddr(addr_to_reset, value.to_ulong());
+  ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, false, 7);
   reg.PC += 2;
 }
 
 void CPU::SET_7_aHL_Instruction(Memory* mem) {
-  Address higher_byte = reg.H;
-  Address lower_byte = reg.L;
-  Address addr_to_reset = utils::create_address_from_two_bytes(higher_byte, lower_byte);
-  Byte value_to_reset = mem->GetInAddr(addr_to_reset);
-  std::bitset<8> value(value_to_reset);
-  value.set(7);
-  mem->SetInAddr(addr_to_reset, value.to_ulong());
+  ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, true, 7);
   reg.PC += 2;
 }
 
 void CPU::SET_1_aHL_Instruction(Memory* mem) {
-  Address higher_byte = reg.H;
-  Address lower_byte = reg.L;
-  Address addr_to_set = utils::create_address_from_two_bytes(higher_byte, lower_byte);
-  Byte value_to_set = mem->GetInAddr(addr_to_set);
-  std::bitset<8> value(value_to_set);
-  value.set(1);
-  mem->SetInAddr(addr_to_set, value.to_ulong());
+  ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, true, 1);
   reg.PC += 2;
 }
 

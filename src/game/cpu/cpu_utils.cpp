@@ -1,5 +1,8 @@
 
+#include <bitset>
+
 #include "cpu_utils.h"
+#include "../../utils/functions.h"
 
 namespace gameboy {
 
@@ -18,6 +21,14 @@ void LD_X_d8_Instruction(Memory* mem, Address* PC, Byte* X) {
   Byte value_to_load_in_C = mem->GetInAddr(add_of_value);
   *X = value_to_load_in_C;
   *PC = (*PC) + 2;
+}
+
+void ChangeBitValueFromMemory_Instruction(Memory* mem, Byte higher_byte, Byte lower_byte, bool value, int position) {
+  Address addr_to_change = utils::create_address_from_two_bytes(higher_byte, lower_byte);
+  Byte value_to_change = mem->GetInAddr(addr_to_change);
+  std::bitset<8> value_bitset(value_to_change);
+  value_bitset.set(position, value);
+  mem->SetInAddr(addr_to_change, value_bitset.to_ulong());
 }
 
 }
