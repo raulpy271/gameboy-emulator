@@ -48,7 +48,9 @@ class CPU {
 
   void execute_prefixed_instruction(Memory* mem);
 
+
   void RES_7_aHL_Instruction(Memory* mem);
+  void SET_7_aHL_Instruction(Memory* mem);
 
  public:
   struct Registers reg;

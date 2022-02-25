@@ -134,6 +134,10 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     CPU::RES_7_aHL_Instruction(mem);
     break;
 
+  case (SET_7_aHL):
+    CPU::SET_7_aHL_Instruction(mem);
+    break;
+
   default:
     std::cout << "Invalid prefixed opcode: " << (unsigned int) opcode << std::endl;
     break;
