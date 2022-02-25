@@ -44,6 +44,8 @@
 
 #define OR_A_C 0xB1
 
+#define XOR_A_A 0xAF
+
 #define JP_NZ_a16 0xC2
 
 #define JP_Z_a16 0xCA
