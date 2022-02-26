@@ -18,6 +18,11 @@ void CPU::SET_7_aHL_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::SET_4_aHL_Instruction(Memory* mem) {
+  ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, true, 4);
+  reg.PC += 2;
+}
+
 void CPU::SET_1_aHL_Instruction(Memory* mem) {
   ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, true, 1);
   reg.PC += 2;

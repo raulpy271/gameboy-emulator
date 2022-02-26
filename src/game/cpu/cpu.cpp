@@ -150,6 +150,10 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     CPU::SET_7_aHL_Instruction(mem);
     break;
 
+  case (SET_4_aHL):
+    CPU::SET_4_aHL_Instruction(mem);
+    break;
+
   case (SET_1_aHL):
     CPU::SET_1_aHL_Instruction(mem);
     break;
