@@ -6,6 +6,8 @@
 
 #define RES_7_aHL 0xBE
 
+#define RES_1_aHL 0x8E
+
 #define SET_7_aHL 0xFE
 
 #define SET_4_aHL 0xE6
