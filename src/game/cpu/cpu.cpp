@@ -103,6 +103,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::OR_A_C_Instruction(mem);
     break;
 
+  case (OR_A_B):
+    CPU::OR_A_B_Instruction(mem);
+    break;
+
   case (XOR_A_A):
     CPU::XOR_A_A_Instruction(mem);
     break;

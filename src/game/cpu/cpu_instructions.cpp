@@ -150,6 +150,16 @@ void CPU::LD_A_C_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+
+void CPU::OR_A_B_Instruction(Memory* mem) {
+  reg.A = reg.A | reg.B;
+  reg.F = 0x0;
+  if (reg.A == 0) {
+    utils::set_zero_flag(&reg.F, true);
+  }
+  reg.PC += 1;
+}
+
 void CPU::OR_A_C_Instruction(Memory* mem) {
   reg.A = reg.A | reg.C;
   reg.F = 0x0;
