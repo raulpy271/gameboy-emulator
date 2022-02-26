@@ -12,4 +12,6 @@
 
 #define SET_1_aHL 0xCE
 
+#define SET_0_aHL 0xC6
+
 #endif  // GAME_PREFIXED_OPCODES_H_
