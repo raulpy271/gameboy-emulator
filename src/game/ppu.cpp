@@ -51,6 +51,38 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int background_Y_line) {
   }
 }
 
+void PPU::DrawSingleSprite(int y_screen, int x_screen, Byte tile_number) {
+  int x, y;
+  int tile_line_address;
+  ColorNumber tile_line[8];
+  int tile_line_number = 0;
+  int tile_column_number = 0;
+  for (y = y_screen; y < (y_screen + 8); y++, tile_line_number++) {
+    if (y < 0 || y >= SCREEN_Y_SIZE) {
+      continue;
+    }
+    tile_line_address = 0x8000 + (tile_number * 16) + (2*tile_line_number);
+    ReadTileLine(tile_line, tile_line_address);
+    for (x = x_screen, tile_column_number = 0; x < (x_screen + 8); x++, tile_column_number++) {
+      if (x < 0 || x >= SCREEN_X_SIZE) {
+        continue;
+      }
+      screen[(SCREEN_X_SIZE * y) + x] = tile_line[tile_column_number];
+    }
+  }
+}
+
+void PPU::DrawSprites() {
+  int x_screen, y_screen;
+  Byte tile_number; 
+  for (int sprite_location = OAM_START_LOCATION; sprite_location <= OAM_END_LOCATION; sprite_location += 4) {
+    y_screen = mem->GetInAddr(sprite_location) - 16;
+    x_screen = mem->GetInAddr(sprite_location + 1) - 8;
+    tile_number = mem->GetInAddr(sprite_location + 2);
+    DrawSingleSprite(y_screen, x_screen, tile_number);
+  }
+}
+
 void PPU::UpdateImageData() {
   int x;
   int y;
@@ -77,6 +109,7 @@ void PPU::UpdateImageData() {
       y_deslocated++;
     }
   }
+  DrawSprites();
 }
 
 }

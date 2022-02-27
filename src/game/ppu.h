@@ -26,6 +26,10 @@ private:
 
   void ReadTileLine(ColorNumber* arr_to_store, Address tile_line_address);
 
+  void DrawSprites();
+
+  void DrawSingleSprite(int y_screen, int x_screen, Byte tile_number);
+
 };
 
 }
