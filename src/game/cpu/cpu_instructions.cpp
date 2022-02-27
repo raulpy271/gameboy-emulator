@@ -131,6 +131,11 @@ void CPU::LD_aHLI_A_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::INC_A_Instruction(Memory* mem) {
+  reg.A += 1;
+  reg.PC += 1;
+}
+
 void CPU::INC_DE_Instruction(Memory* mem) {
   utils::increment_registers_pair(&reg.D, &reg.E);
   reg.PC += 1;

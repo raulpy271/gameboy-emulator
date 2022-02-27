@@ -38,6 +38,8 @@
 
 #define LD_aHLI_A 0x22
 
+#define INC_A 0x3C
+
 #define INC_DE 0x13
 
 #define INC_HL 0x23
