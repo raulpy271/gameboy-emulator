@@ -60,6 +60,22 @@ TEST(Memory, choose_segment_of_memory_wram) {
   EXPECT_EQ(segment, gameboy::MemorySegment::WRAM_N);
 }
 
+TEST(Memory, choose_segment_of_memory_OAM) {
+  gameboy::MemorySegment segment;
+  
+  segment  = gameboy::Memory::choose_segment(0xFE00);
+
+  EXPECT_EQ(segment, gameboy::MemorySegment::OAM);
+
+  segment  = gameboy::Memory::choose_segment(0xFE9F);
+
+  EXPECT_EQ(segment, gameboy::MemorySegment::OAM);
+
+  segment  = gameboy::Memory::choose_segment(0xFEA0);
+
+  EXPECT_NE(segment, gameboy::MemorySegment::OAM);
+}
+
 TEST(Memory, choose_segment_of_memory_io_reg_and_hram_and_ie) {
   gameboy::MemorySegment segment;
   
@@ -90,4 +106,14 @@ TEST(Memory, get_and_set_in_vram) {
 
   EXPECT_EQ(mem.GetInAddr(0x8000), 0x50);
   EXPECT_EQ(mem.GetInAddr(0x9FFF), 0x60);
+}
+
+TEST(Memory, get_and_set_in_OAM) {
+  gameboy::Memory mem;
+
+  mem.SetInAddr(0xFE00, 0x50);
+  mem.SetInAddr(0xFE9F, 0x60);
+
+  EXPECT_EQ(mem.GetInAddr(0xFE00), 0x50);
+  EXPECT_EQ(mem.GetInAddr(0xFE9F), 0x60);
 }
