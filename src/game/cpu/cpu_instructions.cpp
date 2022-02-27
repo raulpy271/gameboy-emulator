@@ -112,6 +112,12 @@ void CPU::LD_A_aDE_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::LD_A_aHL_Instruction(Memory* mem) {
+  Address add_of_value_to_load_in_A = utils::create_address_from_two_bytes(reg.H, reg.L);
+  reg.A = mem->GetInAddr(add_of_value_to_load_in_A);
+  reg.PC += 1;
+}
+
 void CPU::LD_aHL_A_Instruction(Memory* mem) {
   Address add_of_value_to_store_A = utils::create_address_from_two_bytes(reg.H, reg.L);
   mem->SetInAddr(add_of_value_to_store_A, reg.A);

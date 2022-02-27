@@ -71,6 +71,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::LD_A_aDE_Instruction(mem);
     break;
 
+  case (LD_A_aHL):
+    CPU::LD_A_aHL_Instruction(mem);
+    break;
+
   case (LD_aHLI_A):
     CPU::LD_aHLI_A_Instruction(mem);
     break;

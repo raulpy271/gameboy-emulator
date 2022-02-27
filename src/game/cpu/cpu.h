@@ -32,6 +32,7 @@ class CPU {
   void LD_HL_d16_Instruction(Memory* mem);
   void LD_BC_d16_Instruction(Memory* mem);
   void LD_A_aDE_Instruction(Memory* mem);
+  void LD_A_aHL_Instruction(Memory* mem);
   void LD_aC_A_Instruction(Memory* mem);
   void LD_aHLI_A_Instruction(Memory* mem);
   void LD_aHL_A_Instruction(Memory* mem);
