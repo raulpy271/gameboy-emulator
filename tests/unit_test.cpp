@@ -595,6 +595,34 @@ TEST(Instructions, RET_instruction) {
   EXPECT_EQ(game.cpu.reg.SP, old_sp);
 }
 
+TEST(Instructions, RET_Z_instruction_nonzero) {
+  gameboy::Console game;
+  game.initialize_registers();
+
+  game.mem.SetInAddr(0x100, RET_Z);
+  game.cpu.reg.F = 0;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}
+
+TEST(Instructions, RET_Z_instruction_zero) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.cpu.reg.F = 0;
+  utils::set_zero_flag(&game.cpu.reg.F, true);
+  game.mem.SetInAddr(0x100, RET_Z);
+  game.mem.SetInAddr(game.cpu.reg.SP - 1, 0x01);
+  game.mem.SetInAddr(game.cpu.reg.SP - 2, 0x50);
+  game.cpu.reg.SP -= 2;
+
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x0150);
+}
+
 TEST(Instructions, CALL_and_RET_instruction) {
   gameboy::Console game;
   game.initialize_registers();
