@@ -1,14 +1,22 @@
 
 #include <iostream>
+#include <bitset>
 
 #include "cpu.h"
 #include "opcodes.h"
+#include "../hardware_registers.h"
 #include "cb_prefixed_opcodes.h"
 
 namespace gameboy {
 
 bool CPU::GetIME() {
   return IME;
+}
+
+void CPU::RequestInterrupt(Memory* mem, InterruptFlag interrupt) {
+  std::bitset<8> IF_bitset(mem->GetInAddr(rIF));
+  IF_bitset.set((std::size_t) interrupt);
+  mem->SetInAddr(rIF, IF_bitset.to_ulong());
 }
 
 void CPU::execute_intruction(Memory* mem) {

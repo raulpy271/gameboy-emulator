@@ -4,6 +4,7 @@
 
 #include "../primitives.h"
 #include "../memory.h"
+#include "interrupts.h"
 
 namespace gameboy {
 
@@ -18,7 +19,7 @@ struct Registers {
 
 class CPU {
  private:
-  bool IME;
+  bool IME = false;
 
   void IE_Instruction(Memory* mem);
   void JP_a16_Instruction(Memory* mem);
@@ -71,6 +72,8 @@ class CPU {
   struct Registers reg;
 
   void execute_intruction(Memory* mem);
+
+  void RequestInterrupt(Memory* mem, InterruptFlag interrupt);
 
   bool GetIME();
 };
