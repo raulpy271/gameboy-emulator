@@ -7,10 +7,18 @@
 
 namespace gameboy {
 
+bool CPU::GetIME() {
+  return IME;
+}
+
 void CPU::execute_intruction(Memory* mem) {
   Byte opcode = mem->GetInAddr(reg.PC);
   switch (opcode)
   {
+  case (IE):
+    CPU::IE_Instruction(mem);
+    break;
+
   case (JP_a16):
     CPU::JP_a16_Instruction(mem);
     break;

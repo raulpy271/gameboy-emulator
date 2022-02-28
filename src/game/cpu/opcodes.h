@@ -70,4 +70,6 @@
 
 #define JR_s8 0x18
 
+#define IE 0xFB
+
 #endif  // GAME_OPCODES_H_

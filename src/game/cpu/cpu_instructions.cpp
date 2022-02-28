@@ -8,6 +8,11 @@
 
 namespace gameboy {
 
+void CPU::IE_Instruction(Memory* mem) {
+  IME = true;
+  reg.PC += 1;
+}
+
 void CPU::JP_a16_Instruction(Memory* mem) {
   Address lower_byte_addr = reg.PC + 1;
   Address higher_byte_addr = reg.PC + 2;

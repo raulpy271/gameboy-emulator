@@ -18,6 +18,9 @@ struct Registers {
 
 class CPU {
  private:
+  bool IME;
+
+  void IE_Instruction(Memory* mem);
   void JP_a16_Instruction(Memory* mem);
   void LD_d8_Instruction(Memory* mem);
   void LD_B_d8_Instruction(Memory* mem);
@@ -68,6 +71,8 @@ class CPU {
   struct Registers reg;
 
   void execute_intruction(Memory* mem);
+
+  bool GetIME();
 };
 
 }

@@ -9,6 +9,7 @@ add_executable(unit_test
   prefixed_instructions.cpp
   initialize_registers.cpp
   utils.cpp
+  interrupts.cpp
 )
 
 target_link_libraries(unit_test 
