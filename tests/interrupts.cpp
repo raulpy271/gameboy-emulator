@@ -27,3 +27,38 @@ TEST(Interrupts, request_interrupts) {
 
   EXPECT_EQ(game.mem.GetInAddr(rIF), 0b00010001);
 }
+
+TEST(Interrupts, get_next_interrupt) {
+  gameboy::InterruptFlag interrupt;
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(rIF, 0b00000010);
+  game.mem.SetInAddr(rIE, 0b00000010);
+  game.mem.SetInAddr(0x100, IE);
+  game.run_a_instruction_cycle();
+
+  interrupt = game.cpu.GetNextInterrupt(&game.mem);
+
+  EXPECT_EQ(interrupt, gameboy::InterruptFlag::LCDC);
+
+  game.mem.SetInAddr(rIF, 0b00000001);
+  game.mem.SetInAddr(rIE, 0b00000001);
+
+  interrupt = game.cpu.GetNextInterrupt(&game.mem);
+
+  EXPECT_EQ(interrupt, gameboy::InterruptFlag::VBLANK);
+}
+
+TEST(Interrupts, get_next_interrupt_without_interrupt_enable) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(rIF, 0b00000001);
+  game.mem.SetInAddr(rIE, 0b00000010);
+  game.mem.SetInAddr(0x100, IE);
+
+  game.run_a_instruction_cycle();
+
+  gameboy::InterruptFlag interrupt = game.cpu.GetNextInterrupt(&game.mem);
+
+  EXPECT_EQ(interrupt, gameboy::InterruptFlag::NoInterrupt);
+}
