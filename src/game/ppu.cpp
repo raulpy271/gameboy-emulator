@@ -86,8 +86,8 @@ void PPU::DrawSprites() {
 void PPU::UpdateImageData() {
   int x;
   int y;
-  const int scx = mem->GetInAddr(SCX);
-  const int scy = mem->GetInAddr(SCY);
+  const int scx = mem->GetInAddr(rSCX);
+  const int scy = mem->GetInAddr(rSCY);
   int x_deslocated;
   int y_deslocated;
   ColorNumber* image_data_pt = &(imageData[0]);
