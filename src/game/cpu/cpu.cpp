@@ -19,6 +19,20 @@ void CPU::RequestInterrupt(Memory* mem, InterruptFlag interrupt) {
   mem->SetInAddr(rIF, IF_bitset.to_ulong());
 }
 
+InterruptFlag CPU::GetNextInterrupt(Memory* mem) {
+  if (IME) {
+    std::bitset<8> interruption_possible = mem->GetInAddr(rIE) & mem->GetInAddr(rIF);
+    for (int i = 0; i < 8; i++) {
+      if (interruption_possible[i]) {
+        return (InterruptFlag) i;
+      }
+    }
+    return InterruptFlag::NoInterrupt;
+  } else {
+    return InterruptFlag::NoInterrupt;
+  }
+}
+
 void CPU::execute_intruction(Memory* mem) {
   Byte opcode = mem->GetInAddr(reg.PC);
   switch (opcode)

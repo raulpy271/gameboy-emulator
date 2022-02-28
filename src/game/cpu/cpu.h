@@ -75,6 +75,8 @@ class CPU {
 
   void RequestInterrupt(Memory* mem, InterruptFlag interrupt);
 
+  InterruptFlag GetNextInterrupt(Memory* mem);
+
   bool GetIME();
 };
 
