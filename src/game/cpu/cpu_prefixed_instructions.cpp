@@ -52,4 +52,18 @@ void CPU::SRL_A_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::SRL_B_Instruction(Memory* mem) {
+  bool reg_B_end_with_zero = reg.B % 2 == 0;
+  if (reg_B_end_with_zero) {
+    reg.F = 0b00000000; // Setting Carry flag to zero
+  } else {
+    reg.F = 0b00010000; // Setting Carry flag to one
+  }
+  reg.B = reg.B >> 1;
+  if (reg.B == 0) {
+    utils::set_zero_flag(&reg.F, true);
+  }
+  reg.PC += 2;
+}
+
 }

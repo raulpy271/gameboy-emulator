@@ -18,4 +18,6 @@
 
 #define SRL_A 0x3F
 
+#define SRL_B 0x38
+
 #endif  // GAME_PREFIXED_OPCODES_H_
