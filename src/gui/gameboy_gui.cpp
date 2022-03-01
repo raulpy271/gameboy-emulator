@@ -1,6 +1,9 @@
 
 #include "gameboy_gui.h"
 #include "../game/hardware_definitions.h"
+#include "gui_definitions.h"
+#include "../game/hardware_registers.h"
+#include "../game/cpu/interrupts.h"
 
 GameBoyWindow::GameBoyWindow(gameboy::Console* game) {
 
@@ -10,7 +13,7 @@ GameBoyWindow::GameBoyWindow(gameboy::Console* game) {
 
   sigc::slot<bool()> draw_screen_ptr = sigc::mem_fun(*this, &GameBoyWindow::draw_screen_handler);
 
-  draw_screen_connection = Glib::signal_timeout().connect(draw_screen_ptr, 100);
+  draw_screen_connection = Glib::signal_timeout().connect(draw_screen_ptr, INTERVAL_TO_RENDER_FRAME_IN_MS);
 
   screen.set(screen_pixbuf);
 
@@ -21,12 +24,13 @@ GameBoyWindow::GameBoyWindow(gameboy::Console* game) {
 }
 
 bool GameBoyWindow::draw_screen_handler() {
-  for (int i = 0; i < 2000; i++) {
+  for (int i = 0; i < INSTRUCTION_BETWEEN_EACH_FRAME; i++) {
     game->run_a_instruction_cycle();
   }
   game->ppu.UpdateImageData();
   screen_pixbuf = GameBoyWindow::create_pixbuf_from_ppu_data();
-  screen.set(screen_pixbuf);
+  game->cpu.RequestInterrupt(&(game->mem), gameboy::InterruptFlag::VBLANK);
+  screen.set(screen_pixbuf->scale_simple(SCREEN_X_SIZE * 2, SCREEN_Y_SIZE * 2, (Gdk::InterpType) 0 ));
   return true;
 }
 
