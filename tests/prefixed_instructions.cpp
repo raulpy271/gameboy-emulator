@@ -133,3 +133,28 @@ TEST(PrefixedInstructions, SRL_A_instruction_flags) {
   EXPECT_EQ(game.cpu.reg.A, 0x0);
   EXPECT_EQ(game.cpu.reg.F, 0b10010000);
 }
+
+TEST(PrefixedInstructions, SRL_B_instruction_flags) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, OPCODE_PREFIX);
+  game.mem.SetInAddr(0x101, SRL_B);
+  game.cpu.reg.B = 0b11000011;
+  game.cpu.reg.F = 0x0;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+  EXPECT_EQ(game.cpu.reg.B, 0b01100001);
+  EXPECT_EQ(game.cpu.reg.F, 0b00010000);
+
+  game.cpu.reg.PC = 0x100;
+  game.cpu.reg.B = 0b00000001;
+  game.cpu.reg.F = 0x0;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+  EXPECT_EQ(game.cpu.reg.B, 0x0);
+  EXPECT_EQ(game.cpu.reg.F, 0b10010000);
+}
