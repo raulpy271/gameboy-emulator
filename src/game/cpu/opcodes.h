@@ -66,6 +66,8 @@
 
 #define JR_NZ_s8 0x20
 
+#define JR_Z_s8 0x28
+
 #define JP_NZ_a16 0xC2
 
 #define JP_Z_a16 0xCA
