@@ -52,6 +52,8 @@
 
 #define LD_A_C 0x79
 
+#define LD_C_A 0x4F
+
 #define OR_A_B 0xB0
 
 #define OR_A_C 0xB1

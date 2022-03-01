@@ -439,6 +439,19 @@ TEST(Instructions, LD_A_C_instruction) {
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
 }
 
+TEST(Instructions, LD_C_A_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, LD_C_A);
+  game.cpu.reg.A = 0x20;
+  game.cpu.reg.C = 0x00;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.C, 0x20);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}
+
 TEST(Instructions, XOR_A_A_instruction) {
   gameboy::Console game;
   game.initialize_registers();

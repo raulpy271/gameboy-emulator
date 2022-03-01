@@ -178,6 +178,10 @@ void CPU::LD_A_C_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::LD_C_A_Instruction(Memory* mem) {
+  reg.C = reg.A;
+  reg.PC += 1;
+}
 
 void CPU::OR_A_B_Instruction(Memory* mem) {
   reg.A = reg.A | reg.B;
