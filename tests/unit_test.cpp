@@ -465,6 +465,30 @@ TEST(Instructions, LD_B_A_instruction) {
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
 }
 
+TEST(Instructions, ADD_A_B_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, ADD_A_B);
+  game.mem.SetInAddr(0x101, ADD_A_B);
+  game.cpu.reg.A = 0x20;
+  game.cpu.reg.B = 0xa0;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.A, 0xc0);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), false);
+
+  game.cpu.reg.A = 0x0;
+  game.cpu.reg.B = 0x0;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.A, 0x0);
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), true);
+}
+
 TEST(Instructions, ADD_HL_BC_instruction) {
   gameboy::Console game;
   game.initialize_registers();
