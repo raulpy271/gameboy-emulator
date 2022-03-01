@@ -17,6 +17,19 @@ TEST(Interrupts, IE_instruction) {
   EXPECT_EQ(game.cpu.GetIME(), true);
 }
 
+TEST(Interrupts, DI_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, IE);
+  game.mem.SetInAddr(0x101, DI);
+
+  game.cpu.execute_intruction(&game.mem);
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+  EXPECT_EQ(game.cpu.GetIME(), false);
+}
+
 TEST(Interrupts, request_interrupts) {
   gameboy::Console game;
   game.initialize_registers();

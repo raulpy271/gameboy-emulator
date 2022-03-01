@@ -22,6 +22,7 @@ class CPU {
   bool IME = false;
 
   void IE_Instruction(Memory* mem);
+  void DI_Instruction(Memory* mem);
   void JP_a16_Instruction(Memory* mem);
   void LD_d8_Instruction(Memory* mem);
   void LD_B_d8_Instruction(Memory* mem);

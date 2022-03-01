@@ -41,6 +41,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::IE_Instruction(mem);
     break;
 
+  case (DI):
+    CPU::DI_Instruction(mem);
+    break;
+
   case (JP_a16):
     CPU::JP_a16_Instruction(mem);
     break;

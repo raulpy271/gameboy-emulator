@@ -72,4 +72,6 @@
 
 #define IE 0xFB
 
+#define DI 0xF3
+
 #endif  // GAME_OPCODES_H_
