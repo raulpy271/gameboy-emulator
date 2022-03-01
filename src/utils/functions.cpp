@@ -53,4 +53,12 @@ unsigned int integer_division(unsigned int n, unsigned int d) {
   return (unsigned int)(n - (n % d))/d;
 }
 
+Address GetInterruptHandlingAddress(gameboy::InterruptFlag interrupt) {
+  if (interrupt != gameboy::InterruptFlag::NoInterrupt) {
+    return  0x40 + (8 * ((int) interrupt));
+  } else {
+    return 0x0;
+  }
+}
+
 }

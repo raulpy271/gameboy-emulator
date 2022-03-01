@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 
 #include "../src/game/primitives.h"
+#include "../src/game/cpu/interrupts.h"
 #include "../src/utils/functions.h"
 
 TEST(Utils, create_two_bytes_from_address) {
@@ -23,4 +24,15 @@ TEST(Utils, create_two_bytes_from_address) {
 
   EXPECT_EQ(0xff, two_bytes.first);
   EXPECT_EQ(0xff, two_bytes.second);
+}
+
+
+TEST(Utils, GetInterruptHandlingAddress) {
+  Address vblank_addr = 0x40;
+  Address serial_addr = 0x58;
+  Address joypad_addr = 0x60;
+
+  EXPECT_EQ(vblank_addr, utils::GetInterruptHandlingAddress(gameboy::InterruptFlag::VBLANK));
+  EXPECT_EQ(serial_addr, utils::GetInterruptHandlingAddress(gameboy::InterruptFlag::SERIAL));
+  EXPECT_EQ(joypad_addr, utils::GetInterruptHandlingAddress(gameboy::InterruptFlag::HiToLo));
 }

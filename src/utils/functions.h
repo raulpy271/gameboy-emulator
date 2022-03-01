@@ -5,6 +5,7 @@
 #include <utility>
 
 #include "../game/primitives.h"
+#include "../game/cpu/interrupts.h"
 
 namespace utils {
 
@@ -17,6 +18,8 @@ void increment_registers_pair(Byte* higher_byte_reg, Byte* lower_byte_reg);
 void decrement_registers_pair(Byte* higher_byte_reg, Byte* lower_byte_reg);
 
 unsigned int integer_division(unsigned int n, unsigned int d);
+
+Address GetInterruptHandlingAddress(gameboy::InterruptFlag interrupt);
 
 }
 
