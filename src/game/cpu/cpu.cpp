@@ -6,6 +6,9 @@
 #include "opcodes.h"
 #include "../hardware_registers.h"
 #include "cb_prefixed_opcodes.h"
+#include "interrupts.h"
+#include "cpu_utils.h"
+#include "../../utils/functions.h"
 
 namespace gameboy {
 
@@ -31,6 +34,17 @@ InterruptFlag CPU::GetNextInterrupt(Memory* mem) {
   } else {
     return InterruptFlag::NoInterrupt;
   }
+}
+
+void CPU::execute_interrupt(Memory* mem, InterruptFlag interrupt) {
+  Address interrupt_handler = utils::GetInterruptHandlingAddress(interrupt);
+  PUSH_PC_Instruction(mem, &reg.SP, reg.PC);
+  IME = false;
+  std::bitset<8> IF_bitset(mem->GetInAddr(rIF));
+  IF_bitset[(int) interrupt] = false;
+  mem->SetInAddr(rIF, IF_bitset.to_ulong());
+  reg.PC = interrupt_handler;
+  execute_intruction(mem);
 }
 
 void CPU::execute_intruction(Memory* mem) {

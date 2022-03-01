@@ -78,7 +78,12 @@ void Console::initialize_registers() {
 }
 
 void Console::run_a_instruction_cycle() {
-  cpu.execute_intruction(&mem);
+  InterruptFlag interrupt = cpu.GetNextInterrupt(&mem);
+  if (interrupt == InterruptFlag::NoInterrupt) {
+    cpu.execute_intruction(&mem);
+  } else {
+    cpu.execute_interrupt(&mem, interrupt);
+  }
 }
 
 void Console::load_rom(Byte* rom) {
