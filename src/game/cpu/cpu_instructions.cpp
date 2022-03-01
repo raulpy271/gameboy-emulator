@@ -183,6 +183,15 @@ void CPU::LD_C_A_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::ADD_HL_BC_Instruction(Memory* mem) {
+  Address HL = utils::create_address_from_two_bytes(reg.H, reg.L);
+  Address BC = utils::create_address_from_two_bytes(reg.B, reg.C);
+  std::pair<Byte, Byte> new_HL_pair = utils::create_two_bytes_from_address(HL + BC);
+  reg.H = new_HL_pair.first;
+  reg.L = new_HL_pair.second;
+  reg.PC += 1;
+}
+
 void CPU::OR_A_B_Instruction(Memory* mem) {
   reg.A = reg.A | reg.B;
   reg.F = 0x0;
