@@ -16,4 +16,6 @@
 
 #define SET_0_aHL 0xC6
 
+#define SRL_A 0x3F
+
 #endif  // GAME_PREFIXED_OPCODES_H_

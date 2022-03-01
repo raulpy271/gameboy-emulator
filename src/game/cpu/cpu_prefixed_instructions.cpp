@@ -38,4 +38,18 @@ void CPU::SET_0_aHL_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::SRL_A_Instruction(Memory* mem) {
+  bool reg_A_end_with_zero = reg.A % 2 == 0;
+  if (reg_A_end_with_zero) {
+    reg.F = 0b00000000; // Setting Carry flag to zero
+  } else {
+    reg.F = 0b00010000; // Setting Carry flag to one
+  }
+  reg.A = reg.A >> 1;
+  if (reg.A == 0) {
+    utils::set_zero_flag(&reg.F, true);
+  }
+  reg.PC += 2;
+}
+
 }

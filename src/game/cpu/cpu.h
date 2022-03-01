@@ -72,6 +72,7 @@ class CPU {
   void SET_4_aHL_Instruction(Memory* mem);
   void SET_1_aHL_Instruction(Memory* mem);
   void SET_0_aHL_Instruction(Memory* mem);
+  void SRL_A_Instruction(Memory* mem);
 
  public:
   struct Registers reg;
