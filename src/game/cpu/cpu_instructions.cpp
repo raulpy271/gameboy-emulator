@@ -183,6 +183,11 @@ void CPU::LD_C_A_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::LD_B_A_Instruction(Memory* mem) {
+  reg.B = reg.A;
+  reg.PC += 1;
+}
+
 void CPU::ADD_HL_BC_Instruction(Memory* mem) {
   Address HL = utils::create_address_from_two_bytes(reg.H, reg.L);
   Address BC = utils::create_address_from_two_bytes(reg.B, reg.C);
