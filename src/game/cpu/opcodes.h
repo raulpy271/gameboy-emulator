@@ -44,6 +44,8 @@
 
 #define INC_HL 0x23
 
+#define DEC_C 0x0D
+
 #define DEC_BC 0x0B
 
 #define LD_A_B 0x78
