@@ -1,4 +1,5 @@
 
+#include <utility>
 #include <bitset>
 
 #include "cpu_utils.h"
@@ -29,6 +30,13 @@ void ChangeBitValueFromMemory_Instruction(Memory* mem, Byte higher_byte, Byte lo
   std::bitset<8> value_bitset(value_to_change);
   value_bitset.set(position, value);
   mem->SetInAddr(addr_to_change, value_bitset.to_ulong());
+}
+
+void PUSH_PC_Instruction(Memory* mem, Address* SP, Address PC) {
+  std::pair<Byte, Byte> PC_pair = utils::create_two_bytes_from_address(PC);
+  mem->SetInAddr((*SP) - 1, PC_pair.first);
+  mem->SetInAddr((*SP) - 2, PC_pair.second);
+  (*SP) -= 2;
 }
 
 }

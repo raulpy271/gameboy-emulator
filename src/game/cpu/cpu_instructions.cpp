@@ -245,10 +245,7 @@ void CPU::CALL_a16_Instruction(Memory* mem) {
   Byte lower_byte =  mem->GetInAddr(lower_byte_addr);
   Byte higher_byte = mem->GetInAddr(higher_byte_addr);
   Address next_addr = utils::create_address_from_two_bytes(higher_byte, lower_byte);
-  std::pair<Byte, Byte> PC_pair = utils::create_two_bytes_from_address(addr_after_return);
-  mem->SetInAddr(reg.SP - 1, PC_pair.first);
-  mem->SetInAddr(reg.SP - 2, PC_pair.second);
-  reg.SP -= 2;
+  PUSH_PC_Instruction(mem, &reg.SP, addr_after_return);
   reg.PC = next_addr;
 }
 
