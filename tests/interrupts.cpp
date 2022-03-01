@@ -106,4 +106,38 @@ TEST(Interrupts, vblank_handling) {
 
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
   EXPECT_EQ(game.cpu.reg.SP, old_sp);
+  EXPECT_EQ(game.cpu.GetIME(), false);
+}
+
+TEST(Interrupts, RETI_instruction) {
+  gameboy::Console game;
+  Address vblank_addr = (Address) gameboy::InterruptVector::VBLANK;
+  game.initialize_registers();
+  Address old_sp = game.cpu.reg.SP;
+  game.cpu.reg.A = 0x00;
+  game.cpu.reg.C = 0x10;
+  game.mem.SetInAddr(vblank_addr + 0, LD_A_C);
+  game.mem.SetInAddr(vblank_addr + 1, RETI);
+  game.mem.SetInAddr(rIF, 0b00000001);
+  game.mem.SetInAddr(rIE, 0b00000001);
+  game.mem.SetInAddr(0x100, IE);
+
+  game.run_a_instruction_cycle();
+
+  EXPECT_EQ(game.cpu.GetNextInterrupt(&game.mem), gameboy::InterruptFlag::VBLANK);
+
+  game.run_a_instruction_cycle();
+
+  EXPECT_EQ(game.cpu.reg.PC, vblank_addr + 1);
+  EXPECT_EQ(game.cpu.reg.A, 0x10);
+  EXPECT_EQ(game.cpu.GetIME(), false);
+  EXPECT_EQ(game.mem.GetInAddr(rIF), 0b00000000);
+  EXPECT_EQ(game.mem.GetInAddr(rIE), 0b00000001);
+  EXPECT_EQ(game.cpu.reg.SP, old_sp - 2);
+
+  game.run_a_instruction_cycle();
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+  EXPECT_EQ(game.cpu.reg.SP, old_sp);
+  EXPECT_EQ(game.cpu.GetIME(), true);
 }

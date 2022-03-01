@@ -78,6 +78,8 @@
 
 #define RET 0xC9
 
+#define RETI 0xD9
+
 #define RET_Z 0xC8
 
 #define JR_s8 0x18

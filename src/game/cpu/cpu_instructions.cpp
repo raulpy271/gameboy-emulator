@@ -303,6 +303,11 @@ void CPU::RET_Instruction(Memory* mem) {
   reg.PC = next_addr;
 }
 
+void CPU::RETI_Instruction(Memory* mem) {
+  IME = true;
+  RET_Instruction(mem);
+}
+
 void CPU::RET_Z_Instruction(Memory* mem) {
   if (!utils::zero_flag(&reg.F)) {
     reg.PC += 1;
