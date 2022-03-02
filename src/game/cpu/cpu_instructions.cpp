@@ -8,6 +8,10 @@
 
 namespace gameboy {
 
+void CPU::HALT_Instruction(Memory* mem) {
+  reg.PC += 1;
+}
+
 void CPU::IE_Instruction(Memory* mem) {
   IME = true;
   reg.PC += 1;

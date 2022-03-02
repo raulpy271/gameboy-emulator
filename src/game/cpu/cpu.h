@@ -21,6 +21,7 @@ class CPU {
  private:
   bool IME = false;
 
+  void HALT_Instruction(Memory* mem);
   void IE_Instruction(Memory* mem);
   void DI_Instruction(Memory* mem);
   void JP_a16_Instruction(Memory* mem);

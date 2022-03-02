@@ -2,6 +2,10 @@
 #ifndef GAME_OPCODES_H_
 #define GAME_OPCODES_H_
 
+#define NOP 0x00
+
+#define HALT 0x76
+
 #define JP_a16 0xC3
 
 #define LD_d8 0x3E

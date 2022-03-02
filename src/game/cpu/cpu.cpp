@@ -51,6 +51,14 @@ void CPU::execute_intruction(Memory* mem) {
   Byte opcode = mem->GetInAddr(reg.PC);
   switch (opcode)
   {
+  case (NOP):
+    CPU::HALT_Instruction(mem);
+    break;
+
+  case (HALT):
+    CPU::HALT_Instruction(mem);
+    break;
+
   case (IE):
     CPU::IE_Instruction(mem);
     break;
