@@ -812,3 +812,14 @@ TEST(Instructions, JR_s8_instruction) {
   EXPECT_EQ(game.cpu.reg.PC, 0x102 + 0x4e);
 }
 
+TEST(Instructions, JR_s8_instruction_backward) {
+  gameboy::Console game;
+  game.initialize_registers();
+
+  game.mem.SetInAddr(0x100, JR_s8);
+  game.mem.SetInAddr(0x101, 0xfc);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x102 - 0x4);
+}
