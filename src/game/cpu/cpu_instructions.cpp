@@ -245,35 +245,6 @@ void CPU::JP_NZ_a16_Instruction(Memory* mem) {
   }
 }
 
-void CPU::JR_NZ_s8_Instruction(Memory* mem) {
-  reg.PC += 2;
-  if (!utils::zero_flag(&reg.F)) {
-    Address steps_addr = reg.PC - 1;
-    Byte steps =  mem->GetInAddr(steps_addr);
-    bool is_positive = steps < 0b10000000;
-    if (is_positive) {
-      reg.PC += steps;
-    } else {
-      steps = 0x100 - steps;
-      reg.PC -= steps;
-    }
-  }
-}
-
-void CPU::JR_Z_s8_Instruction(Memory* mem) {
-  reg.PC += 2;
-  if (utils::zero_flag(&reg.F)) {
-    Address steps_addr = reg.PC - 1;
-    Byte steps =  mem->GetInAddr(steps_addr);
-    bool is_positive = steps < 0b10000000;
-    if (is_positive) {
-      reg.PC += steps;
-    } else {
-      steps = 0x100 - steps;
-      reg.PC -= steps;
-    }
-  }
-}
 
 void CPU::JP_Z_a16_Instruction(Memory* mem) {
   if (!utils::zero_flag(&reg.F)) {
@@ -326,7 +297,30 @@ void CPU::RET_Z_Instruction(Memory* mem) {
 
 void CPU::JR_s8_Instruction(Memory* mem) {
   Byte steps = mem->GetInAddr(reg.PC + 1);
-  reg.PC = reg.PC + 2 + steps;
+  reg.PC += 2;
+  bool is_positive = steps < 0b10000000;
+  if (is_positive) {
+    reg.PC += steps;
+  } else {
+    steps = 0x100 - steps;
+    reg.PC -= steps;
+  }
+}
+
+void CPU::JR_Z_s8_Instruction(Memory* mem) {
+  if (utils::zero_flag(&reg.F)) {
+    JR_s8_Instruction(mem);
+  } else {
+    reg.PC += 2;
+  }
+}
+
+void CPU::JR_NZ_s8_Instruction(Memory* mem) {
+  if (!utils::zero_flag(&reg.F)) {
+    JR_s8_Instruction(mem);
+  } else {
+    reg.PC += 2;
+  }
 }
 
 }
