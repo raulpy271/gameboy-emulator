@@ -1,4 +1,6 @@
 
+#include <iostream>
+
 #include "memory.h"
 
 namespace gameboy {
@@ -37,11 +39,15 @@ Byte Memory::GetInAddr(Address add) {
     return IO_REG_and_HRAM_and_IE[add - 0xFF00];
   case MemorySegment::VRAM:
     return VRAM[add - 0x8000];
+  case MemorySegment::WRAM_0:
+    return WRAM_0[add - 0xC000];
   case MemorySegment::OAM:
     return OAM[add - 0xFE00];
   case MemorySegment::NO_SEGMENT:
+    std::cout << "Acessing in a nonmapped address: " << (unsigned int) add << std::endl;
     return 0xff;
   default:
+    std::cout << "Acessing in a nonmapped address: " << (unsigned int) add << std::endl;
     return 0xff;
   }
 };
@@ -58,12 +64,17 @@ void Memory::SetInAddr(Address add, Byte byte_to_insert) {
   case MemorySegment::VRAM:
     VRAM[add - 0x8000] = byte_to_insert;
     return;
+  case MemorySegment::WRAM_0:
+    WRAM_0[add - 0xC000] = byte_to_insert;
+    return;
   case MemorySegment::OAM:
     OAM[add - 0xFE00] = byte_to_insert;
     return;
   case MemorySegment::NO_SEGMENT:
+    std::cout << "Setting in a nonmapped address: " << (unsigned int) add << std::endl;
     return;
   default:
+    std::cout << "Setting in a nonmapped address: " << (unsigned int) add << std::endl;
     return;
   }
 };

@@ -117,3 +117,13 @@ TEST(Memory, get_and_set_in_OAM) {
   EXPECT_EQ(mem.GetInAddr(0xFE00), 0x50);
   EXPECT_EQ(mem.GetInAddr(0xFE9F), 0x60);
 }
+
+TEST(Memory, get_and_set_in_wram0) {
+  gameboy::Memory mem;
+
+  mem.SetInAddr(0xC000, 0x50);
+  mem.SetInAddr(0xCFFF, 0x60);
+
+  EXPECT_EQ(mem.GetInAddr(0xC000), 0x50);
+  EXPECT_EQ(mem.GetInAddr(0xCFFF), 0x60);
+}
