@@ -10,6 +10,7 @@ add_library(${PROJECT_NAME}
     memory.cpp
     tile.cpp
     ppu.cpp
+    palette.cpp
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE utils)
 

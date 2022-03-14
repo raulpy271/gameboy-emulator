@@ -10,6 +10,7 @@ add_executable(unit_test
   initialize_registers.cpp
   utils.cpp
   interrupts.cpp
+  palette.cpp
 )
 
 target_link_libraries(unit_test 
