@@ -6,6 +6,7 @@
 
 #include "../game/tile.h"
 #include "../game/game.h"
+#include "../game/primitives.h"
 
 class GameBoyWindow: public Gtk::Window {
 public:
@@ -26,6 +27,8 @@ private:
   bool draw_screen_handler();
 
   Glib::RefPtr<Gdk::Pixbuf> create_pixbuf_from_ppu_data();
+
+  guint8 color_number_to_pixel_channel(ColorNumber color);
 
 };
 

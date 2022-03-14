@@ -1,4 +1,6 @@
 
+#include <iostream>
+
 #include "gameboy_gui.h"
 #include "../game/hardware_definitions.h"
 #include "gui_definitions.h"
@@ -38,9 +40,9 @@ Glib::RefPtr<Gdk::Pixbuf> GameBoyWindow::create_pixbuf_from_ppu_data() {
   guint8* array_pixel = new guint8[3 * SCREEN_X_SIZE * SCREEN_Y_SIZE];
   int next_pos = 0;
   for (int i = 0; i < SCREEN_X_SIZE * SCREEN_Y_SIZE; i++) {
-    array_pixel[next_pos    ] = 80 * game->ppu.screen[i];
-    array_pixel[next_pos + 1] = 80 * game->ppu.screen[i];
-    array_pixel[next_pos + 2] = 80 * game->ppu.screen[i];
+    array_pixel[next_pos    ] = color_number_to_pixel_channel(game->ppu.screen[i]);
+    array_pixel[next_pos + 1] = color_number_to_pixel_channel(game->ppu.screen[i]);
+    array_pixel[next_pos + 2] = color_number_to_pixel_channel(game->ppu.screen[i]);
     next_pos += 3;
   }
   Glib::RefPtr<Gdk::Pixbuf> pixbuf = Gdk::Pixbuf::create_from_data(
@@ -53,4 +55,20 @@ Glib::RefPtr<Gdk::Pixbuf> GameBoyWindow::create_pixbuf_from_ppu_data() {
     3 * SCREEN_X_SIZE
   );
   return pixbuf;
+}
+
+guint8 GameBoyWindow::color_number_to_pixel_channel(ColorNumber color) {
+  switch (color)
+  {
+  case 0:
+    return 0xff;
+  case 1:
+    return 0xA0;
+  case 2:
+    return 0x50;
+  case 3:
+    return 0x00;
+  default:
+    throw "Not a color number";
+  }
 }
