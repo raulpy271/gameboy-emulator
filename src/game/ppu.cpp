@@ -95,19 +95,14 @@ void PPU::DrawSprites() {
   }
 }
 
-void PPU::UpdateImageData() {
-  Byte palette = mem->GetInAddr(rBGP);
+void PPU::UpdateScreenFromBackground() {
   int x;
   int y;
-  const int scx = mem->GetInAddr(rSCX);
-  const int scy = mem->GetInAddr(rSCY);
   int x_deslocated;
   int y_deslocated;
-  ColorNumber* image_data_pt = &(imageData[0]);
-  for (int current_line = 0; current_line < 256; current_line++) {
-    ScanLine(image_data_pt + (256 * current_line), current_line, palette);
-  }
-  for (int y = 0, y_deslocated = scy; y < SCREEN_Y_SIZE; y++) {
+  const int scx = mem->GetInAddr(rSCX);
+  const int scy = mem->GetInAddr(rSCY);
+  for (y = 0, y_deslocated = scy; y < SCREEN_Y_SIZE; y++) {
     for (x = 0, x_deslocated = scx; x < SCREEN_X_SIZE; x++) {
       screen[(SCREEN_X_SIZE * y) + x] = imageData[(BACKGROUND_X_SIZE * y_deslocated) + x_deslocated];
       if (x_deslocated >= (BACKGROUND_X_SIZE - 1)) {
@@ -122,6 +117,15 @@ void PPU::UpdateImageData() {
       y_deslocated++;
     }
   }
+}
+
+void PPU::UpdateImageData() {
+  Byte palette = mem->GetInAddr(rBGP);
+  ColorNumber* image_data_pt = &(imageData[0]);
+  for (int current_line = 0; current_line < 256; current_line++) {
+    ScanLine(image_data_pt + (256 * current_line), current_line, palette);
+  }
+  UpdateScreenFromBackground();
   DrawSprites();
 }
 
