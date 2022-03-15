@@ -3,6 +3,7 @@
 
 #include "ppu.h"
 #include "hardware_registers.h"
+#include "hardware_definitions.h"
 #include "palette.h"
 #include "../utils/functions.h"
 
@@ -62,13 +63,15 @@ void PPU::DrawSingleSprite(int y_screen, int x_screen, Byte tile_number, Byte pa
     if (y < 0 || y >= SCREEN_Y_SIZE) {
       continue;
     }
-    tile_line_address = 0x8000 + (tile_number * 16) + (2*tile_line_number);
-    ReadTileLine(tile_line, tile_line_address, palette);
+    tile_line_address = _VRAM8000 + (tile_number * 16) + (2*tile_line_number);
+    ReadTileLine(tile_line, tile_line_address, indentity_palette);
     for (x = x_screen, tile_column_number = 0; x < (x_screen + 8); x++, tile_column_number++) {
       if (x < 0 || x >= SCREEN_X_SIZE) {
         continue;
       }
-      screen[(SCREEN_X_SIZE * y) + x] = tile_line[tile_column_number];
+      if (tile_line[tile_column_number]) {
+        screen[(SCREEN_X_SIZE * y) + x] =  apply_palette(tile_line[tile_column_number], palette);
+      }
     }
   }
 }
