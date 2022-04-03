@@ -751,6 +751,33 @@ TEST(Instructions, CALL_a16_instruction) {
   EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP + 1), 0x01);
 }
 
+TEST(Instructions, CALL_Z_a16_instruction_z_is_not_set) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.cpu.reg.F = 0;
+  game.mem.SetInAddr(0x100, CALL_Z_a16);
+  game.mem.SetInAddr(0x101, 0x90);
+  game.mem.SetInAddr(0x102, 0x02);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x103);
+}
+
+TEST(Instructions, CALL_Z_a16_instruction_z_is_set) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.cpu.reg.F = 0;
+  utils::set_zero_flag(&game.cpu.reg.F, true);
+  game.mem.SetInAddr(0x100, CALL_Z_a16);
+  game.mem.SetInAddr(0x101, 0x90);
+  game.mem.SetInAddr(0x102, 0x02);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x290);
+}
+
 TEST(Instructions, RET_instruction) {
   gameboy::Console game;
   game.initialize_registers();
