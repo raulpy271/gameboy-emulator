@@ -41,6 +41,7 @@ class CPU {
   void LD_A_aHL_Instruction(Memory* mem);
   void LD_aC_A_Instruction(Memory* mem);
   void LD_aHLI_A_Instruction(Memory* mem);
+  void LD_aHL_d8_Instruction(Memory* mem);
   void LD_aHL_A_Instruction(Memory* mem);
   void INC_A_Instruction(Memory* mem);
   void INC_DE_Instruction(Memory* mem);
