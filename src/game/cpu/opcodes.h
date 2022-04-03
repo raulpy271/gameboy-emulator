@@ -82,6 +82,8 @@
 
 #define CALL_a16 0xCD
 
+#define CALL_Z_a16 0xCC
+
 #define RET 0xC9
 
 #define RETI 0xD9

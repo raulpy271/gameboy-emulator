@@ -277,6 +277,14 @@ void CPU::CALL_a16_Instruction(Memory* mem) {
   reg.PC = next_addr;
 }
 
+void CPU::CALL_Z_a16_Instruction(Memory* mem) {
+  if (utils::zero_flag(&reg.F)) {
+    CALL_a16_Instruction(mem);
+  } else {
+    reg.PC += 3;
+  }
+}
+
 void CPU::RET_Instruction(Memory* mem) {
   Byte lower_byte =  mem->GetInAddr(reg.SP);
   Byte higher_byte = mem->GetInAddr(reg.SP + 1);
