@@ -52,6 +52,7 @@ class CPU {
   void LD_H_A_Instruction(Memory* mem);
   void LD_L_A_Instruction(Memory* mem);
   void LD_A_C_Instruction(Memory* mem);
+  void LD_A_L_Instruction(Memory* mem);
   void LD_A_H_Instruction(Memory* mem);
   void LD_C_A_Instruction(Memory* mem);
   void LD_B_A_Instruction(Memory* mem);
