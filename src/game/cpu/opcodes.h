@@ -60,6 +60,8 @@
 
 #define LD_L_A 0x6F
 
+#define LD_A_H 0x7C
+
 #define LD_A_C 0x79
 
 #define LD_C_A 0x4F
