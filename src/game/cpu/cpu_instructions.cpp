@@ -219,6 +219,12 @@ void CPU::ADD_A_B_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::ADD_A_d8_Instruction(Memory* mem) {
+  Byte value = mem->GetInAddr(reg.PC + 1);
+  ADD_X_Y_Instruction(&reg.A, &value, &reg.F);
+  reg.PC += 2;
+}
+
 void CPU::ADD_HL_BC_Instruction(Memory* mem) {
   Address HL = utils::create_address_from_two_bytes(reg.H, reg.L);
   Address BC = utils::create_address_from_two_bytes(reg.B, reg.C);

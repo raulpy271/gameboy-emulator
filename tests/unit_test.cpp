@@ -590,6 +590,20 @@ TEST(Instructions, ADD_A_B_instruction_half_carry_flag) {
   EXPECT_EQ(game.cpu.reg.PC, 0x102);
 }
 
+TEST(Instructions, ADD_A_d8_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, ADD_A_d8);
+  game.mem.SetInAddr(0x101, 0x5);
+  game.cpu.reg.A = 0x0f;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.A, 0x14);
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), true);
+}
+
 TEST(Instructions, ADD_HL_BC_instruction) {
   gameboy::Console game;
   game.initialize_registers();

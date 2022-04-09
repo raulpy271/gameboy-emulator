@@ -70,6 +70,8 @@
 
 #define ADD_A_B 0x80
 
+#define ADD_A_d8 0xC6
+
 #define ADD_HL_BC 0x09
 
 #define OR_A_B 0xB0
