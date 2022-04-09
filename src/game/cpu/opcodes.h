@@ -68,6 +68,8 @@
 
 #define LD_C_A 0x4F
 
+#define LD_D_A 0x57
+
 #define LD_B_A 0x47
 
 #define ADD_A_B 0x80

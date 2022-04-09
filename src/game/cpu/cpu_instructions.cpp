@@ -214,6 +214,11 @@ void CPU::LD_C_A_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::LD_D_A_Instruction(Memory* mem) {
+  reg.D = reg.A;
+  reg.PC += 1;
+}
+
 void CPU::LD_B_A_Instruction(Memory* mem) {
   reg.B = reg.A;
   reg.PC += 1;
