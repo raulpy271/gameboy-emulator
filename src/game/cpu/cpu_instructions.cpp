@@ -242,8 +242,13 @@ void CPU::ADD_A_d8_Instruction(Memory* mem) {
 
 void CPU::SUB_A_B_Instruction(Memory* mem) {
   reg.F = 0b01000000;
+  Byte A_lower_part = reg.A & 0xf;
+  Byte B_lower_part = reg.B & 0xf;
   if (reg.A < reg.B) {
     utils::set_carry_flag(&reg.F, true);
+  }
+  if ((A_lower_part) < (B_lower_part)) {
+    utils::set_half_carry_flag(&reg.F, true);
   }
   reg.A = reg.A - reg.B;
   utils::set_zero_flag(&reg.F, !((bool)reg.A));
