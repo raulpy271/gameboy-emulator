@@ -215,8 +215,7 @@ void CPU::LD_B_A_Instruction(Memory* mem) {
 }
 
 void CPU::ADD_A_B_Instruction(Memory* mem) {
-  reg.A = reg.A + reg.B;
-  utils::set_zero_flag(&reg.F, !((bool)reg.A));
+  ADD_X_Y_Instruction(&reg.A, &reg.B, &reg.F);
   reg.PC += 1;
 }
 

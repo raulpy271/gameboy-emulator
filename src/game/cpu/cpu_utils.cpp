@@ -4,8 +4,21 @@
 
 #include "cpu_utils.h"
 #include "../../utils/functions.h"
+#include "../../utils/register_F_manipulate.h"
 
 namespace gameboy {
+
+void ADD_X_Y_Instruction(Byte* X, Byte* Y, Byte* F) {
+  *F = 0;
+  if (*X + *Y > 0xff) {
+    utils::set_carry_flag(F, true);
+  }
+  if (((*X) & 0xf) + ((*Y) & 0xf) > 0xf) {
+    utils::set_half_carry_flag(F, true);
+  }
+  *X = *X + *Y;
+  utils::set_zero_flag(F, !((bool)*X));
+}
 
 void LD_XX_d16_Instruction(Memory* mem, Address* PC, Byte* higher_byte_reg, Byte* lower_byte_reg) {
   Address lower_byte_addr = (*PC) + 1;
