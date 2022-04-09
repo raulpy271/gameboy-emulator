@@ -78,6 +78,8 @@
 
 #define ADD_A_d8 0xC6
 
+#define SUB_A_B 0x90
+
 #define ADD_HL_BC 0x09
 
 #define OR_A_B 0xB0

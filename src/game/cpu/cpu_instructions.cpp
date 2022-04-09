@@ -240,6 +240,16 @@ void CPU::ADD_A_d8_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::SUB_A_B_Instruction(Memory* mem) {
+  reg.F = 0b01000000;
+  if (reg.A < reg.B) {
+    utils::set_carry_flag(&reg.F, true);
+  }
+  reg.A = reg.A - reg.B;
+  utils::set_zero_flag(&reg.F, !((bool)reg.A));
+  reg.PC += 1;
+}
+
 void CPU::ADD_HL_BC_Instruction(Memory* mem) {
   Address HL = utils::create_address_from_two_bytes(reg.H, reg.L);
   Address BC = utils::create_address_from_two_bytes(reg.B, reg.C);
