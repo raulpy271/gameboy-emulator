@@ -16,6 +16,16 @@ void CPU::BIT_0_A_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::RR_A_Instruction(Memory* mem) {
+  bool carry = utils::carry_flag(&reg.F);
+  bool reg_A_end_with_zero = reg.A % 2 == 0;
+  reg.F = 0;
+  reg.A = reg.A >> 1 | (carry << 7);
+  utils::set_carry_flag(&reg.F, !reg_A_end_with_zero);
+  utils::set_zero_flag(&reg.F, !(bool)reg.A);
+  reg.PC += 2;
+}
+
 void CPU::RES_7_aHL_Instruction(Memory* mem) {
   ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, false, 7);
   reg.PC += 2;
