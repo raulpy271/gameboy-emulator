@@ -352,11 +352,7 @@ void CPU::RET_Z_Instruction(Memory* mem) {
   if (!utils::zero_flag(&reg.F)) {
     reg.PC += 1;
   } else {
-    Byte lower_byte =  mem->GetInAddr(reg.SP);
-    Byte higher_byte = mem->GetInAddr(reg.SP + 1);
-    reg.SP += 2;
-    Address next_addr = utils::create_address_from_two_bytes(higher_byte, lower_byte);
-    reg.PC = next_addr;
+    RET_Instruction(mem);
   }
 }
 
