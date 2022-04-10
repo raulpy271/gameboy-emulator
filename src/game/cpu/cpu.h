@@ -71,6 +71,7 @@ class CPU {
   void JP_Z_a16_Instruction(Memory* mem);
   void CALL_a16_Instruction(Memory* mem);
   void CALL_Z_a16_Instruction(Memory* mem);
+  void CALL_C_a16_Instruction(Memory* mem);
   void RET_Instruction(Memory* mem);
   void RETI_Instruction(Memory* mem);
   void RET_Z_Instruction(Memory* mem);
