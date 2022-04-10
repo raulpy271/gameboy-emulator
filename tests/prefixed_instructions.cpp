@@ -4,6 +4,7 @@
 #include "../src/game/game.h"
 #include "../src/game/primitives.h"
 #include "../src/game/cpu/cb_prefixed_opcodes.h"
+#include "../src/utils/register_F_manipulate.h"
 
 TEST(PrefixedInstructions, BIT_0_A_instruction) {
   gameboy::Console game;
@@ -26,6 +27,46 @@ TEST(PrefixedInstructions, BIT_0_A_instruction) {
 
   EXPECT_EQ(game.cpu.reg.PC, 0x104);
   EXPECT_EQ(game.cpu.reg.F, 0b00110000);
+}
+
+TEST(PrefixedInstructions, RR_A_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, OPCODE_PREFIX);
+  game.mem.SetInAddr(0x101, RR_A);
+  game.cpu.reg.A = 0b00100010;
+  game.cpu.reg.F = 0;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+  EXPECT_EQ(game.cpu.reg.A, 0b00010001);
+}
+
+TEST(PrefixedInstructions, RR_A_instruction_flags) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, OPCODE_PREFIX);
+  game.mem.SetInAddr(0x101, RR_A);
+  game.mem.SetInAddr(0x102, OPCODE_PREFIX);
+  game.mem.SetInAddr(0x103, RR_A);
+  game.cpu.reg.A = 0b00100010;
+  game.cpu.reg.F = 0;
+  utils::set_carry_flag(&game.cpu.reg.F, true);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+  EXPECT_EQ(game.cpu.reg.A, 0b10010001);
+  EXPECT_EQ(game.cpu.reg.F, 0b00000000);
+
+  game.cpu.reg.A = 0b00000001;
+  game.cpu.reg.F = 0;
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x104);
+  EXPECT_EQ(game.cpu.reg.A, 0);
+  EXPECT_EQ(game.cpu.reg.F, 0b10010000);
 }
 
 TEST(PrefixedInstructions, RES_7_aHL_instruction) {
