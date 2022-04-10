@@ -302,6 +302,10 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
   Byte opcode = mem->GetInAddr(reg.PC + 1);
   switch (opcode)
   {
+  case (BIT_0_A):
+    CPU::BIT_0_A_Instruction(mem);
+    break;
+
   case (RES_7_aHL):
     CPU::RES_7_aHL_Instruction(mem);
     break;

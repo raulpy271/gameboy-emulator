@@ -8,6 +8,14 @@
 
 namespace gameboy {
 
+void CPU::BIT_0_A_Instruction(Memory* mem) {
+  bool reg_A_end_with_zero = reg.A % 2 == 0;
+  utils::set_zero_flag(&reg.F, reg_A_end_with_zero);
+  utils::set_subtract_flag(&reg.F, false);
+  utils::set_half_carry_flag(&reg.F, true);
+  reg.PC += 2;
+}
+
 void CPU::RES_7_aHL_Instruction(Memory* mem) {
   ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, false, 7);
   reg.PC += 2;
