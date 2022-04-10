@@ -1141,3 +1141,22 @@ TEST(Instructions, JR_s8_instruction_backward) {
 
   EXPECT_EQ(game.cpu.reg.PC, 0x102 - 0x4);
 }
+
+TEST(Instructions, CCF_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.cpu.reg.F = 0b00000000;
+  game.mem.SetInAddr(0x100, CCF);
+  game.mem.SetInAddr(0x101, CCF);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.F, 0b00010000);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+
+  game.cpu.reg.F = 0b11110000;
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.F, 0b10000000);
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+}

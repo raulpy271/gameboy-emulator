@@ -400,4 +400,13 @@ void CPU::JR_NZ_s8_Instruction(Memory* mem) {
   }
 }
 
+void CPU::CCF_Instruction(Memory* mem) {
+  bool carry_flag_value = utils::carry_flag(&reg.F);
+  utils::set_carry_flag(&reg.F, !carry_flag_value);
+  utils::set_half_carry_flag(&reg.F, false);
+  utils::set_subtract_flag(&reg.F, false);
+  reg.PC += 1;
+}
+
+
 }

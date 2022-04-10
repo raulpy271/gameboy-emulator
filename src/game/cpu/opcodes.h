@@ -112,6 +112,8 @@
 
 #define JR_s8 0x18
 
+#define CCF 0x3F
+
 #define IE 0xFB
 
 #define DI 0xF3
