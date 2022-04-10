@@ -360,6 +360,14 @@ void CPU::RET_Z_Instruction(Memory* mem) {
   }
 }
 
+void CPU::RET_NC_Instruction(Memory* mem) {
+  if (utils::carry_flag(&reg.F)) {
+    reg.PC += 1;
+  } else {
+    RET_Instruction(mem);
+  }
+}
+
 void CPU::JR_s8_Instruction(Memory* mem) {
   Byte steps = mem->GetInAddr(reg.PC + 1);
   reg.PC += 2;

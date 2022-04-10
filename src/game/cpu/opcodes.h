@@ -106,6 +106,8 @@
 
 #define RET_Z 0xC8
 
+#define RET_NC 0xD0
+
 #define JR_s8 0x18
 
 #define IE 0xFB

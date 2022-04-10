@@ -74,6 +74,7 @@ class CPU {
   void RET_Instruction(Memory* mem);
   void RETI_Instruction(Memory* mem);
   void RET_Z_Instruction(Memory* mem);
+  void RET_NC_Instruction(Memory* mem);
   void JR_s8_Instruction(Memory* mem);
   
 
