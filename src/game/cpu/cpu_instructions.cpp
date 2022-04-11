@@ -108,6 +108,19 @@ void CPU::JP_C_a16_Instruction(Memory* mem) {
   }
 }
 
+void CPU::JP_NC_a16_Instruction(Memory* mem) {
+  if (!utils::carry_flag(&reg.F)) {
+    Address lower_byte_addr = reg.PC + 1;
+    Address higher_byte_addr = reg.PC + 2;
+    Byte lower_byte =  mem->GetInAddr(lower_byte_addr);
+    Byte higher_byte = mem->GetInAddr(higher_byte_addr);
+    Address next_addr = utils::create_address_from_two_bytes(higher_byte, lower_byte);
+    reg.PC = next_addr;
+  } else {
+    reg.PC = reg.PC + 3;
+  }
+}
+
 void CPU::LD_DE_d16_Instruction(Memory* mem) {
   LD_XX_d16_Instruction(mem, &reg.PC, &reg.D, &reg.E);
 }

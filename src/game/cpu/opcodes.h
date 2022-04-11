@@ -98,6 +98,8 @@
 
 #define JP_Z_a16 0xCA
 
+#define JP_NC_a16 0xD2
+
 #define CALL_a16 0xCD
 
 #define CALL_Z_a16 0xCC

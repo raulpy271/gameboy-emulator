@@ -70,6 +70,7 @@ class CPU {
   void JR_Z_s8_Instruction(Memory* mem);
   void JP_NZ_a16_Instruction(Memory* mem);
   void JP_Z_a16_Instruction(Memory* mem);
+  void JP_NC_a16_Instruction(Memory* mem);
   void CALL_a16_Instruction(Memory* mem);
   void CALL_Z_a16_Instruction(Memory* mem);
   void CALL_C_a16_Instruction(Memory* mem);
