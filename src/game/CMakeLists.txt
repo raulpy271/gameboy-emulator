@@ -11,6 +11,7 @@ add_library(${PROJECT_NAME}
     tile.cpp
     ppu.cpp
     palette.cpp
+    timer_registers.cpp
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE utils)
 

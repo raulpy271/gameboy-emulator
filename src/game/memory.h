@@ -23,6 +23,8 @@ class Memory {
 
   void SetInAddr(Address add, Byte byte_to_insert);
 
+  void IncrementDivRegister();
+
   static MemorySegment choose_segment(Address add);
 
  private:

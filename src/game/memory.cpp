@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "memory.h"
+#include "hardware_registers.h"
 
 namespace gameboy {
 
@@ -76,6 +77,15 @@ void Memory::SetInAddr(Address add, Byte byte_to_insert) {
   default:
     std::cout << "Setting in a nonmapped address: " << (unsigned int) add << std::endl;
     return;
+  }
+};
+
+void Memory::IncrementDivRegister() {
+  Byte div_value = GetInAddr(rDIV);
+  if (div_value == 0xff) {
+    IO_REG_and_HRAM_and_IE[rDIV - 0xFF00] = 0;
+  } else {
+    IO_REG_and_HRAM_and_IE[rDIV - 0xFF00] = div_value + 1;
   }
 };
 
