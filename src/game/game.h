@@ -6,6 +6,7 @@
 #include "memory.h"
 #include "cpu/cpu.h"
 #include "ppu.h"
+#include "timer_registers.h"
 
 namespace gameboy {
 
@@ -14,6 +15,7 @@ class Console {
   Memory mem;
   PPU ppu;
   CPU cpu;
+  TimerRegisters timer;
 
   Console();
 

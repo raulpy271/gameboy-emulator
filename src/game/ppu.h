@@ -14,7 +14,7 @@ public:
   ColorNumber imageData[BACKGROUND_X_SIZE * BACKGROUND_Y_SIZE];
   ColorNumber screen[SCREEN_X_SIZE * SCREEN_Y_SIZE];
 
-  void SetMemory(Memory* mem);
+  PPU(Memory* mem);
 
   void UpdateImageData();
 

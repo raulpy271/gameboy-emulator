@@ -10,7 +10,7 @@
 namespace gameboy {
 
 
-void PPU::SetMemory(Memory* mem) {
+PPU::PPU(Memory* mem) {
   this->mem = mem;
 }
 

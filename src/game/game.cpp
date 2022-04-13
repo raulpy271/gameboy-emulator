@@ -1,12 +1,14 @@
 
 #include "game.h"
 #include "hardware_registers.h"
+#include "hardware_definitions.h"
+#include "emulator_definitions.h"
 
 namespace gameboy {
 
-Console::Console() {
-  ppu.SetMemory(&mem);
-}
+Console::Console() : 
+  timer(&mem, DIV_FREQUENCY_Hz, TAC_FREQUENCY_00_Hz, TAC_FREQUENCY_01_Hz, TAC_FREQUENCY_10_Hz, TAC_FREQUENCY_11_Hz),
+  ppu(&mem) {}
 
 void Console::initialize_registers() {
   cpu.reg.PC = 0x0100;
@@ -78,6 +80,7 @@ void Console::initialize_registers() {
 }
 
 void Console::run_a_instruction_cycle() {
+  timer.pulses(MEAN_OF_PULSES_BY_INSTRUCTION);
   InterruptFlag interrupt = cpu.GetNextInterrupt(&mem);
   if (interrupt == InterruptFlag::NoInterrupt) {
     cpu.execute_intruction(&mem);
