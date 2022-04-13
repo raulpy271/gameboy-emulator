@@ -16,12 +16,6 @@ bool CPU::GetIME() {
   return IME;
 }
 
-void CPU::RequestInterrupt(Memory* mem, InterruptFlag interrupt) {
-  std::bitset<8> IF_bitset(mem->GetInAddr(rIF));
-  IF_bitset.set((std::size_t) interrupt);
-  mem->SetInAddr(rIF, IF_bitset.to_ulong());
-}
-
 InterruptFlag CPU::GetNextInterrupt(Memory* mem) {
   if (IME) {
     std::bitset<8> interruption_possible = mem->GetInAddr(rIE) & mem->GetInAddr(rIF);

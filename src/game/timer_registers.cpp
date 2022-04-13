@@ -5,6 +5,7 @@
 #include "primitives.h"
 #include "timer_registers.h"
 #include "hardware_registers.h"
+#include "cpu/interrupts.h"
 
 namespace gameboy {
 
@@ -45,7 +46,8 @@ void TimerRegisters::pulses(unsigned int pulses) {
       if (tima < 0xff) {
         mem->SetInAddr(rTIMA, tima + 1);
       } else {
-        mem->SetInAddr(rTIMA, 0);
+        mem->SetInAddr(rTIMA, mem->GetInAddr(rTMA));
+        RequestInterrupt(mem, InterruptFlag::TIMER);
       }
     } else {
       pulses_until_tima_frequency -= pulses;

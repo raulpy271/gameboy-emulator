@@ -2,6 +2,8 @@
 #ifndef GAME_INTERRUPTS_H_
 #define GAME_INTERRUPTS_H_
 
+#include "../memory.h"
+
 namespace gameboy {
 
 enum class InterruptVector {
@@ -20,6 +22,8 @@ enum class InterruptFlag {
   HiToLo      = 4,
   NoInterrupt = 5
 };
+
+void RequestInterrupt(Memory* mem, InterruptFlag interrupt);
 
 }
 

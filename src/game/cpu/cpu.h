@@ -103,8 +103,6 @@ class CPU {
 
   void execute_interrupt(Memory* mem, InterruptFlag interrupt);
 
-  void RequestInterrupt(Memory* mem, InterruptFlag interrupt);
-
   InterruptFlag GetNextInterrupt(Memory* mem);
 
   bool GetIME();

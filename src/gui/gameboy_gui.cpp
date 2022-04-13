@@ -31,7 +31,7 @@ bool GameBoyWindow::draw_screen_handler() {
   }
   game->ppu.UpdateImageData();
   screen_pixbuf = GameBoyWindow::create_pixbuf_from_ppu_data();
-  game->cpu.RequestInterrupt(&(game->mem), gameboy::InterruptFlag::VBLANK);
+  RequestInterrupt(&(game->mem), gameboy::InterruptFlag::VBLANK);
   screen.set(screen_pixbuf->scale_simple(SCREEN_X_SIZE * 2, SCREEN_Y_SIZE * 2, (Gdk::InterpType) 0 ));
   return true;
 }
