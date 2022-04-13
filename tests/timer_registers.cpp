@@ -119,3 +119,41 @@ TEST(Timer, TAC_register_changing_frequency) {
   timer.pulses(5);
   EXPECT_EQ(mem.GetInAddr(rTIMA), 0x02);
 }
+
+TEST(Timer, TIMA_register_is_set_to_TMA_in_overflow) {
+  unsigned int div_clock_frequency = 5;
+  unsigned int tac_clock_frequency_00 = 5;
+  gameboy::Memory mem;
+  gameboy::TimerRegisters timer(&mem, div_clock_frequency, tac_clock_frequency_00, 0, 0, 0);
+
+  mem.SetInAddr(rTAC, 0b00000100); // start rTIME register 
+  mem.SetInAddr(rTIMA, 0xfe);
+  mem.SetInAddr(rTMA, 0x05);
+
+
+  timer.pulses(5);
+  EXPECT_EQ(mem.GetInAddr(rTIMA), 0xff);
+
+  timer.pulses(4);
+  EXPECT_EQ(mem.GetInAddr(rTIMA), 0xff);
+
+  timer.pulses(1);
+  EXPECT_EQ(mem.GetInAddr(rTIMA), 0x05);
+}
+
+TEST(Timer, TIMA_register_generate_interrupt_in_overflow) {
+  unsigned int div_clock_frequency = 5;
+  unsigned int tac_clock_frequency_00 = 5;
+  gameboy::Memory mem;
+  gameboy::TimerRegisters timer(&mem, div_clock_frequency, tac_clock_frequency_00, 0, 0, 0);
+
+  mem.SetInAddr(rTAC, 0b00000100); // start rTIME register 
+  mem.SetInAddr(rTIMA, 0xff);
+  mem.SetInAddr(rTMA, 0x00);
+  mem.SetInAddr(rIF, 0x00);
+
+  timer.pulses(5);
+
+  EXPECT_EQ(mem.GetInAddr(rTIMA), 0x00);
+  EXPECT_EQ(mem.GetInAddr(rIF), 0b00000100);
+}

@@ -35,8 +35,8 @@ TEST(Interrupts, request_interrupts) {
   game.initialize_registers();
   game.mem.SetInAddr(rIF, 0x0);
 
-  game.cpu.RequestInterrupt(&game.mem, gameboy::InterruptFlag::VBLANK);
-  game.cpu.RequestInterrupt(&game.mem, gameboy::InterruptFlag::HiToLo);
+  RequestInterrupt(&game.mem, gameboy::InterruptFlag::VBLANK);
+  RequestInterrupt(&game.mem, gameboy::InterruptFlag::HiToLo);
 
   EXPECT_EQ(game.mem.GetInAddr(rIF), 0b00010001);
 }
