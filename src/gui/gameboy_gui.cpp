@@ -20,6 +20,7 @@ GameBoyWindow::GameBoyWindow(gameboy::Console* game) {
   screen.set(screen_pixbuf);
 
   add(screen);
+  add_events(Gdk::KEY_PRESS_MASK);
 
   screen.show();
   show();
@@ -34,6 +35,42 @@ bool GameBoyWindow::draw_screen_handler() {
   RequestInterrupt(&(game->mem), gameboy::InterruptFlag::VBLANK);
   screen.set(screen_pixbuf->scale_simple(SCREEN_X_SIZE * 2, SCREEN_Y_SIZE * 2, (Gdk::InterpType) 0 ));
   return true;
+}
+
+bool GameBoyWindow::on_key_press_event(GdkEventKey* key_event) {
+  switch (key_event->keyval)
+  {
+  case BOTTON_ARROW_DOWN:
+    std::cout << "Setinha baixo" << std::endl;
+    return true;
+  case BOTTON_ARROW_UP:
+    std::cout << "Setinha cima" << std::endl;
+    return true;
+  case BOTTON_ARROW_RIGHT:
+    std::cout << "Setinha direita" << std::endl;
+    return true;
+  case BOTTON_ARROW_LEFT:
+    std::cout << "Setinha esquerda" << std::endl;
+    return true;
+  case BOTTON_B:
+    std::cout << "Botão B" << std::endl;
+    return true;
+  case BOTTON_A:
+    std::cout << "Botão A" << std::endl;
+    return true;
+  case BOTTON_SELECT:
+    std::cout << "Botão SELECT" << std::endl;
+    return true;
+  case BOTTON_START:
+    std::cout << "Botão START" << std::endl;
+    return true;
+  default:
+    break;
+  }
+  std::cout << "Non mapped botton" << std::endl;
+  std::cout << "Keyval: " << key_event->keyval << std::endl;
+  std::cout << "State: " << key_event->state << std::endl;
+  return false;
 }
 
 Glib::RefPtr<Gdk::Pixbuf> GameBoyWindow::create_pixbuf_from_ppu_data() {
