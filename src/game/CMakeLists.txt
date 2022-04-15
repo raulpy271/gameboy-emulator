@@ -13,6 +13,7 @@ add_library(${PROJECT_NAME}
     ppu.cpp
     palette.cpp
     timer_registers.cpp
+    keypad.cpp
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE utils)
 
