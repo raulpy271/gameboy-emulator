@@ -91,10 +91,10 @@ TEST(Memory, choose_segment_of_memory_io_reg_and_hram_and_ie) {
 TEST(Memory, get_and_set_in_io_reg_and_ie) {
   gameboy::Memory mem;
 
-  mem.SetInAddr(0xff00, 0x50);
+  mem.SetInAddr(0xff06, 0x50);
   mem.SetInAddr(0xffff, 0xf0);
 
-  EXPECT_EQ(mem.GetInAddr(0xff00), 0x50);
+  EXPECT_EQ(mem.GetInAddr(0xff06), 0x50);
   EXPECT_EQ(mem.GetInAddr(0xffff), 0xf0);
 }
 
