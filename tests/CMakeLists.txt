@@ -12,6 +12,7 @@ add_executable(unit_test
   interrupts.cpp
   palette.cpp
   timer_registers.cpp
+  keypad.cpp
 )
 
 target_link_libraries(unit_test 

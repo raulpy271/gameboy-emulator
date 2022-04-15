@@ -3,6 +3,7 @@
 #define GAME_MEMORY_H_
 
 #include "primitives.h"
+#include "keypad.h"
 
 namespace gameboy {
 
@@ -17,11 +18,18 @@ enum class MemorySegment {
   NO_SEGMENT
 };
 
+enum class BottonEventType {PRESS, RELEASE};
+
 class Memory {
  public:
+
+  Keypad keypad;
+
   Byte GetInAddr(Address add);
 
   void SetInAddr(Address add, Byte byte_to_insert);
+
+  void HandleBottonEvent(Botton botton, BottonEventType type);
 
   void IncrementDivRegister();
 

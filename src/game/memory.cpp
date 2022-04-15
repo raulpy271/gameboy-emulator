@@ -32,6 +32,9 @@ MemorySegment Memory::choose_segment(Address add) {
 }
 
 Byte Memory::GetInAddr(Address add) {
+  if (add == rP1) {
+    return keypad.ReadOnP1Register(IO_REG_and_HRAM_and_IE[add - 0xFF00]);
+  }
   switch (Memory::choose_segment(add))
   {
   case MemorySegment::CARTRIDGE_ROM:
@@ -54,6 +57,10 @@ Byte Memory::GetInAddr(Address add) {
 };
 
 void Memory::SetInAddr(Address add, Byte byte_to_insert) {
+  if (add == rP1) {
+    IO_REG_and_HRAM_and_IE[add - 0xFF00] = keypad.WriteOnP1Register(byte_to_insert);
+    return;
+  }
   switch (Memory::choose_segment(add))
   {
   case MemorySegment::CARTRIDGE_ROM:
@@ -79,6 +86,14 @@ void Memory::SetInAddr(Address add, Byte byte_to_insert) {
     return;
   }
 };
+
+ void Memory::HandleBottonEvent(Botton botton, BottonEventType type) {
+   if (type == BottonEventType::PRESS) {
+     keypad.PressBotton(botton);
+   } else {
+     keypad.ReleaseBotton(botton);
+   }
+ }
 
 void Memory::IncrementDivRegister() {
   Byte div_value = GetInAddr(rDIV);
