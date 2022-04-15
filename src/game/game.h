@@ -7,6 +7,7 @@
 #include "cpu/cpu.h"
 #include "ppu.h"
 #include "timer_registers.h"
+#include "keypad.h"
 
 namespace gameboy {
 
@@ -24,6 +25,8 @@ class Console {
   void run_a_instruction_cycle();
 
   void load_rom(Byte* rom);
+
+  void HandleBottonEvent(Botton botton, BottonEventType type);
 };
 
 }

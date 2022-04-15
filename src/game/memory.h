@@ -29,8 +29,6 @@ class Memory {
 
   void SetInAddr(Address add, Byte byte_to_insert);
 
-  void HandleBottonEvent(Botton botton, BottonEventType type);
-
   void IncrementDivRegister();
 
   static MemorySegment choose_segment(Address add);

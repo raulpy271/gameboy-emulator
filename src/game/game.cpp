@@ -3,6 +3,7 @@
 #include "hardware_registers.h"
 #include "hardware_definitions.h"
 #include "emulator_definitions.h"
+#include "cpu/interrupts.h"
 
 namespace gameboy {
 
@@ -94,5 +95,15 @@ void Console::load_rom(Byte* rom) {
     mem.SetInAddr(i, rom[i]);
   }
 }
+
+void Console::HandleBottonEvent(Botton botton, BottonEventType type) {
+  if (type == BottonEventType::PRESS) {
+    mem.keypad.PressBotton(botton);
+  } else {
+    mem.keypad.ReleaseBotton(botton);
+  }
+  RequestInterrupt(&mem, InterruptFlag::HiToLo);
+}
+
 
 }

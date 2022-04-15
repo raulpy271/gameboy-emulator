@@ -87,14 +87,6 @@ void Memory::SetInAddr(Address add, Byte byte_to_insert) {
   }
 };
 
- void Memory::HandleBottonEvent(Botton botton, BottonEventType type) {
-   if (type == BottonEventType::PRESS) {
-     keypad.PressBotton(botton);
-   } else {
-     keypad.ReleaseBotton(botton);
-   }
- }
-
 void Memory::IncrementDivRegister() {
   Byte div_value = GetInAddr(rDIV);
   if (div_value == 0xff) {
