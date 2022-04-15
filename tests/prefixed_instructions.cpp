@@ -29,6 +29,34 @@ TEST(PrefixedInstructions, BIT_0_A_instruction) {
   EXPECT_EQ(game.cpu.reg.F, 0b00110000);
 }
 
+TEST(PrefixedInstructions, BIT_1_A_instruction_bit_1_is_zero) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.cpu.reg.F = 0;
+  game.mem.SetInAddr(0x100, OPCODE_PREFIX);
+  game.mem.SetInAddr(0x101, BIT_1_A);
+  game.cpu.reg.A = 0b00000000;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+  EXPECT_EQ(game.cpu.reg.F, 0b10100000);
+}
+
+TEST(PrefixedInstructions, BIT_1_A_instruction_bit_1_is_one) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, OPCODE_PREFIX);
+  game.mem.SetInAddr(0x101, BIT_1_A);
+  game.cpu.reg.A = 0b00000010;
+  game.cpu.reg.F = 0b00010000;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+  EXPECT_EQ(game.cpu.reg.F, 0b00110000);
+}
+
 TEST(PrefixedInstructions, RR_A_instruction) {
   gameboy::Console game;
   game.initialize_registers();

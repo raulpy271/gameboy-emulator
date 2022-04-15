@@ -6,6 +6,8 @@
 
 #define BIT_0_A 0x47
 
+#define BIT_1_A 0x4F
+
 #define RR_A 0x1F
 
 #define RES_7_aHL 0xBE

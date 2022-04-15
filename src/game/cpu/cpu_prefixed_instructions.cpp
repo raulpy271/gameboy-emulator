@@ -16,6 +16,14 @@ void CPU::BIT_0_A_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::BIT_1_A_Instruction(Memory* mem) {
+  bool bit_1_is_one = (bool)(reg.A & 0b00000010);
+  utils::set_zero_flag(&reg.F, !bit_1_is_one);
+  utils::set_subtract_flag(&reg.F, false);
+  utils::set_half_carry_flag(&reg.F, true);
+  reg.PC += 2;
+}
+
 void CPU::RR_A_Instruction(Memory* mem) {
   bool carry = utils::carry_flag(&reg.F);
   bool reg_A_end_with_zero = reg.A % 2 == 0;
