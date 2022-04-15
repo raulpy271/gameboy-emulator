@@ -37,6 +37,14 @@ void LD_X_d8_Instruction(Memory* mem, Address* PC, Byte* X) {
   *PC = (*PC) + 2;
 }
 
+void BIT_X_A_Instruction(Byte* F, Byte A, Address* PC, int X) {
+  bool bit_X_is_one = (bool)(A & (1 << X));
+  utils::set_zero_flag(F, !bit_X_is_one);
+  utils::set_subtract_flag(F, false);
+  utils::set_half_carry_flag(F, true);
+  *PC = (*PC) + 2;
+}
+
 void ChangeBitValueFromMemory_Instruction(Memory* mem, Byte higher_byte, Byte lower_byte, bool value, int position) {
   Address addr_to_change = utils::create_address_from_two_bytes(higher_byte, lower_byte);
   Byte value_to_change = mem->GetInAddr(addr_to_change);
