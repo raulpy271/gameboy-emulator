@@ -308,6 +308,10 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     CPU::BIT_1_A_Instruction(mem);
     break;
 
+  case (BIT_2_A):
+    CPU::BIT_2_A_Instruction(mem);
+    break;
+
   case (RR_A):
     CPU::RR_A_Instruction(mem);
     break;

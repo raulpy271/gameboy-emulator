@@ -16,6 +16,10 @@ void CPU::BIT_1_A_Instruction(Memory* mem) {
   BIT_X_A_Instruction(&reg.F, reg.A, &reg.PC, 1);
 }
 
+void CPU::BIT_2_A_Instruction(Memory* mem) {
+  BIT_X_A_Instruction(&reg.F, reg.A, &reg.PC, 2);
+}
+
 void CPU::RR_A_Instruction(Memory* mem) {
   bool carry = utils::carry_flag(&reg.F);
   bool reg_A_end_with_zero = reg.A % 2 == 0;
