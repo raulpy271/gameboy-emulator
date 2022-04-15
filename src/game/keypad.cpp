@@ -45,6 +45,13 @@ Byte Keypad::ReadOnP1Register(Byte value) {
     result[2] = !(pressed_botton[(int) Botton::Up]);
     result[3] = !(pressed_botton[(int) Botton::Down]);
     return result.to_ulong();
+  } 
+  if (selected_action_bottons) {
+    result[0] = !(pressed_botton[(int) Botton::A]);
+    result[1] = !(pressed_botton[(int) Botton::B]);
+    result[2] = !(pressed_botton[(int) Botton::Select]);
+    result[3] = !(pressed_botton[(int) Botton::Start]);
+    return result.to_ulong();
   }
   return 0b00111111;
 }
