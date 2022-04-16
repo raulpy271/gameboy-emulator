@@ -166,7 +166,12 @@ void CPU::LD_aHLI_A_Instruction(Memory* mem) {
 }
 
 void CPU::INC_A_Instruction(Memory* mem) {
+  if ((reg.A & 0xf) == 0xf) {
+    utils::set_half_carry_flag(&reg.F, true);
+  }
   reg.A += 1;
+  utils::set_subtract_flag(&reg.F, false);
+  utils::set_zero_flag(&reg.F, !((bool)reg.A));
   reg.PC += 1;
 }
 
