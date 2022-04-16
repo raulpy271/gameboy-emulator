@@ -185,6 +185,16 @@ void CPU::DEC_BC_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::DEC_A_Instruction(Memory* mem) {
+  if ((reg.A & 0xf) == 0) {
+    utils::set_half_carry_flag(&reg.F, true);
+  }
+  reg.A -= 1; 
+  utils::set_subtract_flag(&reg.F, true);
+  utils::set_zero_flag(&reg.F, !((bool)reg.A));
+  reg.PC += 1;
+}
+
 void CPU::DEC_C_Instruction(Memory* mem) {
   reg.C -= 1; 
   utils::set_subtract_flag(&reg.F, true);
