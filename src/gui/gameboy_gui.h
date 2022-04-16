@@ -27,6 +27,7 @@ private:
   bool draw_screen_handler();
 
   bool on_key_press_event(GdkEventKey* event) override;
+  bool on_key_release_event(GdkEventKey* key_event) override;
 
   Glib::RefPtr<Gdk::Pixbuf> create_pixbuf_from_ppu_data();
 

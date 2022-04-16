@@ -20,7 +20,7 @@ GameBoyWindow::GameBoyWindow(gameboy::Console* game) {
   screen.set(screen_pixbuf);
 
   add(screen);
-  add_events(Gdk::KEY_PRESS_MASK);
+  add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
 
   screen.show();
   show();
@@ -40,34 +40,102 @@ bool GameBoyWindow::draw_screen_handler() {
 bool GameBoyWindow::on_key_press_event(GdkEventKey* key_event) {
   switch (key_event->keyval)
   {
-  case BOTTON_ARROW_DOWN:
-    std::cout << "Setinha baixo" << std::endl;
-    return true;
-  case BOTTON_ARROW_UP:
-    std::cout << "Setinha cima" << std::endl;
-    return true;
-  case BOTTON_ARROW_RIGHT:
-    std::cout << "Setinha direita" << std::endl;
-    return true;
-  case BOTTON_ARROW_LEFT:
-    std::cout << "Setinha esquerda" << std::endl;
-    return true;
-  case BOTTON_B:
-    std::cout << "Botão B" << std::endl;
-    return true;
-  case BOTTON_A:
-    std::cout << "Botão A" << std::endl;
-    return true;
-  case BOTTON_SELECT:
-    std::cout << "Botão SELECT" << std::endl;
-    return true;
-  case BOTTON_START:
-    std::cout << "Botão START" << std::endl;
-    return true;
+  case BOTTON_ARROW_DOWN: {
+      std::cout << "Setinha baixo" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::Down, gameboy::BottonEventType::PRESS);
+      return true;
+    }
+  case BOTTON_ARROW_UP: {
+      std::cout << "Setinha cima" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::Up, gameboy::BottonEventType::PRESS);
+      return true;
+    }
+  case BOTTON_ARROW_RIGHT: {
+      std::cout << "Setinha direita" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::Right, gameboy::BottonEventType::PRESS);
+      return true;
+    }
+  case BOTTON_ARROW_LEFT: {
+      std::cout << "Setinha esquerda" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::Left, gameboy::BottonEventType::PRESS);
+      return true;
+    }
+  case BOTTON_B: {
+      std::cout << "Botão B" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::B, gameboy::BottonEventType::PRESS);
+      return true;
+    }
+  case BOTTON_A: {
+      std::cout << "Botão A" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::A, gameboy::BottonEventType::PRESS);
+      return true;
+    }
+  case BOTTON_SELECT: {
+      std::cout << "Botão SELECT" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::Select, gameboy::BottonEventType::PRESS);
+      return true;
+    }
+  case BOTTON_START: {
+      std::cout << "Botão START" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::Start, gameboy::BottonEventType::PRESS);
+      return true;
+    }
   default:
     break;
   }
   std::cout << "Non mapped botton" << std::endl;
+  std::cout << "Keyval: " << key_event->keyval << std::endl;
+  std::cout << "State: " << key_event->state << std::endl;
+  return false;
+}
+
+bool GameBoyWindow::on_key_release_event(GdkEventKey* key_event) {
+  switch (key_event->keyval)
+  {
+  case BOTTON_ARROW_DOWN: {
+      std::cout << "Setinha baixo (release)" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::Down, gameboy::BottonEventType::RELEASE);
+      return true;
+    }
+  case BOTTON_ARROW_UP: {
+      std::cout << "Setinha cima (release)" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::Up, gameboy::BottonEventType::RELEASE);
+      return true;
+    }
+  case BOTTON_ARROW_RIGHT: {
+      std::cout << "Setinha direita (release)" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::Right, gameboy::BottonEventType::RELEASE);
+      return true;
+    }
+  case BOTTON_ARROW_LEFT: {
+      std::cout << "Setinha esquerda (release)" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::Left, gameboy::BottonEventType::RELEASE);
+      return true;
+    }
+  case BOTTON_B: {
+      std::cout << "Botão B (release)" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::B, gameboy::BottonEventType::RELEASE);
+      return true;
+    }
+  case BOTTON_A: {
+      std::cout << "Botão A (release)" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::A, gameboy::BottonEventType::RELEASE);
+      return true;
+    }
+  case BOTTON_SELECT: {
+      std::cout << "Botão SELECT (release)" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::Select, gameboy::BottonEventType::RELEASE);
+      return true;
+    }
+  case BOTTON_START: {
+      std::cout << "Botão START (release)" << std::endl;
+      game->HandleBottonEvent(gameboy::Botton::Start, gameboy::BottonEventType::RELEASE);
+      return true;
+    }
+  default:
+    break;
+  }
+  std::cout << "Non mapped botton (release)" << std::endl;
   std::cout << "Keyval: " << key_event->keyval << std::endl;
   std::cout << "State: " << key_event->state << std::endl;
   return false;
