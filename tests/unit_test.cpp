@@ -426,6 +426,23 @@ TEST(Instructions, INC_B_instruction_flags) {
   EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), true);
 }
 
+TEST(Instructions, INC_C_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, INC_C);
+  game.cpu.reg.C = 0b00001111;
+  game.cpu.reg.F = 0;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.C, 0b00010000);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), true);
+}
+
+
 TEST(Instructions, INC_DE_instruction) {
   gameboy::Console game;
   game.initialize_registers();
