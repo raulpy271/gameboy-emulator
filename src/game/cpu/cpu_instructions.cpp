@@ -133,6 +133,16 @@ void CPU::LD_BC_d16_Instruction(Memory* mem) {
   LD_XX_d16_Instruction(mem, &reg.PC, &reg.B, &reg.C);
 }
 
+void CPU::LD_SP_d16_Instruction(Memory* mem) {
+  Address lower_byte_addr = (reg.PC) + 1;
+  Address higher_byte_addr = (reg.PC) + 2;
+  Byte lower_byte =  mem->GetInAddr(lower_byte_addr);
+  Byte higher_byte = mem->GetInAddr(higher_byte_addr);
+  Address addr = utils::create_address_from_two_bytes(higher_byte, lower_byte);
+  reg.SP = addr;
+  reg.PC = (reg.PC) + 3;
+}
+
 void CPU::LD_A_aDE_Instruction(Memory* mem) {
   Address add_of_value_to_load_in_A = utils::create_address_from_two_bytes(reg.D, reg.E);
   reg.A = mem->GetInAddr(add_of_value_to_load_in_A);

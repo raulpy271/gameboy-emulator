@@ -34,6 +34,8 @@
 
 #define LD_HL_d16 0x21
 
+#define LD_SP_d16 0x31
+
 #define LD_A_aDE 0x1A
 
 #define LD_A_aHL 0x7E

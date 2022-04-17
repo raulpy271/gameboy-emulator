@@ -117,6 +117,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::LD_HL_d16_Instruction(mem);
     break;
 
+  case (LD_SP_d16):
+    CPU::LD_SP_d16_Instruction(mem);
+    break;
+
   case (LD_BC_d16):
     CPU::LD_BC_d16_Instruction(mem);
     break;
