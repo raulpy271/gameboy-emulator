@@ -7,6 +7,8 @@
 
 namespace gameboy {
 
+void INC_X_Instruction(Byte* X, Byte* F, Address* PC);
+
 void ADD_X_Y_Instruction(Byte* X, Byte* Y, Byte* F);
 
 void LD_XX_d16_Instruction(Memory* mem, Address* PC, Byte* higher_byte_reg, Byte* lower_byte_reg);

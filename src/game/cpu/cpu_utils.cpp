@@ -8,6 +8,16 @@
 
 namespace gameboy {
 
+void INC_X_Instruction(Byte* X, Byte* F, Address* PC) {
+  if (((*X) & 0xf) == 0xf) {
+    utils::set_half_carry_flag(F, true);
+  }
+  (*X) = (*X) + 1;
+  utils::set_subtract_flag(F, false);
+  utils::set_zero_flag(F, !((bool)(*X)));
+  *PC = (*PC) + 1;
+}
+
 void ADD_X_Y_Instruction(Byte* X, Byte* Y, Byte* F) {
   *F = 0;
   if (*X + *Y > 0xff) {
