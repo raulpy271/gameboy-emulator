@@ -48,6 +48,8 @@
 
 #define INC_A 0x3C
 
+#define INC_B 0x04
+
 #define INC_DE 0x13
 
 #define INC_HL 0x23
