@@ -76,6 +76,8 @@
 
 #define LD_B_A 0x47
 
+#define LD_B_B 0x40
+
 #define LD_B_C 0x41
 
 #define LD_B_D 0x42
