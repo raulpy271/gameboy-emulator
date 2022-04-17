@@ -60,6 +60,8 @@
 
 #define INC_L 0x2C
 
+#define INC_aHL 0x34
+
 #define INC_DE 0x13
 
 #define INC_HL 0x23

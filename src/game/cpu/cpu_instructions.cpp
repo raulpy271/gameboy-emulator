@@ -203,6 +203,19 @@ void CPU::INC_L_Instruction(Memory* mem) {
   INC_X_Instruction(&reg.L, &reg.F, &reg.PC);
 }
 
+void CPU::INC_aHL_Instruction(Memory* mem) {
+  Address aHL = utils::create_address_from_two_bytes(reg.H, reg.L);
+  Byte value = mem->GetInAddr(aHL);
+  if (((value) & 0xf) == 0xf) {
+    utils::set_half_carry_flag(&reg.F, true);
+  }
+  value = value + 1;
+  utils::set_subtract_flag(&reg.F, false);
+  utils::set_zero_flag(&reg.F, !((bool)(value)));
+  mem->SetInAddr(aHL, value);
+  reg.PC += 1;
+}
+
 void CPU::INC_DE_Instruction(Memory* mem) {
   utils::increment_registers_pair(&reg.D, &reg.E);
   reg.PC += 1;
