@@ -88,6 +88,8 @@
 
 #define LD_B_L 0x45
 
+#define LD_B_aHL 0x46
+
 #define ADD_A_B 0x80
 
 #define ADD_A_d8 0xC6
