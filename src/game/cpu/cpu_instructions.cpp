@@ -199,6 +199,10 @@ void CPU::INC_H_Instruction(Memory* mem) {
   INC_X_Instruction(&reg.H, &reg.F, &reg.PC);
 }
 
+void CPU::INC_L_Instruction(Memory* mem) {
+  INC_X_Instruction(&reg.L, &reg.F, &reg.PC);
+}
+
 void CPU::INC_DE_Instruction(Memory* mem) {
   utils::increment_registers_pair(&reg.D, &reg.E);
   reg.PC += 1;
