@@ -21,3 +21,6 @@ run: build-cmake
 run-tests: build-tests
 	./$(CMAKE_BUILD)/$(TEST_EXE)
 
+count-instructions:
+	./count_instructions.sh
+
