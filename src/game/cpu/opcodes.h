@@ -52,6 +52,8 @@
 
 #define INC_C 0x0C
 
+#define INC_D 0x14
+
 #define INC_DE 0x13
 
 #define INC_HL 0x23
