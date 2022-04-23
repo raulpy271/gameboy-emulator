@@ -45,6 +45,8 @@ Byte Memory::GetInAddr(Address add) {
     return VRAM[add - 0x8000];
   case MemorySegment::WRAM_0:
     return WRAM_0[add - 0xC000];
+  case MemorySegment::WRAM_N:
+    return WRAM_N[add - 0xD000];
   case MemorySegment::OAM:
     return OAM[add - 0xFE00];
   case MemorySegment::NO_SEGMENT:
@@ -74,6 +76,9 @@ void Memory::SetInAddr(Address add, Byte byte_to_insert) {
     return;
   case MemorySegment::WRAM_0:
     WRAM_0[add - 0xC000] = byte_to_insert;
+    return;
+  case MemorySegment::WRAM_N:
+    WRAM_N[add - 0xD000] = byte_to_insert;
     return;
   case MemorySegment::OAM:
     OAM[add - 0xFE00] = byte_to_insert;
