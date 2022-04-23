@@ -39,6 +39,8 @@ Byte Memory::GetInAddr(Address add) {
   {
   case MemorySegment::CARTRIDGE_ROM:
     return cartridge_ROM[add];
+  case MemorySegment::CARTRIDGE_RAM:
+    return cartridge_RAM[add - 0xA000];
   case MemorySegment::IO_REG_and_HRAM_and_IE:
     return IO_REG_and_HRAM_and_IE[add - 0xFF00];
   case MemorySegment::VRAM:
@@ -67,6 +69,9 @@ void Memory::SetInAddr(Address add, Byte byte_to_insert) {
   {
   case MemorySegment::CARTRIDGE_ROM:
     cartridge_ROM[add] = byte_to_insert;
+    return;
+  case MemorySegment::CARTRIDGE_RAM:
+    cartridge_RAM[add - 0xA000] = byte_to_insert;
     return;
   case MemorySegment::IO_REG_and_HRAM_and_IE:
     IO_REG_and_HRAM_and_IE[add - 0xFF00] = byte_to_insert;
