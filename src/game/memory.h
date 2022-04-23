@@ -42,6 +42,8 @@ class Memory {
   Byte                    OAM[0xFEA0 - 0xFE00] = {0x0};
   Byte IO_REG_and_HRAM_and_IE[0xFFFF - 0xFF00] = {0x0};
 
+  void executeDMATransfer(Byte source_destination_high_byte);
+
 };
 
 }

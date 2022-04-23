@@ -3,6 +3,8 @@
 
 #include "../src/game/primitives.h"
 #include "../src/game/memory.h"
+#include "../src/game/hardware_registers.h"
+#include "../src/game/hardware_definitions.h"
 
 TEST(Memory, choose_segment_of_memory_rom) {
   gameboy::MemorySegment segment;
@@ -146,4 +148,45 @@ TEST(Memory, get_and_set_in_cartridge_ram) {
 
   EXPECT_EQ(mem.GetInAddr(0xA000), 0x50);
   EXPECT_EQ(mem.GetInAddr(0xBFFF), 0x60);
+}
+
+TEST(Memory, writing_to_DMA) {
+  gameboy::Memory mem;
+  Address source = 0x3000;
+  Byte source_high_byte = 0x30;
+  Byte value_in_source = 0x5;
+
+  for (Address i = source; i <= 0x309F; i++) {
+    mem.SetInAddr(i, value_in_source);
+  }
+
+  mem.SetInAddr(rDMA, source_high_byte);
+
+  for (Address add = OAM_START_LOCATION; add <= OAM_END_LOCATION; add++) {
+    EXPECT_EQ(mem.GetInAddr(add), value_in_source);
+  }
+}
+
+TEST(Memory, writing_to_DMA_random_data) {
+  gameboy::Memory mem;
+  Address source = 0x3000;
+  Byte source_high_byte = 0x30;
+
+  for (Address i = source; i <= 0x309F; i++) {
+    if (i % 2 == 0) {
+      mem.SetInAddr(i, 2);
+    } else {
+      mem.SetInAddr(i, 3);
+    }
+  }
+
+  mem.SetInAddr(rDMA, source_high_byte);
+
+  for (Address add = OAM_START_LOCATION; add <= OAM_END_LOCATION; add++) {
+    if (add % 2 == 0) {
+      EXPECT_EQ(mem.GetInAddr(add), 2);
+    } else {
+      EXPECT_EQ(mem.GetInAddr(add), 3);
+    }
+  }
 }

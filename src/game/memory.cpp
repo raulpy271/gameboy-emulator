@@ -3,6 +3,7 @@
 
 #include "memory.h"
 #include "hardware_registers.h"
+#include "hardware_definitions.h"
 
 namespace gameboy {
 
@@ -65,6 +66,10 @@ void Memory::SetInAddr(Address add, Byte byte_to_insert) {
     IO_REG_and_HRAM_and_IE[add - 0xFF00] = keypad.WriteOnP1Register(byte_to_insert);
     return;
   }
+  if (add == rDMA) {
+    executeDMATransfer(byte_to_insert);
+    return;
+  }
   switch (Memory::choose_segment(add))
   {
   case MemorySegment::CARTRIDGE_ROM:
@@ -105,5 +110,14 @@ void Memory::IncrementDivRegister() {
     IO_REG_and_HRAM_and_IE[rDIV - 0xFF00] = div_value + 1;
   }
 };
+
+void Memory::executeDMATransfer(Byte source_destination_high_byte) {
+  Address source = source_destination_high_byte * 0x100;
+  Byte value;
+  for (Address destination = OAM_START_LOCATION; destination <= OAM_END_LOCATION; destination++, source++) {
+    value = GetInAddr(source);
+    SetInAddr(destination, value);
+  }
+}
 
 }
