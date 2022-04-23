@@ -58,7 +58,6 @@ void Console::initialize_registers() {
   mem.SetInAddr(rSCX , 0x00);
   mem.SetInAddr(rLY , 0x00);
   mem.SetInAddr(rLYC , 0x00);
-  mem.SetInAddr(rDMA , 0xFF);
   mem.SetInAddr(rBGP , 0xFC);
   mem.SetInAddr(rOBP0 , 0x0);
   mem.SetInAddr(rOBP1 , 0x0);
