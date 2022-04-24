@@ -1,5 +1,5 @@
 
-#include <iostream>
+#include "stdio.h"
 #include <bitset>
 
 #include "ppu.h"
@@ -67,11 +67,15 @@ void PPU::ScanLineBackground(ColorNumber* arr_to_store_line, int background_Y_li
 
 Address* PPU::OAMScan(int Y_cordinate) {
   Address* sprites = new Address[10]{0};
-  int y_screen;
+  int y_screen, x_screen;
   int next_sprite_to_add = 0;
   for (Address sprite_location = OAM_START_LOCATION; sprite_location < OAM_END_LOCATION; sprite_location += 4) {
     y_screen = mem->GetInAddr(sprite_location) - 16;
-    if ((Y_cordinate >= y_screen) && (Y_cordinate < (y_screen + 8))) {
+    x_screen = mem->GetInAddr(sprite_location + 1) - 8;
+    if (
+          (Y_cordinate >= y_screen) && (Y_cordinate < (y_screen + 8)) &&
+          (x_screen > (-8) && x_screen < SCREEN_X_SIZE)
+        ) {
       sprites[next_sprite_to_add] = sprite_location;
       next_sprite_to_add++;
     }
@@ -81,6 +85,8 @@ Address* PPU::OAMScan(int Y_cordinate) {
 
 void PPU::DrawSpriteLine(ColorNumber* arr_to_store_line, Address sprite_location, int Y_cordinate) {
   Byte obp;
+  ColorNumber tile_line[8]; 
+  ColorNumber* next_pixel_to_set;
   int y_screen = mem->GetInAddr(sprite_location) - 16;
   int x_screen = mem->GetInAddr(sprite_location + 1) - 8;
   Byte tile_number = mem->GetInAddr(sprite_location + 2);
@@ -91,7 +97,13 @@ void PPU::DrawSpriteLine(ColorNumber* arr_to_store_line, Address sprite_location
   } else {
     obp = mem->GetInAddr(rOBP0);
   }
-  ReadTileLine(arr_to_store_line + x_screen, 0x8000 + (16 * tile_number) + (2 * line_number), obp);
+  ReadTileLine(&(tile_line[0]), _VRAM8000 + (16 * tile_number) + (2 * line_number), obp);
+  for (int i = 0; i < 8 && x_screen < SCREEN_X_SIZE; i++, x_screen++) {
+    if (x_screen >= 0) {
+      next_pixel_to_set = arr_to_store_line + x_screen;
+      *next_pixel_to_set = tile_line[i];
+    }
+  }
 }
 
 void PPU::ScanLine(ColorNumber* arr_to_store_line, int background_Y_line, Byte palette) {
@@ -108,7 +120,7 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int background_Y_line, Byte p
 
   for (int i = 0; i < 10; i++) {
     if (sprites[i] != 0) {
-      std::cout << "Drawing sprite: " << i << " | " << (unsigned int) sprites[i]  << std::endl;
+      printf("Drawing sprite: %x\n", (unsigned int) sprites[i]);
       DrawSpriteLine(arr_to_store_line, sprites[i], background_Y_line);
     }
   }
