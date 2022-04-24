@@ -44,7 +44,7 @@ void PPU::ReadTileLine(ColorNumber* arr_to_store, Address tile_line_address, Byt
 }
 
 void PPU::ScanLineBackground(ColorNumber* arr_to_store_line, int background_Y_line, Byte palette) {
-  ColorNumber background_line[256];
+  ColorNumber background_line[BACKGROUND_X_SIZE];
   unsigned int tile_data_position = 0;
   unsigned int tile_reference = 0;
   unsigned int tile_line = background_Y_line % 8;
@@ -66,7 +66,7 @@ void PPU::ScanLineBackground(ColorNumber* arr_to_store_line, int background_Y_li
 }
 
 Address* PPU::OAMScan(int Y_cordinate) {
-  Address* sprites = new Address[10]{0};
+  Address* sprites = new Address[MAX_SPRITES_PER_SCANLINE]{0};
   int y_screen, x_screen;
   int next_sprite_to_add = 0;
   for (Address sprite_location = OAM_START_LOCATION; sprite_location < OAM_END_LOCATION; sprite_location += 4) {
@@ -118,7 +118,7 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int LY, Byte palette) {
   }
   ScanLineBackground(arr_to_store_line, background_Y_line, palette);
 
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < MAX_SPRITES_PER_SCANLINE; i++) {
     if (sprites[i] != 0) {
       printf("Drawing sprite: %x\n", (unsigned int) sprites[i]);
       DrawSpriteLine(arr_to_store_line, sprites[i], LY);
