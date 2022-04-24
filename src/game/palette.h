@@ -9,6 +9,8 @@ namespace gameboy {
 // This palette don't change the color index, because index 0 is mapped to 0. Index 1 is mapped to 1 and so on.
 const Byte indentity_palette = 0b11100100; 
 
+const ColorNumber TRANSPARENT_COLOR = 0;
+
 ColorNumber apply_palette(ColorNumber color, Byte palette);
 
 

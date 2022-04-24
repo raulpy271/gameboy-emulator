@@ -24,13 +24,13 @@ private:
 
   void ScanLine(ColorNumber* line_data, int line_number, Byte palette);
 
+  void ScanLineBackground(ColorNumber* line_data, int line_number, Byte palette);
+
+  void DrawSpriteLine(ColorNumber* arr_to_store_line, Address sprite_location, int Y_cordinate);
+
+  Address* OAMScan(int Y_cordinate);
+
   void ReadTileLine(ColorNumber* arr_to_store, Address tile_line_address, Byte palette);
-
-  void UpdateScreenFromBackground();
-
-  void DrawSprites();
-
-  void DrawSingleSprite(int y_screen, int x_screen, Byte tile_number, Byte palette);
 
 };
 
