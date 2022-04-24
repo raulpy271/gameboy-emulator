@@ -106,13 +106,13 @@ void PPU::DrawSpriteLine(ColorNumber* arr_to_store_line, Address sprite_location
   }
 }
 
-void PPU::ScanLine(ColorNumber* arr_to_store_line, int background_Y_line, Byte palette) {
+void PPU::ScanLine(ColorNumber* arr_to_store_line, int LY, Byte palette) {
   // MODE 2
-  Address* sprites = OAMScan(background_Y_line);
+  Address* sprites = OAMScan(LY);
 
   // MODE 3
   const int scy = mem->GetInAddr(rSCY);
-  background_Y_line = background_Y_line + scy;
+  int background_Y_line = LY + scy;
   if (background_Y_line >= (BACKGROUND_Y_SIZE)) {
     background_Y_line -= BACKGROUND_Y_SIZE;
   }
@@ -121,7 +121,7 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int background_Y_line, Byte p
   for (int i = 0; i < 10; i++) {
     if (sprites[i] != 0) {
       printf("Drawing sprite: %x\n", (unsigned int) sprites[i]);
-      DrawSpriteLine(arr_to_store_line, sprites[i], background_Y_line);
+      DrawSpriteLine(arr_to_store_line, sprites[i], LY);
     }
   }
 
