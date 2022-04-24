@@ -97,11 +97,11 @@ void PPU::DrawSpriteLine(ColorNumber* arr_to_store_line, Address sprite_location
   } else {
     obp = mem->GetInAddr(rOBP0);
   }
-  ReadTileLine(&(tile_line[0]), _VRAM8000 + (16 * tile_number) + (2 * line_number), obp);
+  ReadTileLine(&(tile_line[0]), _VRAM8000 + (16 * tile_number) + (2 * line_number), indentity_palette);
   for (int i = 0; i < 8 && x_screen < SCREEN_X_SIZE; i++, x_screen++) {
-    if (x_screen >= 0) {
+    if (x_screen >= 0 && tile_line[i] != TRANSPARENT_COLOR) {
       next_pixel_to_set = arr_to_store_line + x_screen;
-      *next_pixel_to_set = tile_line[i];
+      *next_pixel_to_set = apply_palette(tile_line[i], obp);
     }
   }
 }
