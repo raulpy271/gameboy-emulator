@@ -6,6 +6,7 @@
 #include "hardware_registers.h"
 #include "hardware_definitions.h"
 #include "palette.h"
+#include "LCDC.h"
 #include "../utils/functions.h"
 
 namespace gameboy {
@@ -107,8 +108,12 @@ void PPU::DrawSpriteLine(ColorNumber* arr_to_store_line, Address sprite_location
 }
 
 void PPU::ScanLine(ColorNumber* arr_to_store_line, int LY, Byte palette) {
+  bool object_is_on = ObjectDisplayIsOn(mem->GetInAddr(rLCDC));
+  Address* sprites = NULL;
   // MODE 2
-  Address* sprites = OAMScan(LY);
+  if (object_is_on) {
+    sprites = OAMScan(LY);
+  }
 
   // MODE 3
   const int scy = mem->GetInAddr(rSCY);
@@ -118,14 +123,18 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int LY, Byte palette) {
   }
   ScanLineBackground(arr_to_store_line, background_Y_line, palette);
 
-  for (int i = 0; i < MAX_SPRITES_PER_SCANLINE; i++) {
-    if (sprites[i] != 0) {
-      printf("Drawing sprite: %x\n", (unsigned int) sprites[i]);
-      DrawSpriteLine(arr_to_store_line, sprites[i], LY);
+  if (object_is_on) {
+    for (int i = 0; i < MAX_SPRITES_PER_SCANLINE; i++) {
+      if (sprites[i] != 0) {
+        printf("Drawing sprite: %x\n", (unsigned int) sprites[i]);
+        DrawSpriteLine(arr_to_store_line, sprites[i], LY);
+      }
     }
   }
 
-  delete[] sprites;
+  if (sprites != NULL) {
+    delete[] sprites;
+  }
 }
 
 void PPU::UpdateImageData() {
