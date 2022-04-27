@@ -66,6 +66,22 @@ void PPU::ScanLineBackground(ColorNumber* arr_to_store_line, int background_Y_li
   }
 }
 
+void PPU::ScanLineWindow(ColorNumber* arr_to_store_line, int background_Y_line, Byte palette) {
+  ColorNumber background_line[BACKGROUND_X_SIZE];
+  unsigned int tile_data_position = 0;
+  unsigned int tile_reference = 0;
+  unsigned int tile_line = background_Y_line % 8;
+  for (int tile_number = 0; tile_number < 32; tile_number++) {
+    tile_reference = mem->GetInAddr(0x9C00 + (32 * utils::integer_division(background_Y_line, 8)) + tile_number);
+    tile_data_position = 0x8000 + (tile_reference * 16) + (2*tile_line);
+    ReadTileLine((&(background_line[0])) + (tile_number * 8), tile_data_position, palette);
+  }
+  for (int i = 0; i < SCREEN_X_SIZE; i++) {
+    arr_to_store_line[i] = background_line[i];
+  }
+}
+
+
 Address* PPU::OAMScan(int Y_cordinate) {
   Address* sprites = new Address[MAX_SPRITES_PER_SCANLINE]{0};
   int y_screen, x_screen;
@@ -122,6 +138,10 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int LY, Byte palette) {
     background_Y_line -= BACKGROUND_Y_SIZE;
   }
   ScanLineBackground(arr_to_store_line, background_Y_line, palette);
+
+  if (WindowDisplayIsOn(mem->GetInAddr(rLCDC))) {
+    ScanLineWindow(arr_to_store_line, LY, palette);
+  }
 
   if (object_is_on) {
     for (int i = 0; i < MAX_SPRITES_PER_SCANLINE; i++) {

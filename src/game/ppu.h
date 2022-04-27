@@ -24,7 +24,9 @@ private:
 
   void ScanLine(ColorNumber* line_data, int line_number, Byte palette);
 
-  void ScanLineBackground(ColorNumber* line_data, int line_number, Byte palette);
+  void ScanLineBackground(ColorNumber* arr_to_store_line, int background_Y_line, Byte palette);
+
+  void ScanLineWindow(ColorNumber* arr_to_store_line, int background_Y_line, Byte palette);
 
   void DrawSpriteLine(ColorNumber* arr_to_store_line, Address sprite_location, int Y_cordinate);
 
