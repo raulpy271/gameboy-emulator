@@ -144,7 +144,11 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int LY, Byte palette) {
   ScanLineBackground(arr_to_store_line, background_Y_line, palette);
 
   if (WindowDisplayIsOn(mem->GetInAddr(rLCDC))) {
-    ScanLineWindow(arr_to_store_line, LY, palette);
+    const int wy = mem->GetInAddr(rWY);
+    int window_Y_line = LY - wy;
+    if (window_Y_line >= 0) {
+      ScanLineWindow(arr_to_store_line, window_Y_line, palette);
+    }
   }
 
   if (object_is_on) {
