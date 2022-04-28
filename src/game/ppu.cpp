@@ -76,8 +76,12 @@ void PPU::ScanLineWindow(ColorNumber* arr_to_store_line, int background_Y_line, 
     tile_data_position = 0x8000 + (tile_reference * 16) + (2*tile_line);
     ReadTileLine((&(background_line[0])) + (tile_number * 8), tile_data_position, palette);
   }
-  for (int i = 0; i < SCREEN_X_SIZE; i++) {
-    arr_to_store_line[i] = background_line[i];
+  const int wx = mem->GetInAddr(rWX);
+  int x_deslocated = wx - 7;
+  for (int i = 0; (x_deslocated < SCREEN_X_SIZE) && (i < BACKGROUND_X_SIZE); i++, x_deslocated++) {
+    if (x_deslocated >= 0) {
+      arr_to_store_line[x_deslocated] = background_line[i];
+    }
   }
 }
 
@@ -146,7 +150,7 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int LY, Byte palette) {
   if (object_is_on) {
     for (int i = 0; i < MAX_SPRITES_PER_SCANLINE; i++) {
       if (sprites[i] != 0) {
-        printf("Drawing sprite: %x\n", (unsigned int) sprites[i]);
+        //printf("Drawing sprite: %x\n", (unsigned int) sprites[i]);
         DrawSpriteLine(arr_to_store_line, sprites[i], LY);
       }
     }
