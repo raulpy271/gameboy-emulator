@@ -34,6 +34,8 @@ private:
 
   void ReadTileLine(ColorNumber* arr_to_store, Address tile_line_address, Byte palette);
 
+  Address GetTileAddress(Byte tile_index);
+
   Address GetBGTileMapAddress();
 
   Address GetWindowTileMapAddress();

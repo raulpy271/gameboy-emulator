@@ -36,5 +36,9 @@ bool LCDEnable(Byte LCDC) {
   return LCDC_bitset[LCD_ENABLE_POSITION];
 }
 
+bool TileDataArea8000(Byte LCDC) {
+  std::bitset<8> LCDC_bitset(LCDC);
+  return LCDC_bitset[BG_WINDOW_TILE_DATA_AREA];
 }
 
+}

@@ -16,6 +16,18 @@ PPU::PPU(Memory* mem) {
   this->mem = mem;
 }
 
+Address PPU::GetTileAddress(Byte tile_index) {
+  if (TileDataArea8000(mem->GetInAddr(rLCDC))) {
+    return 0x8000 + (16 * tile_index);
+  } else {
+    if (tile_index > 127) {
+      return 0x8800 + (16 * (int)(tile_index - 128));
+    } else {
+      return 0x9000 + (16 * tile_index);
+    }
+  }
+}
+
 Address PPU::GetBGTileMapAddress() {
   if (BgTileMapIsOn(mem->GetInAddr(rLCDC))) {
     return 0x9C00;
@@ -68,7 +80,7 @@ void PPU::ScanLineBackground(ColorNumber* arr_to_store_line, int background_Y_li
   Address bg_tile_map_address = GetBGTileMapAddress();
   for (int tile_number = 0; tile_number < 32; tile_number++) {
     tile_reference = mem->GetInAddr(bg_tile_map_address + (32 * utils::integer_division(background_Y_line, 8)) + tile_number);
-    tile_data_position = 0x8000 + (tile_reference * 16) + (2*tile_line);
+    tile_data_position = GetTileAddress(tile_reference) + (2*tile_line);
     ReadTileLine((&(background_line[0])) + (tile_number * 8), tile_data_position, palette);
   }
   const int scx = mem->GetInAddr(rSCX);
@@ -91,7 +103,7 @@ void PPU::ScanLineWindow(ColorNumber* arr_to_store_line, int background_Y_line, 
   Address window_tile_map_address = GetWindowTileMapAddress();
   for (int tile_number = 0; tile_number < 32; tile_number++) {
     tile_reference = mem->GetInAddr(window_tile_map_address + (32 * utils::integer_division(background_Y_line, 8)) + tile_number);
-    tile_data_position = 0x8000 + (tile_reference * 16) + (2*tile_line);
+    tile_data_position = GetTileAddress(tile_reference) + (2*tile_line);
     ReadTileLine((&(background_line[0])) + (tile_number * 8), tile_data_position, palette);
   }
   const int wx = mem->GetInAddr(rWX);
