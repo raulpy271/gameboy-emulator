@@ -16,6 +16,14 @@ PPU::PPU(Memory* mem) {
   this->mem = mem;
 }
 
+Address PPU::GetBGTileMapAddress() {
+  if (BgTileMapIsOn(mem->GetInAddr(rLCDC))) {
+    return 0x9C00;
+  } else {
+    return 0x9800;
+  }
+}
+
 void PPU::ReadTileLine(ColorNumber* arr_to_store, Address tile_line_address, Byte palette) {
   std::bitset<8> part_1_of_an_line;
   std::bitset<8> part_2_of_an_line;
@@ -49,8 +57,9 @@ void PPU::ScanLineBackground(ColorNumber* arr_to_store_line, int background_Y_li
   unsigned int tile_data_position = 0;
   unsigned int tile_reference = 0;
   unsigned int tile_line = background_Y_line % 8;
+  Address bg_tile_map_address = GetBGTileMapAddress();
   for (int tile_number = 0; tile_number < 32; tile_number++) {
-    tile_reference = mem->GetInAddr(0x9800 + (32 * utils::integer_division(background_Y_line, 8)) + tile_number);
+    tile_reference = mem->GetInAddr(bg_tile_map_address + (32 * utils::integer_division(background_Y_line, 8)) + tile_number);
     tile_data_position = 0x8000 + (tile_reference * 16) + (2*tile_line);
     ReadTileLine((&(background_line[0])) + (tile_number * 8), tile_data_position, palette);
   }
@@ -166,12 +175,18 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int LY, Byte palette) {
 }
 
 void PPU::UpdateImageData() {
-  Byte palette = mem->GetInAddr(rBGP);
-  ColorNumber* image_data_pt = &(screen[0]);
-  for (int LY = 0; LY < SCREEN_Y_SIZE; LY++) {
-    ScanLine(image_data_pt + (SCREEN_X_SIZE * LY), LY, palette);
+  bool lcd_enable = LCDEnable(mem->GetInAddr(rLCDC));
+  if (lcd_enable) {
+    Byte palette = mem->GetInAddr(rBGP);
+    ColorNumber* image_data_pt = &(screen[0]);
+    for (int LY = 0; LY < SCREEN_Y_SIZE; LY++) {
+      ScanLine(image_data_pt + (SCREEN_X_SIZE * LY), LY, palette);
+    }
+  } else {
+    for (int i = 0; i < (SCREEN_X_SIZE * SCREEN_Y_SIZE); i++) {
+      screen[i] = 0;
+    }
   }
-
 }
 
 }
