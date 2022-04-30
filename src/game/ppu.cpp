@@ -24,6 +24,14 @@ Address PPU::GetBGTileMapAddress() {
   }
 }
 
+Address PPU::GetWindowTileMapAddress() {
+  if (WindowTileMapIsOn(mem->GetInAddr(rLCDC))) {
+    return 0x9C00;
+  } else {
+    return 0x9800;
+  }
+}
+
 void PPU::ReadTileLine(ColorNumber* arr_to_store, Address tile_line_address, Byte palette) {
   std::bitset<8> part_1_of_an_line;
   std::bitset<8> part_2_of_an_line;
@@ -80,8 +88,9 @@ void PPU::ScanLineWindow(ColorNumber* arr_to_store_line, int background_Y_line, 
   unsigned int tile_data_position = 0;
   unsigned int tile_reference = 0;
   unsigned int tile_line = background_Y_line % 8;
+  Address window_tile_map_address = GetWindowTileMapAddress();
   for (int tile_number = 0; tile_number < 32; tile_number++) {
-    tile_reference = mem->GetInAddr(0x9C00 + (32 * utils::integer_division(background_Y_line, 8)) + tile_number);
+    tile_reference = mem->GetInAddr(window_tile_map_address + (32 * utils::integer_division(background_Y_line, 8)) + tile_number);
     tile_data_position = 0x8000 + (tile_reference * 16) + (2*tile_line);
     ReadTileLine((&(background_line[0])) + (tile_number * 8), tile_data_position, palette);
   }
@@ -137,6 +146,7 @@ void PPU::DrawSpriteLine(ColorNumber* arr_to_store_line, Address sprite_location
 }
 
 void PPU::ScanLine(ColorNumber* arr_to_store_line, int LY, Byte palette) {
+  bool bg_and_window_is_on = BGWindowDisplayIsOn(mem->GetInAddr(rLCDC));
   bool object_is_on = ObjectDisplayIsOn(mem->GetInAddr(rLCDC));
   Address* sprites = NULL;
   // MODE 2
@@ -145,18 +155,24 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int LY, Byte palette) {
   }
 
   // MODE 3
-  const int scy = mem->GetInAddr(rSCY);
-  int background_Y_line = LY + scy;
-  if (background_Y_line >= (BACKGROUND_Y_SIZE)) {
-    background_Y_line -= BACKGROUND_Y_SIZE;
-  }
-  ScanLineBackground(arr_to_store_line, background_Y_line, palette);
+  if (bg_and_window_is_on) {
+    const int scy = mem->GetInAddr(rSCY);
+    int background_Y_line = LY + scy;
+    if (background_Y_line >= (BACKGROUND_Y_SIZE)) {
+      background_Y_line -= BACKGROUND_Y_SIZE;
+    }
+    ScanLineBackground(arr_to_store_line, background_Y_line, palette);
 
-  if (WindowDisplayIsOn(mem->GetInAddr(rLCDC))) {
-    const int wy = mem->GetInAddr(rWY);
-    int window_Y_line = LY - wy;
-    if (window_Y_line >= 0) {
-      ScanLineWindow(arr_to_store_line, window_Y_line, palette);
+    if (WindowDisplayIsOn(mem->GetInAddr(rLCDC))) {
+      const int wy = mem->GetInAddr(rWY);
+      int window_Y_line = LY - wy;
+      if (window_Y_line >= 0) {
+        ScanLineWindow(arr_to_store_line, window_Y_line, palette);
+      }
+    }
+  } else {
+    for (int i = 0; i < SCREEN_X_SIZE; i++) {
+      arr_to_store_line[i] = 0;
     }
   }
 

@@ -36,6 +36,8 @@ private:
 
   Address GetBGTileMapAddress();
 
+  Address GetWindowTileMapAddress();
+
 };
 
 }
