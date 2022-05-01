@@ -110,6 +110,8 @@ void Console::ScanLineAndSTATInterruptions() {
   ly = mem.GetInAddr(rLY);
   if (ly == mem.GetInAddr(rLYC)) {
     mem.SetInAddr(rSTAT, mem.GetInAddr(rSTAT) | (1 << 2));
+  } else {
+    mem.SetInAddr(rSTAT, mem.GetInAddr(rSTAT) & ((0 << 2) & 0xf));
   }
   ppu.ScanLine();
 }

@@ -64,5 +64,11 @@ TEST(PPU, LYC_equal_LY_flag) {
 
   game.ScanLineAndSTATInterruptions();
 
+  EXPECT_EQ(game.mem.GetInAddr(rLY), 3);
   EXPECT_EQ(game.mem.GetInAddr(rSTAT) && lyc_enqual_ly, true);
+
+  game.ScanLineAndSTATInterruptions();
+
+  EXPECT_EQ(game.mem.GetInAddr(rLY), 4);
+  EXPECT_EQ(game.mem.GetInAddr(rSTAT) && lyc_enqual_ly, false);
 }
