@@ -18,11 +18,13 @@ public:
 
   void UpdateImageData();
 
+  void ScanLine();
+
+  Address GetTileAddress(Byte tile_index);
+
 private:
 
   Memory* mem;
-
-  void ScanLine(ColorNumber* line_data, int line_number, Byte palette);
 
   void ScanLineBackground(ColorNumber* arr_to_store_line, int background_Y_line, Byte palette);
 
@@ -34,7 +36,6 @@ private:
 
   void ReadTileLine(ColorNumber* arr_to_store, Address tile_line_address, Byte palette);
 
-  Address GetTileAddress(Byte tile_index);
 
   Address GetBGTileMapAddress();
 

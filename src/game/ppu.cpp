@@ -157,7 +157,10 @@ void PPU::DrawSpriteLine(ColorNumber* arr_to_store_line, Address sprite_location
   }
 }
 
-void PPU::ScanLine(ColorNumber* arr_to_store_line, int LY, Byte palette) {
+void PPU::ScanLine() {
+  Byte palette = mem->GetInAddr(rBGP);
+  int LY = mem->GetInAddr(rLY);
+  ColorNumber* arr_to_store_line = (&(screen[0])) + (SCREEN_X_SIZE * LY);
   bool bg_and_window_is_on = BGWindowDisplayIsOn(mem->GetInAddr(rLCDC));
   bool object_is_on = ObjectDisplayIsOn(mem->GetInAddr(rLCDC));
   Address* sprites = NULL;
@@ -200,15 +203,16 @@ void PPU::ScanLine(ColorNumber* arr_to_store_line, int LY, Byte palette) {
   if (sprites != NULL) {
     delete[] sprites;
   }
+  
+  mem->SetInAddr(rLY, LY + 1);
 }
 
 void PPU::UpdateImageData() {
+  mem->SetInAddr(rLY, 0);
   bool lcd_enable = LCDEnable(mem->GetInAddr(rLCDC));
   if (lcd_enable) {
-    Byte palette = mem->GetInAddr(rBGP);
-    ColorNumber* image_data_pt = &(screen[0]);
     for (int LY = 0; LY < SCREEN_Y_SIZE; LY++) {
-      ScanLine(image_data_pt + (SCREEN_X_SIZE * LY), LY, palette);
+      ScanLine();
     }
   } else {
     for (int i = 0; i < (SCREEN_X_SIZE * SCREEN_Y_SIZE); i++) {
