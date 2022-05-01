@@ -109,9 +109,9 @@ void Console::ScanLineAndSTATInterruptions() {
   Byte ly;
   ly = mem.GetInAddr(rLY);
   if (ly == mem.GetInAddr(rLYC)) {
-    mem.SetInAddr(rSTAT, mem.GetInAddr(rSTAT) | (1 << 2));
+    mem.SetCoincidenceFlagLYEqualLYC(true);
   } else {
-    mem.SetInAddr(rSTAT, mem.GetInAddr(rSTAT) & ((0 << 2) & 0xf));
+    mem.SetCoincidenceFlagLYEqualLYC(false);
   }
   ppu.ScanLine();
 }

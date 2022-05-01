@@ -90,6 +90,19 @@ TEST(Memory, choose_segment_of_memory_io_reg_and_hram_and_ie) {
   EXPECT_EQ(segment, gameboy::MemorySegment::IO_REG_and_HRAM_and_IE);
 }
 
+TEST(Memory, change_coincidence_flag) {
+  gameboy::Memory mem;
+  Byte lyc_equal_ly = 1 << 2;
+
+  mem.SetCoincidenceFlagLYEqualLYC(false);
+
+  EXPECT_EQ(mem.GetInAddr(rSTAT) && lyc_equal_ly, false);
+
+  mem.SetCoincidenceFlagLYEqualLYC(true);
+
+  EXPECT_EQ(mem.GetInAddr(rSTAT) && lyc_equal_ly, true);
+}
+
 TEST(Memory, get_and_set_in_io_reg_and_ie) {
   gameboy::Memory mem;
 

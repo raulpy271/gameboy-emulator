@@ -31,6 +31,8 @@ class Memory {
 
   void IncrementDivRegister();
 
+  void SetCoincidenceFlagLYEqualLYC(bool value);
+
   static MemorySegment choose_segment(Address add);
 
  private:

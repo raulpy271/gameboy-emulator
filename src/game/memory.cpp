@@ -1,4 +1,5 @@
 
+#include <bitset>
 #include <iostream>
 
 #include "memory.h"
@@ -110,6 +111,12 @@ void Memory::IncrementDivRegister() {
     IO_REG_and_HRAM_and_IE[rDIV - 0xFF00] = div_value + 1;
   }
 };
+
+void Memory::SetCoincidenceFlagLYEqualLYC(bool value) {
+  std::bitset<8> STAT_bitset(GetInAddr(rSTAT));
+  STAT_bitset[COINCIDENCE_FLAG_POSITION] = value;
+  IO_REG_and_HRAM_and_IE[rSTAT - 0xFF00] = STAT_bitset.to_ulong();
+}
 
 void Memory::executeDMATransfer(Byte source_destination_high_byte) {
   Address source = source_destination_high_byte * 0x100;
