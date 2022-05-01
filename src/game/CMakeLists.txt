@@ -15,6 +15,7 @@ add_library(${PROJECT_NAME}
     timer_registers.cpp
     keypad.cpp
     LCDC.cpp
+    STAT.cpp
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE utils)
 

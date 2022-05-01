@@ -24,5 +24,4 @@ TEST(InitializeRegisters, hardware_registers) {
   EXPECT_EQ(game.mem.GetInAddr(rBGP), 0xFC);
   EXPECT_EQ(game.mem.GetInAddr(rIF), 0xE1);
   EXPECT_EQ(game.mem.GetInAddr(rLCDC), 0x91);
-  EXPECT_EQ(game.mem.GetInAddr(rSTAT), 0x85);
 }

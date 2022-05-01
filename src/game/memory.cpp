@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "memory.h"
+#include "STAT.h"
 #include "hardware_registers.h"
 #include "hardware_definitions.h"
 
@@ -69,6 +70,10 @@ void Memory::SetInAddr(Address add, Byte byte_to_insert) {
   }
   if (add == rDMA) {
     executeDMATransfer(byte_to_insert);
+    return;
+  }
+  if (add == rSTAT) {
+    IO_REG_and_HRAM_and_IE[add - 0xFF00] = GetByteToWriteInSTAT(byte_to_insert, IO_REG_and_HRAM_and_IE[add - 0xFF00]);
     return;
   }
   switch (Memory::choose_segment(add))

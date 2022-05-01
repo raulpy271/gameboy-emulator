@@ -103,6 +103,27 @@ TEST(Memory, change_coincidence_flag) {
   EXPECT_EQ(mem.GetInAddr(rSTAT) && lyc_equal_ly, true);
 }
 
+TEST(Memory, forbids_write_in_coincidence_flag) {
+  gameboy::Memory mem;
+  Byte lyc_equal_ly = 1 << 2;
+
+  mem.SetCoincidenceFlagLYEqualLYC(true);
+
+  EXPECT_EQ(mem.GetInAddr(rSTAT) && lyc_equal_ly, true);
+
+  mem.SetInAddr(rSTAT, 0);
+
+  EXPECT_EQ(mem.GetInAddr(rSTAT) && lyc_equal_ly, true);
+}
+
+TEST(Memory, forbids_write_in_lcd_current_mode) {
+  gameboy::Memory mem;
+
+  mem.SetInAddr(rSTAT, 0b01111011);
+
+  EXPECT_EQ(mem.GetInAddr(rSTAT), 0b01111000);
+}
+
 TEST(Memory, get_and_set_in_io_reg_and_ie) {
   gameboy::Memory mem;
 
