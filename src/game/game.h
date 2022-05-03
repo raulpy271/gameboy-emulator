@@ -29,6 +29,9 @@ class Console {
   void HandleBottonEvent(Botton botton, BottonEventType type);
 
   void ScanLineAndSTATInterruptions();
+
+  void RunAFrameAndExecuteInstructions();
+
 };
 
 }

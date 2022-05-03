@@ -3,6 +3,7 @@
 #include "hardware_registers.h"
 #include "hardware_definitions.h"
 #include "emulator_definitions.h"
+#include "LCDC.h"
 #include "cpu/interrupts.h"
 
 namespace gameboy {
@@ -103,6 +104,26 @@ void Console::HandleBottonEvent(Botton botton, BottonEventType type) {
   RequestInterrupt(&mem, InterruptFlag::HiToLo);
 }
 
+void Console::RunAFrameAndExecuteInstructions() {
+  int i;
+  mem.SetInAddr(rLY, 0);
+  bool lcd_enable = LCDEnable(mem.GetInAddr(rLCDC));
+  if (lcd_enable) {
+    for (int LY = 0; LY <= MAX_LY; LY++) {
+      ScanLineAndSTATInterruptions();
+      for (i = 0; i < INSTRUCTIONS_BY_EACH_SCANLINE; i++) {
+        run_a_instruction_cycle();
+      }
+    }
+  } else {
+    for (i = 0; i < (SCREEN_X_SIZE * SCREEN_Y_SIZE); i++) {
+      ppu.screen[i] = 0;
+    }
+    for (i = 0; i < INSTRUCTIONS_BY_EACH_FRAME; i++) {
+      run_a_instruction_cycle();
+    }
+  }
+}
 
 void Console::ScanLineAndSTATInterruptions() {
   Byte ly;
@@ -112,7 +133,13 @@ void Console::ScanLineAndSTATInterruptions() {
   } else {
     mem.SetCoincidenceFlagLYEqualLYC(false);
   }
-  ppu.ScanLine();
+  if (ly < SCREEN_Y_SIZE) {
+    ppu.ScanLine();
+  }
+  if (ly == SCREEN_Y_SIZE) {
+    RequestInterrupt(&mem, InterruptFlag::VBLANK);
+  }
+  mem.SetInAddr(rLY, ly + 1);
 }
 
 }

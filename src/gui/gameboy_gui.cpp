@@ -27,12 +27,8 @@ GameBoyWindow::GameBoyWindow(gameboy::Console* game) {
 }
 
 bool GameBoyWindow::draw_screen_handler() {
-  for (int i = 0; i < INSTRUCTION_BETWEEN_EACH_FRAME; i++) {
-    game->run_a_instruction_cycle();
-  }
-  game->ppu.UpdateImageData();
+  game->RunAFrameAndExecuteInstructions();
   screen_pixbuf = GameBoyWindow::create_pixbuf_from_ppu_data();
-  RequestInterrupt(&(game->mem), gameboy::InterruptFlag::VBLANK);
   screen.set(screen_pixbuf->scale_simple(SCREEN_X_SIZE * 2, SCREEN_Y_SIZE * 2, (Gdk::InterpType) 0 ));
   return true;
 }

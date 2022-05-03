@@ -16,8 +16,6 @@ public:
 
   PPU(Memory* mem);
 
-  void UpdateImageData();
-
   void ScanLine();
 
   Address GetTileAddress(Byte tile_index);

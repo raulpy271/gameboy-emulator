@@ -12,11 +12,11 @@ TEST(PPU, LY_register) {
 
   EXPECT_EQ(game.mem.GetInAddr(rLY), 0);
 
-  game.ppu.ScanLine();
+  game.ScanLineAndSTATInterruptions();
 
   EXPECT_EQ(game.mem.GetInAddr(rLY), 1);
 
-  game.ppu.ScanLine();
+  game.ScanLineAndSTATInterruptions();
 
   EXPECT_EQ(game.mem.GetInAddr(rLY), 2);
 }

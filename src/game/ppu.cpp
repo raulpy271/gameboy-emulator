@@ -203,22 +203,6 @@ void PPU::ScanLine() {
   if (sprites != NULL) {
     delete[] sprites;
   }
-  
-  mem->SetInAddr(rLY, LY + 1);
-}
-
-void PPU::UpdateImageData() {
-  mem->SetInAddr(rLY, 0);
-  bool lcd_enable = LCDEnable(mem->GetInAddr(rLCDC));
-  if (lcd_enable) {
-    for (int LY = 0; LY < SCREEN_Y_SIZE; LY++) {
-      ScanLine();
-    }
-  } else {
-    for (int i = 0; i < (SCREEN_X_SIZE * SCREEN_Y_SIZE); i++) {
-      screen[i] = 0;
-    }
-  }
 }
 
 }
