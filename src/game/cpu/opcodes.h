@@ -70,6 +70,8 @@
 
 #define DEC_A 0x3D
 
+#define DEC_B 0x05
+
 #define DEC_C 0x0D
 
 #define DEC_BC 0x0B

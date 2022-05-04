@@ -239,23 +239,15 @@ void CPU::DEC_BC_Instruction(Memory* mem) {
 }
 
 void CPU::DEC_A_Instruction(Memory* mem) {
-  if ((reg.A & 0xf) == 0) {
-    utils::set_half_carry_flag(&reg.F, true);
-  }
-  reg.A -= 1; 
-  utils::set_subtract_flag(&reg.F, true);
-  utils::set_zero_flag(&reg.F, !((bool)reg.A));
-  reg.PC += 1;
+  DEC_X_Instruction(&reg.A, &reg.F, &reg.PC);
+}
+
+void CPU::DEC_B_Instruction(Memory* mem) {
+  DEC_X_Instruction(&reg.B, &reg.F, &reg.PC);
 }
 
 void CPU::DEC_C_Instruction(Memory* mem) {
-  if ((reg.C & 0xf) == 0) {
-    utils::set_half_carry_flag(&reg.F, true);
-  }
-  reg.C -= 1; 
-  utils::set_subtract_flag(&reg.F, true);
-  utils::set_zero_flag(&reg.F, !((bool)reg.C));
-  reg.PC += 1;
+  DEC_X_Instruction(&reg.C, &reg.F, &reg.PC);
 }
 
 void CPU::LD_A_B_Instruction(Memory* mem) {
