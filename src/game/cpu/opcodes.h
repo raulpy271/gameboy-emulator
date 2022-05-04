@@ -46,6 +46,8 @@
 
 #define LD_aHLI_A 0x22
 
+#define LD_aHLD_A 0x32
+
 #define INC_A 0x3C
 
 #define INC_B 0x04

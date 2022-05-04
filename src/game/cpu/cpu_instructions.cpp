@@ -175,6 +175,13 @@ void CPU::LD_aHLI_A_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::LD_aHLD_A_Instruction(Memory* mem) {
+  Address add_of_value_to_store_A = utils::create_address_from_two_bytes(reg.H, reg.L);
+  mem->SetInAddr(add_of_value_to_store_A, reg.A);
+  utils::decrement_registers_pair(&reg.H, &reg.L);
+  reg.PC += 1;
+}
+
 void CPU::INC_A_Instruction(Memory* mem) {
   INC_X_Instruction(&reg.A, &reg.F, &reg.PC);
 }

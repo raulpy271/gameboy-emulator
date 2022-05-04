@@ -340,6 +340,54 @@ TEST(Instructions, LD_aHLI_A_instruction_increment_both_registers) {
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
 }
 
+TEST(Instructions, LD_aHLD_A_instruction_decrement_L) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, LD_aHLD_A);
+  game.mem.SetInAddr(0x01ff, 0x0);
+  game.cpu.reg.A = 0x10;
+  game.cpu.reg.H = 0x01;
+  game.cpu.reg.L = 0xff;
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.mem.GetInAddr(0x01ff), 0x10);
+  EXPECT_EQ(game.cpu.reg.H, 0x01);
+  EXPECT_EQ(game.cpu.reg.L, 0xfe);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}
+
+TEST(Instructions, LD_aHLD_A_instruction_decrement_H) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, LD_aHLD_A);
+  game.mem.SetInAddr(0x2000, 0x0);
+  game.cpu.reg.A = 0x10;
+  game.cpu.reg.H = 0x20;
+  game.cpu.reg.L = 0x00;
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.mem.GetInAddr(0x2000), 0x10);
+  EXPECT_EQ(game.cpu.reg.H, 0x1f);
+  EXPECT_EQ(game.cpu.reg.L, 0xff);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}
+
+TEST(Instructions, LD_aHLD_A_instruction_underflow) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, LD_aHLD_A);
+  game.mem.SetInAddr(0x0, 0x0);
+  game.cpu.reg.A = 0x10;
+  game.cpu.reg.H = 0x00;
+  game.cpu.reg.L = 0x00;
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.mem.GetInAddr(0x0), 0x10);
+  EXPECT_EQ(game.cpu.reg.H, 0xff);
+  EXPECT_EQ(game.cpu.reg.L, 0xff);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}
+
 TEST(Instructions, INC_A_instruction) {
   gameboy::Console game;
   game.initialize_registers();
