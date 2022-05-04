@@ -437,6 +437,14 @@ void CPU::CALL_Z_a16_Instruction(Memory* mem) {
   }
 }
 
+void CPU::CALL_NZ_a16_Instruction(Memory* mem) {
+  if (!utils::zero_flag(&reg.F)) {
+    CALL_a16_Instruction(mem);
+  } else {
+    reg.PC += 3;
+  }
+}
+
 void CPU::CALL_C_a16_Instruction(Memory* mem) {
   if (utils::carry_flag(&reg.F)) {
     CALL_a16_Instruction(mem);
