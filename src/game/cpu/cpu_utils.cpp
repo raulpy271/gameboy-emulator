@@ -80,4 +80,11 @@ void PUSH_PC_Instruction(Memory* mem, Address* SP, Address PC) {
   (*SP) -= 2;
 }
 
+void PUSH_XX_Instruction(Memory* mem, Address* SP, Byte higher_byte, Byte lower_byte, Address* PC) {
+  mem->SetInAddr((*SP) - 1, higher_byte);
+  mem->SetInAddr((*SP) - 2, lower_byte);
+  *SP = (*SP) - 2;
+  *PC = (*PC) + 1;
+}
+
 }

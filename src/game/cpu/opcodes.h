@@ -28,6 +28,8 @@
 
 #define PUSH_BC 0xC5
 
+#define PUSH_AF 0xF5
+
 #define JP_C_a16 0xDA
 
 #define LD_BC_d16 0x01

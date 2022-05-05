@@ -97,10 +97,11 @@ void CPU::CP_d8_Instruction(Memory* mem) {
 }
 
 void CPU::PUSH_BC_Instruction(Memory* mem) {
-  mem->SetInAddr(reg.SP - 1, reg.B);
-  mem->SetInAddr(reg.SP - 2, reg.C);
-  reg.SP = reg.SP - 2;
-  reg.PC = reg.PC + 1;
+  PUSH_XX_Instruction(mem, &reg.SP, reg.B, reg.C, &reg.PC);
+}
+
+void CPU::PUSH_AF_Instruction(Memory* mem) {
+  PUSH_XX_Instruction(mem, &reg.SP, reg.A, reg.F, &reg.PC);
 }
 
 void CPU::JP_C_a16_Instruction(Memory* mem) {
