@@ -100,6 +100,10 @@ void CPU::PUSH_BC_Instruction(Memory* mem) {
   PUSH_XX_Instruction(mem, &reg.SP, reg.B, reg.C, &reg.PC);
 }
 
+void CPU::PUSH_DE_Instruction(Memory* mem) {
+  PUSH_XX_Instruction(mem, &reg.SP, reg.D, reg.E, &reg.PC);
+}
+
 void CPU::PUSH_AF_Instruction(Memory* mem) {
   PUSH_XX_Instruction(mem, &reg.SP, reg.A, reg.F, &reg.PC);
 }

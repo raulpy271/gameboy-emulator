@@ -193,6 +193,21 @@ TEST(Instructions, PUSH_AF_instruction) {
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
 }
 
+TEST(Instructions, PUSH_DE_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  Address sp_old_position = game.cpu.reg.SP; 
+  game.mem.SetInAddr(0x100, PUSH_DE);
+  game.cpu.reg.D = 0x01;
+  game.cpu.reg.E = 0x02;
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP), 0x02);
+  EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP + 1), 0x01);
+  EXPECT_EQ(game.cpu.reg.SP, sp_old_position - 2);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}
+
 TEST(Instructions, JP_C_a16_case_C_flag_reset) {
   gameboy::Console game;
   game.initialize_registers();
