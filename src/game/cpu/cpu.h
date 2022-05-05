@@ -35,6 +35,7 @@ class CPU {
   void CP_d8_Instruction(Memory* mem);
   void PUSH_AF_Instruction(Memory* mem);
   void PUSH_DE_Instruction(Memory* mem);
+  void PUSH_HL_Instruction(Memory* mem);
   void PUSH_BC_Instruction(Memory* mem);
   void JP_C_a16_Instruction(Memory* mem);
   void LD_DE_d16_Instruction(Memory* mem);

@@ -108,6 +108,10 @@ void CPU::PUSH_AF_Instruction(Memory* mem) {
   PUSH_XX_Instruction(mem, &reg.SP, reg.A, reg.F, &reg.PC);
 }
 
+void CPU::PUSH_HL_Instruction(Memory* mem) {
+  PUSH_XX_Instruction(mem, &reg.SP, reg.H, reg.L, &reg.PC);
+}
+
 void CPU::JP_C_a16_Instruction(Memory* mem) {
   if (utils::carry_flag(&reg.F)) {
     Address lower_byte_addr = reg.PC + 1;
