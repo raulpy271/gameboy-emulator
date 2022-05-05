@@ -20,6 +20,8 @@
 
 #define LD_A_a16 0xFA
 
+#define LD_A_a8 0xF0
+
 #define LD_aC_A 0xE2
 
 #define CP_d8 0xFE

@@ -76,6 +76,14 @@ void CPU::LD_A_a16_Instruction(Memory* mem) {
   reg.PC = reg.PC + 3;
 }
 
+void CPU::LD_A_a8_Instruction(Memory* mem) {
+  Address lower_byte_addr = reg.PC + 1;
+  Byte lower_byte =  mem->GetInAddr(lower_byte_addr);
+  Address addr_to_load_A = utils::create_address_from_two_bytes(0xff, lower_byte);
+  reg.A = mem->GetInAddr(addr_to_load_A);
+  reg.PC = reg.PC + 2;
+}
+
 void CPU::CP_d8_Instruction(Memory* mem) {
   Address byte_to_compare_address = reg.PC + 1;
   Byte byte_to_compare =  mem->GetInAddr(byte_to_compare_address);
