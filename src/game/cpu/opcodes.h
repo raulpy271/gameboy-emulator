@@ -42,6 +42,8 @@
 
 #define LD_A_aHL 0x7E
 
+#define LD_A_aHLI 0x2A
+
 #define LD_aHL_A 0x77
 
 #define LD_aHL_d8 0x36

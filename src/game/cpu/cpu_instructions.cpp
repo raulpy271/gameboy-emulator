@@ -163,6 +163,13 @@ void CPU::LD_A_aHL_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::LD_A_aHLI_Instruction(Memory* mem) {
+  Address add_of_value_to_load_in_A = utils::create_address_from_two_bytes(reg.H, reg.L);
+  reg.A = mem->GetInAddr(add_of_value_to_load_in_A);
+  utils::increment_registers_pair(&reg.H, &reg.L);
+  reg.PC += 1;
+}
+
 void CPU::LD_aHL_d8_Instruction(Memory* mem) {
   Address add_of_value_to_store = utils::create_address_from_two_bytes(reg.H, reg.L);
   Byte value = mem->GetInAddr(reg.PC + 1);
