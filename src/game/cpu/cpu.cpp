@@ -365,6 +365,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::RET_Z_Instruction(mem);
     break;
 
+  case (RET_NZ):
+    CPU::RET_NZ_Instruction(mem);
+    break;
+
   case (RET_NC):
     CPU::RET_NC_Instruction(mem);
     break;

@@ -160,6 +160,8 @@
 
 #define RET_NC 0xD0
 
+#define RET_NZ 0xC0
+
 #define JR_s8 0x18
 
 #define CCF 0x3F

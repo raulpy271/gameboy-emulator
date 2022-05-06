@@ -509,6 +509,14 @@ void CPU::RET_Z_Instruction(Memory* mem) {
   }
 }
 
+void CPU::RET_NZ_Instruction(Memory* mem) {
+  if (utils::zero_flag(&reg.F)) {
+    reg.PC += 1;
+  } else {
+    RET_Instruction(mem);
+  }
+}
+
 void CPU::RET_NC_Instruction(Memory* mem) {
   if (utils::carry_flag(&reg.F)) {
     reg.PC += 1;
