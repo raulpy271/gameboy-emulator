@@ -86,5 +86,11 @@ void PUSH_XX_Instruction(Memory* mem, Address* SP, Byte higher_byte, Byte lower_
   *SP = (*SP) - 2;
   *PC = (*PC) + 1;
 }
+void POP_XX_Instruction(Memory* mem, Address* SP, Byte* higher_byte, Byte* lower_byte, Address* PC) {
+  *lower_byte = mem->GetInAddr(*SP);
+  *higher_byte = mem->GetInAddr((*SP) + 1);
+  *SP = (*SP) + 2;
+  *PC = (*PC) + 1;
+}
 
 }

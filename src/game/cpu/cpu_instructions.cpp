@@ -113,10 +113,11 @@ void CPU::PUSH_HL_Instruction(Memory* mem) {
 }
 
 void CPU::POP_HL_Instruction(Memory* mem) {
-  reg.L = mem->GetInAddr(reg.SP);
-  reg.H = mem->GetInAddr(reg.SP + 1);
-  reg.SP += 2;
-  reg.PC += 1;
+  POP_XX_Instruction(mem, &reg.SP, &reg.H, &reg.L, &reg.PC);
+}
+
+void CPU::POP_DE_Instruction(Memory* mem) {
+  POP_XX_Instruction(mem, &reg.SP, &reg.D, &reg.E, &reg.PC);
 }
 
 void CPU::JP_C_a16_Instruction(Memory* mem) {
