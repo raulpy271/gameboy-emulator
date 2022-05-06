@@ -112,6 +112,13 @@ void CPU::PUSH_HL_Instruction(Memory* mem) {
   PUSH_XX_Instruction(mem, &reg.SP, reg.H, reg.L, &reg.PC);
 }
 
+void CPU::POP_HL_Instruction(Memory* mem) {
+  reg.L = mem->GetInAddr(reg.SP);
+  reg.H = mem->GetInAddr(reg.SP + 1);
+  reg.SP += 2;
+  reg.PC += 1;
+}
+
 void CPU::JP_C_a16_Instruction(Memory* mem) {
   if (utils::carry_flag(&reg.F)) {
     Address lower_byte_addr = reg.PC + 1;

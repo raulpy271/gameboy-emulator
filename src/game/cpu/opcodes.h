@@ -34,6 +34,8 @@
 
 #define PUSH_HL 0xE5
 
+#define POP_HL 0xE1
+
 #define JP_C_a16 0xDA
 
 #define LD_BC_d16 0x01
