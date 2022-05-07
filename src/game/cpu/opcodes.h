@@ -130,6 +130,8 @@
 
 #define LD_B_aHL 0x46
 
+#define LD_E_aHL 0x5E
+
 #define ADD_A_A 0x87
 
 #define ADD_A_B 0x80
