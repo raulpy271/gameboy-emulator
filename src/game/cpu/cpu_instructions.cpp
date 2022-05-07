@@ -426,6 +426,20 @@ void CPU::AND_A_A_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::AND_A_d8_Instruction(Memory* mem) {
+  Byte value = mem->GetInAddr(reg.PC + 1);
+  reg.A = reg.A & value;
+  if (reg.A == 0) {
+    utils::set_zero_flag(&reg.F, true);
+  } else {
+    utils::set_zero_flag(&reg.F, false);
+  }
+  utils::set_subtract_flag(&reg.F, false);
+  utils::set_half_carry_flag(&reg.F, true);
+  utils::set_carry_flag(&reg.F, false);
+  reg.PC += 2;
+}
+
 void CPU::OR_A_C_Instruction(Memory* mem) {
   reg.A = reg.A | reg.C;
   reg.F = 0x0;
