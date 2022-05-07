@@ -379,6 +379,12 @@ void CPU::LD_B_aHL_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::LD_D_aHL_Instruction(Memory* mem) {
+  Address add_of_value_to_load = utils::create_address_from_two_bytes(reg.H, reg.L);
+  reg.D = mem->GetInAddr(add_of_value_to_load);
+  reg.PC += 1;
+}
+
 void CPU::LD_E_aHL_Instruction(Memory* mem) {
   Address add_of_value_to_load_in_E = utils::create_address_from_two_bytes(reg.H, reg.L);
   reg.E = mem->GetInAddr(add_of_value_to_load_in_E);
