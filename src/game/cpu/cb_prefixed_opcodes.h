@@ -30,4 +30,6 @@
 
 #define SRL_B 0x38
 
+#define SWAP_A 0x37
+
 #endif  // GAME_PREFIXED_OPCODES_H_

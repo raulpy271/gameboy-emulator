@@ -472,6 +472,10 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     CPU::SRL_B_Instruction(mem);
     break;
 
+  case (SWAP_A):
+    CPU::SWAP_A_Instruction(mem);
+    break;
+
   default:
     std::cout << "Invalid prefixed opcode: " << (unsigned int) opcode << std::endl;
     break;
