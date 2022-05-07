@@ -333,6 +333,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::AND_A_A_Instruction(mem);
     break;
 
+  case (AND_A_C):
+    CPU::AND_A_C_Instruction(mem);
+    break;
+
   case (AND_A_d8):
     CPU::AND_A_d8_Instruction(mem);
     break;

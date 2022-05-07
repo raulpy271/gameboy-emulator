@@ -40,6 +40,19 @@ void ADD_X_Y_Instruction(Byte* X, Byte* Y, Byte* F) {
   utils::set_zero_flag(F, !((bool)*X));
 }
 
+void AND_X_Y_Instruction(Byte* X, Byte* Y, Byte* F, Address* PC) {
+  *X = (*X) & (*Y);
+  if ((*X) == 0) {
+    utils::set_zero_flag(F, true);
+  } else {
+    utils::set_zero_flag(F, false);
+  }
+  utils::set_subtract_flag(F, false);
+  utils::set_half_carry_flag(F, true);
+  utils::set_carry_flag(F, false);
+  *PC = (*PC) + 1;
+}
+
 void LD_XX_d16_Instruction(Memory* mem, Address* PC, Byte* higher_byte_reg, Byte* lower_byte_reg) {
   Address lower_byte_addr = (*PC) + 1;
   Address higher_byte_addr = (*PC) + 2;

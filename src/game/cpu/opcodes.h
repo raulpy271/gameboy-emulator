@@ -136,6 +136,8 @@
 
 #define AND_A_A 0xA7
 
+#define AND_A_C 0xA1
+
 #define AND_A_d8 0xE6
 
 #define OR_A_B 0xB0

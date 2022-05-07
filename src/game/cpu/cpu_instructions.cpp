@@ -415,15 +415,11 @@ void CPU::OR_A_B_Instruction(Memory* mem) {
 }
 
 void CPU::AND_A_A_Instruction(Memory* mem) {
-  if (reg.A == 0) {
-    utils::set_zero_flag(&reg.F, true);
-  } else {
-    utils::set_zero_flag(&reg.F, false);
-  }
-  utils::set_subtract_flag(&reg.F, false);
-  utils::set_half_carry_flag(&reg.F, true);
-  utils::set_carry_flag(&reg.F, false);
-  reg.PC += 1;
+  AND_X_Y_Instruction(&reg.A, &reg.A, &reg.F, &reg.PC);
+}
+
+void CPU::AND_A_C_Instruction(Memory* mem) {
+  AND_X_Y_Instruction(&reg.A, &reg.C, &reg.F, &reg.PC);
 }
 
 void CPU::AND_A_d8_Instruction(Memory* mem) {
