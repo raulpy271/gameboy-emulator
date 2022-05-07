@@ -414,6 +414,18 @@ void CPU::ADD_HL_BC_Instruction(Memory* mem) {
   Address HL = utils::create_address_from_two_bytes(reg.H, reg.L);
   Address BC = utils::create_address_from_two_bytes(reg.B, reg.C);
   std::pair<Byte, Byte> new_HL_pair = utils::create_two_bytes_from_address(HL + BC);
+
+  utils::set_subtract_flag(&reg.F, false);
+  if ((HL + BC) > 0xFFFF) {
+    utils::set_carry_flag(&reg.F, true);
+  } else {
+    utils::set_carry_flag(&reg.F, false);
+  }
+  if (((HL & 0x0FFF) + (BC & 0x0FFF)) > 0x0FFF) {
+    utils::set_half_carry_flag(&reg.F, true);
+  } else {
+    utils::set_half_carry_flag(&reg.F, false);
+  }
   reg.H = new_HL_pair.first;
   reg.L = new_HL_pair.second;
   reg.PC += 1;
