@@ -93,6 +93,7 @@ class CPU {
   void AND_A_d8_Instruction(Memory* mem);
   void OR_A_C_Instruction(Memory* mem);
   void XOR_A_A_Instruction(Memory* mem);
+  void XOR_A_C_Instruction(Memory* mem);
   void JR_NZ_s8_Instruction(Memory* mem);
   void JR_Z_s8_Instruction(Memory* mem);
   void JP_NZ_a16_Instruction(Memory* mem);

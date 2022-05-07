@@ -144,6 +144,8 @@
 
 #define XOR_A_A 0xAF
 
+#define XOR_A_C 0xA9
+
 #define JR_NZ_s8 0x20
 
 #define JR_Z_s8 0x28

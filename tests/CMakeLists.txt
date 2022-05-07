@@ -14,6 +14,7 @@ add_executable(unit_test
   timer_registers.cpp
   keypad.cpp
   ppu.cpp
+  arithmetic.cpp
 )
 
 target_link_libraries(unit_test 

@@ -341,6 +341,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::XOR_A_A_Instruction(mem);
     break;
 
+  case (XOR_A_C):
+    CPU::XOR_A_C_Instruction(mem);
+    break;
+
   case (JP_NZ_a16):
     CPU::JP_NZ_a16_Instruction(mem);
     break;
