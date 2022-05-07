@@ -53,6 +53,27 @@ void AND_X_Y_Instruction(Byte* X, Byte* Y, Byte* F, Address* PC) {
   *PC = (*PC) + 1;
 }
 
+void ADD_HL_XY_Instruction(Byte* H, Byte* L, Byte* X, Byte* Y, Byte* F, Address* PC) {
+  Address HL = utils::create_address_from_two_bytes(*H, *L);
+  Address XY = utils::create_address_from_two_bytes(*X, *Y);
+  std::pair<Byte, Byte> new_HL_pair = utils::create_two_bytes_from_address(HL + XY);
+
+  utils::set_subtract_flag(F, false);
+  if ((HL + XY) > 0xFFFF) {
+    utils::set_carry_flag(F, true);
+  } else {
+    utils::set_carry_flag(F, false);
+  }
+  if (((HL & 0x0FFF) + (XY & 0x0FFF)) > 0x0FFF) {
+    utils::set_half_carry_flag(F, true);
+  } else {
+    utils::set_half_carry_flag(F, false);
+  }
+  *H = new_HL_pair.first;
+  *L = new_HL_pair.second;
+  *PC = (*PC) + 1;
+}
+
 void LD_XX_d16_Instruction(Memory* mem, Address* PC, Byte* higher_byte_reg, Byte* lower_byte_reg) {
   Address lower_byte_addr = (*PC) + 1;
   Address higher_byte_addr = (*PC) + 2;

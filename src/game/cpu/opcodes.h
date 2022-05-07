@@ -140,6 +140,8 @@
 
 #define ADD_HL_BC 0x09
 
+#define ADD_HL_DE 0x19
+
 #define AND_A_A 0xA7
 
 #define AND_A_C 0xA1

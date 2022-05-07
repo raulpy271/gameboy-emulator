@@ -440,3 +440,43 @@ TEST(ArithmeticInstructions, ADD_HL_BC_instruction_half_carry) {
   EXPECT_EQ(utils::carry_flag(&game.cpu.reg.F), false);
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
 }
+
+TEST(ArithmeticInstructions, ADD_HL_DE_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, ADD_HL_DE);
+  game.cpu.reg.H = 0x20;
+  game.cpu.reg.L = 0x01;
+
+  game.cpu.reg.D = 0x10;
+  game.cpu.reg.E = 0xa0;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.H, 0x30);
+  EXPECT_EQ(game.cpu.reg.L, 0xa1);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::carry_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}
+
+TEST(ArithmeticInstructions, ADD_HL_DE_instruction_half_carry) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, ADD_HL_DE);
+  game.cpu.reg.H = 0x0f;
+  game.cpu.reg.L = 0x00;
+
+  game.cpu.reg.D = 0x12;
+  game.cpu.reg.E = 0x00;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.H, 0x21);
+  EXPECT_EQ(game.cpu.reg.L, 0x00);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::carry_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}

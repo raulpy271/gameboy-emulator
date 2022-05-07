@@ -411,24 +411,11 @@ void CPU::SUB_A_B_Instruction(Memory* mem) {
 }
 
 void CPU::ADD_HL_BC_Instruction(Memory* mem) {
-  Address HL = utils::create_address_from_two_bytes(reg.H, reg.L);
-  Address BC = utils::create_address_from_two_bytes(reg.B, reg.C);
-  std::pair<Byte, Byte> new_HL_pair = utils::create_two_bytes_from_address(HL + BC);
+  ADD_HL_XY_Instruction(&reg.H, &reg.L, &reg.B, &reg.C, &reg.F, &reg.PC);
+}
 
-  utils::set_subtract_flag(&reg.F, false);
-  if ((HL + BC) > 0xFFFF) {
-    utils::set_carry_flag(&reg.F, true);
-  } else {
-    utils::set_carry_flag(&reg.F, false);
-  }
-  if (((HL & 0x0FFF) + (BC & 0x0FFF)) > 0x0FFF) {
-    utils::set_half_carry_flag(&reg.F, true);
-  } else {
-    utils::set_half_carry_flag(&reg.F, false);
-  }
-  reg.H = new_HL_pair.first;
-  reg.L = new_HL_pair.second;
-  reg.PC += 1;
+void CPU::ADD_HL_DE_Instruction(Memory* mem) {
+  ADD_HL_XY_Instruction(&reg.H, &reg.L, &reg.D, &reg.E, &reg.F, &reg.PC);
 }
 
 void CPU::OR_A_B_Instruction(Memory* mem) {
