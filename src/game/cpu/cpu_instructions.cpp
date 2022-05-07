@@ -120,6 +120,10 @@ void CPU::POP_DE_Instruction(Memory* mem) {
   POP_XX_Instruction(mem, &reg.SP, &reg.D, &reg.E, &reg.PC);
 }
 
+void CPU::POP_BC_Instruction(Memory* mem) {
+  POP_XX_Instruction(mem, &reg.SP, &reg.B, &reg.C, &reg.PC);
+}
+
 void CPU::JP_C_a16_Instruction(Memory* mem) {
   if (utils::carry_flag(&reg.F)) {
     Address lower_byte_addr = reg.PC + 1;
