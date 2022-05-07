@@ -40,6 +40,7 @@ class CPU {
   void POP_HL_Instruction(Memory* mem);
   void POP_DE_Instruction(Memory* mem);
   void POP_BC_Instruction(Memory* mem);
+  void POP_AF_Instruction(Memory* mem);
   void JP_C_a16_Instruction(Memory* mem);
   void LD_DE_d16_Instruction(Memory* mem);
   void LD_HL_d16_Instruction(Memory* mem);

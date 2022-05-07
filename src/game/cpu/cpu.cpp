@@ -129,6 +129,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::POP_BC_Instruction(mem);
     break;
 
+  case (POP_AF):
+    CPU::POP_AF_Instruction(mem);
+    break;
+
   case (JP_C_a16):
     CPU::JP_C_a16_Instruction(mem);
     break;

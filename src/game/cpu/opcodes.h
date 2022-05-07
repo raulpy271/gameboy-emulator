@@ -40,6 +40,8 @@
 
 #define POP_BC 0xC1
 
+#define POP_AF 0xF1
+
 #define JP_C_a16 0xDA
 
 #define LD_BC_d16 0x01
