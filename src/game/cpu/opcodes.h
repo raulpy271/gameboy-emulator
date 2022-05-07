@@ -182,6 +182,8 @@
 
 #define CPL 0x2F
 
+#define RST_0x28 0xEF
+
 #define IE 0xFB
 
 #define DI 0xF3

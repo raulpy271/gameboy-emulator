@@ -1565,3 +1565,31 @@ TEST(Instructions, CPL_instruction) {
   EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), true);
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
 }
+
+TEST(Instructions, RST_0x28_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x1150, RST_0x28);
+  game.cpu.reg.PC = 0x1150;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x28);
+  EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP), 0x51);
+  EXPECT_EQ(game.mem.GetInAddr(game.cpu.reg.SP + 1), 0x11);
+}
+
+TEST(Instructions, RST_0x28_and_RET_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x28, RET);
+  game.mem.SetInAddr(0x100, RST_0x28);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x28);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}

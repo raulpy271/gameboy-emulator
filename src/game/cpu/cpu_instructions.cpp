@@ -603,4 +603,10 @@ void CPU::CPL_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::RST_0x28_Instruction(Memory* mem) {
+  Address addr_after_return = reg.PC + 1;
+  PUSH_PC_Instruction(mem, &reg.SP, addr_after_return);
+  reg.PC = 0x28;
+}
+
 }
