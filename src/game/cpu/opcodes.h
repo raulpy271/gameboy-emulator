@@ -14,6 +14,8 @@
 
 #define LD_C_d8 0x0E
 
+#define LD_D_d8 0x16
+
 #define LD_a8_A 0xE0
 
 #define LD_a16_A 0xEA

@@ -43,6 +43,10 @@ void CPU::LD_C_d8_Instruction(Memory* mem) {
   LD_X_d8_Instruction(mem, &reg.PC, &reg.C);
 }
 
+void CPU::LD_D_d8_Instruction(Memory* mem) {
+  LD_X_d8_Instruction(mem, &reg.PC, &reg.D);
+}
+
 void CPU::LD_a16_A_Instruction(Memory* mem) {
   Address lower_byte_addr = reg.PC + 1;
   Address higher_byte_addr = reg.PC + 2;
