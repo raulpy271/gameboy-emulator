@@ -1829,3 +1829,17 @@ TEST(Instructions, CCF_instruction) {
   EXPECT_EQ(game.cpu.reg.F, 0b10000000);
   EXPECT_EQ(game.cpu.reg.PC, 0x102);
 }
+
+TEST(Instructions, CPL_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.cpu.reg.A = 0b01000101;
+  game.mem.SetInAddr(0x100, CPL);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.A, 0b10111010);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}

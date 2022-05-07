@@ -397,6 +397,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::CCF_Instruction(mem);
     break;
 
+  case (CPL):
+    CPU::CPL_Instruction(mem);
+    break;
+
   case (OPCODE_PREFIX):
     CPU::execute_prefixed_instruction(mem);
     break;

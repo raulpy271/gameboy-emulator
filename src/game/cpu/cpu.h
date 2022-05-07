@@ -108,6 +108,7 @@ class CPU {
   void RET_NC_Instruction(Memory* mem);
   void JR_s8_Instruction(Memory* mem);
   void CCF_Instruction(Memory* mem);
+  void CPL_Instruction(Memory* mem);
   
 
   void execute_prefixed_instruction(Memory* mem);

@@ -577,5 +577,11 @@ void CPU::CCF_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::CPL_Instruction(Memory* mem) {
+  reg.A = reg.A ^ 0xFF;
+  utils::set_half_carry_flag(&reg.F, true);
+  utils::set_subtract_flag(&reg.F, true);
+  reg.PC += 1;
+}
 
 }
