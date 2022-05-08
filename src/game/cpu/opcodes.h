@@ -136,6 +136,8 @@
 
 #define LD_B_aHL 0x46
 
+#define LD_C_aHL 0x4E
+
 #define LD_D_aHL 0x56
 
 #define LD_E_aHL 0x5E

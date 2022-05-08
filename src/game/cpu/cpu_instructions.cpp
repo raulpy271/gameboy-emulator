@@ -401,8 +401,14 @@ void CPU::LD_B_L_Instruction(Memory* mem) {
 }
 
 void CPU::LD_B_aHL_Instruction(Memory* mem) {
-  Address add_of_value_to_load_in_B = utils::create_address_from_two_bytes(reg.H, reg.L);
-  reg.B = mem->GetInAddr(add_of_value_to_load_in_B);
+  Address add_of_value_to_load = utils::create_address_from_two_bytes(reg.H, reg.L);
+  reg.B = mem->GetInAddr(add_of_value_to_load);
+  reg.PC += 1;
+}
+
+void CPU::LD_C_aHL_Instruction(Memory* mem) {
+  Address add_of_value_to_load = utils::create_address_from_two_bytes(reg.H, reg.L);
+  reg.C = mem->GetInAddr(add_of_value_to_load);
   reg.PC += 1;
 }
 
