@@ -108,6 +108,8 @@
 
 #define LD_L_A 0x6F
 
+#define LD_L_C 0x69
+
 #define LD_A_H 0x7C
 
 #define LD_A_C 0x79
