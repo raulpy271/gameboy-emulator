@@ -64,6 +64,8 @@
 
 #define LD_A_aHLI 0x2A
 
+#define LD_A_aHLD 0x3A
+
 #define LD_aDE_A 0x12
 
 #define LD_aHL_A 0x77
