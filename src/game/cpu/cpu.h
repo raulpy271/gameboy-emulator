@@ -141,6 +141,7 @@ class CPU {
   void SET_0_aHL_Instruction(Memory* mem);
   void SRL_A_Instruction(Memory* mem);
   void SRL_B_Instruction(Memory* mem);
+  void SLA_A_Instruction(Memory* mem);
   void SWAP_A_Instruction(Memory* mem);
 
  public:

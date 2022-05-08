@@ -99,6 +99,21 @@ void CPU::SRL_B_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::SLA_A_Instruction(Memory* mem) {
+  reg.F = 0;
+  bool last_bit_set = reg.A & 0b10000000;
+  if (last_bit_set) {
+    utils::set_carry_flag(&reg.F, true);
+  } else {
+    utils::set_carry_flag(&reg.F, false);
+  }
+  reg.A = reg.A << 1;
+  if (reg.A == 0) {
+    utils::set_zero_flag(&reg.F, true);
+  }
+  reg.PC += 2;
+}
+
 void CPU::SWAP_A_Instruction(Memory* mem) {
   Byte lower_nibble = reg.A & 0x0f;
   Byte higher_nibble = (reg.A & 0xf0) >> 4;

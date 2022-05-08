@@ -524,6 +524,10 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     CPU::SRL_B_Instruction(mem);
     break;
 
+  case (SLA_A):
+    CPU::SLA_A_Instruction(mem);
+    break;
+
   case (SWAP_A):
     CPU::SWAP_A_Instruction(mem);
     break;
