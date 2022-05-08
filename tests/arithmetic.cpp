@@ -818,6 +818,9 @@ TEST(ArithmeticInstructions, DEC_C_instruction) {
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
   EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), false);
   EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), false);
+
+  game.cpu.reg.F = 0xff;
 
   game.cpu.execute_intruction(&game.mem);
 
@@ -825,6 +828,7 @@ TEST(ArithmeticInstructions, DEC_C_instruction) {
   EXPECT_EQ(game.cpu.reg.PC, 0x102);
   EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), true);
   EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), false);
 }
 
 TEST(ArithmeticInstructions, DEC_C_half_carry_set) {

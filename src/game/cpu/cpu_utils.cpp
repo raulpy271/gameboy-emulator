@@ -21,6 +21,8 @@ void INC_X_Instruction(Byte* X, Byte* F, Address* PC) {
 void DEC_X_Instruction(Byte* X, Byte* F, Address* PC) {
   if (((*X) & 0xf) == 0) {
     utils::set_half_carry_flag(F, true);
+  } else {
+    utils::set_half_carry_flag(F, false);
   }
   (*X) = (*X) - 1;
   utils::set_subtract_flag(F, true);
