@@ -306,6 +306,21 @@ void CPU::DEC_C_Instruction(Memory* mem) {
   DEC_X_Instruction(&reg.C, &reg.F, &reg.PC);
 }
 
+void CPU::DEC_aHL_Instruction(Memory* mem) {
+  Address addr = utils::create_address_from_two_bytes(reg.H, reg.L);
+  Byte value = mem->GetInAddr(addr);
+  if ((value & 0xf) == 0) {
+    utils::set_half_carry_flag(&reg.F, true);
+  } else {
+    utils::set_half_carry_flag(&reg.F, false);
+  }
+  value -= 1;
+  mem->SetInAddr(addr, value);
+  utils::set_subtract_flag(&reg.F, true);
+  utils::set_zero_flag(&reg.F, !((bool)value));
+  reg.PC += 1;
+}
+
 void CPU::LD_A_B_Instruction(Memory* mem) {
   reg.A = reg.B;
   reg.PC += 1;

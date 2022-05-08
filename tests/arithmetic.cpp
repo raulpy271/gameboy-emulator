@@ -841,3 +841,50 @@ TEST(ArithmeticInstructions, DEC_C_half_carry_set) {
   EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), true);
   EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), true);
 }
+
+TEST(ArithmeticInstructions, DEC_aHL_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, DEC_aHL);
+  game.mem.SetInAddr(0x101, DEC_aHL);
+  game.mem.SetInAddr(0xFE00, 0x2);
+  game.cpu.reg.F = 0x0;
+  game.cpu.reg.H = 0xFE;
+  game.cpu.reg.L = 0x00;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.mem.GetInAddr(0xFE00), 0x01);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), false);
+
+  game.cpu.reg.F = 0xff;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.mem.GetInAddr(0xFE00), 0x00);
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), false);
+}
+
+TEST(ArithmeticInstructions, DEC_aHL_half_carry_set) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, DEC_aHL);
+  game.mem.SetInAddr(0xFE00, 0b00100000);
+  game.cpu.reg.F = 0x0;
+  game.cpu.reg.H = 0xFE;
+  game.cpu.reg.L = 0x00;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.mem.GetInAddr(0xFE00), 0b00011111);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), true);
+}
