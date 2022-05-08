@@ -56,6 +56,8 @@
 
 #define LD_SP_d16 0x31
 
+#define LD_A_aBC 0x0A
+
 #define LD_A_aDE 0x1A
 
 #define LD_A_aHL 0x7E

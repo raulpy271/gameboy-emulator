@@ -186,6 +186,12 @@ void CPU::LD_SP_d16_Instruction(Memory* mem) {
   reg.PC = (reg.PC) + 3;
 }
 
+void CPU::LD_A_aBC_Instruction(Memory* mem) {
+  Address add_of_value_to_load_in_A = utils::create_address_from_two_bytes(reg.B, reg.C);
+  reg.A = mem->GetInAddr(add_of_value_to_load_in_A);
+  reg.PC += 1;
+}
+
 void CPU::LD_A_aDE_Instruction(Memory* mem) {
   Address add_of_value_to_load_in_A = utils::create_address_from_two_bytes(reg.D, reg.E);
   reg.A = mem->GetInAddr(add_of_value_to_load_in_A);
