@@ -106,6 +106,8 @@
 
 #define LD_H_A 0x67
 
+#define LD_H_B 0x60
+
 #define LD_L_A 0x6F
 
 #define LD_L_C 0x69
