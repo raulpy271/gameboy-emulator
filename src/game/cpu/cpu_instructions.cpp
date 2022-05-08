@@ -31,6 +31,12 @@ void CPU::JP_a16_Instruction(Memory* mem) {
   reg.PC = addr_to_jump;
 }
 
+void CPU::JP_HL_Instruction(Memory* mem) {
+  Address addr_to_jump = utils::create_address_from_two_bytes(reg.H, reg.L);
+  reg.PC = addr_to_jump;
+}
+
+
 void CPU::LD_d8_Instruction(Memory* mem) {
   LD_X_d8_Instruction(mem, &reg.PC, &reg.A);
 }

@@ -64,6 +64,10 @@ void CPU::execute_intruction(Memory* mem) {
   case (JP_a16):
     CPU::JP_a16_Instruction(mem);
     break;
+
+  case (JP_HL):
+    CPU::JP_HL_Instruction(mem);
+    break;
   
   case (LD_d8):
     CPU::LD_d8_Instruction(mem);

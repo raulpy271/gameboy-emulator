@@ -8,6 +8,8 @@
 
 #define JP_a16 0xC3
 
+#define JP_HL 0xE9
+
 #define LD_d8 0x3E
 
 #define LD_B_d8 0x06

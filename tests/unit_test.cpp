@@ -17,6 +17,18 @@ TEST(Instructions, JP_a16_instruction) {
   EXPECT_EQ(game.cpu.reg.PC, 0x150);
 }
 
+TEST(Instructions, JP_HL_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, JP_HL);
+  game.cpu.reg.H = 0x01;
+  game.cpu.reg.L = 0x50;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x150);
+}
+
 TEST(Instructions, LD_d8_instruction) {
   gameboy::Console game;
   int to_load = 0x50;
