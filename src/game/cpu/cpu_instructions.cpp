@@ -212,6 +212,12 @@ void CPU::LD_aHL_d8_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::LD_aDE_A_Instruction(Memory* mem) {
+  Address add_of_value_to_store = utils::create_address_from_two_bytes(reg.D, reg.E);
+  mem->SetInAddr(add_of_value_to_store, reg.A);
+  reg.PC += 1;
+}
+
 void CPU::LD_aHL_A_Instruction(Memory* mem) {
   Address add_of_value_to_store_A = utils::create_address_from_two_bytes(reg.H, reg.L);
   mem->SetInAddr(add_of_value_to_store_A, reg.A);
