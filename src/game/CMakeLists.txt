@@ -9,7 +9,6 @@ add_library(${PROJECT_NAME}
     cpu/interrupts.cpp
     game.cpp
     memory.cpp
-    tile.cpp
     ppu.cpp
     palette.cpp
     timer_registers.cpp

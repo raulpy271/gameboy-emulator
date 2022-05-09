@@ -4,7 +4,6 @@
 
 #include <gtkmm.h>
 
-#include "../game/tile.h"
 #include "../game/game.h"
 #include "../game/primitives.h"
 
