@@ -19,7 +19,7 @@ jobs:
       run: docker run --rm --name emulator-container -i -v "$(pwd)/build:/code/build" emulator-image
       
     - name: Upload the artifacts
-    - uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3
       with:
         name: elf binary
         path: build/main
