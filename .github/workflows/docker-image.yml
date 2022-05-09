@@ -11,6 +11,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --tag emulator-image
+    - name: Run image
+      run: docker run --rm --name emulator-container -i -v "$(pwd)/build:/code/build" emulator-image
     - name: Download a Build Artifact
       uses: actions/download-artifact@v3.0.0
       with:
@@ -18,7 +22,3 @@ jobs:
         name: main binary
         # Destination path
         path: build/main
-    - name: Build the Docker image
-      run: docker build . --tag emulator-image
-    - name: Run image
-      run: docker run --rm --name emulator-container -i -v "$(pwd)/build:/code/build" emulator-image
