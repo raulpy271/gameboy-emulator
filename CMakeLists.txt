@@ -4,21 +4,10 @@ cmake_minimum_required(VERSION 3.10)
 project(gameboy-emulator)
 
 add_subdirectory(src)
-add_subdirectory(tests)
-
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
-)
 
 
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
-
-
-if(NOT DEFINED ENV{test_setup})
-    message("No tests")
+if(DEFINED ENV{COMPILE_GUI})
+    message("Compilling gui")
     add_subdirectory(src/gui)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(GTKMM REQUIRED gtkmm-3.0)
@@ -32,7 +21,23 @@ if(NOT DEFINED ENV{test_setup})
     add_executable(debug debug_code.cpp)
     target_link_libraries(debug PRIVATE game utils)
 else()
-    message("Test building")
+    message("Don't compilling gui")
+endif()
+
+if(DEFINED ENV{COMPILE_TESTS})
+    message("Compilling tests")
+    add_subdirectory(tests)
+
+    include(FetchContent)
+    FetchContent_Declare(
+      googletest
+      URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+    )
+
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
+else()
+    message("Don't compilling tests")
 endif()
 
 
