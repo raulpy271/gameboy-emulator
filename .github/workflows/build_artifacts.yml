@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build Artifacts
 
 on:
   workflow_dispatch:
@@ -11,10 +11,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Build the Docker image
       run: docker build . --tag emulator-image
+      
     - name: Run image
       run: docker run --rm --name emulator-container -i -v "$(pwd)/build:/code/build" emulator-image
+      
+    - name: Upload the artifacts
     - uses: actions/upload-artifact@v3
       with:
         name: elf binary
