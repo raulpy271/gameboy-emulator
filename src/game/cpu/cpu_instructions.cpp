@@ -342,6 +342,10 @@ void CPU::DEC_C_Instruction(Memory* mem) {
   DEC_X_Instruction(&reg.C, &reg.F, &reg.PC);
 }
 
+void CPU::DEC_L_Instruction(Memory* mem) {
+  DEC_X_Instruction(&reg.L, &reg.F, &reg.PC);
+}
+
 void CPU::DEC_aHL_Instruction(Memory* mem) {
   Address addr = utils::create_address_from_two_bytes(reg.H, reg.L);
   Byte value = mem->GetInAddr(addr);

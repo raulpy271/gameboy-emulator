@@ -76,6 +76,7 @@ class CPU {
   void DEC_A_Instruction(Memory* mem);
   void DEC_B_Instruction(Memory* mem);
   void DEC_C_Instruction(Memory* mem);
+  void DEC_L_Instruction(Memory* mem);
   void DEC_aHL_Instruction(Memory* mem);
   void DEC_BC_Instruction(Memory* mem);
   void LD_A_B_Instruction(Memory* mem);
