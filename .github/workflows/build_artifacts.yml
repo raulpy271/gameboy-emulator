@@ -25,4 +25,4 @@ jobs:
         path: build/main
         
     - name: run binary
-      run: chmod +x build/main && ./build/main
+      run: ./build/main
