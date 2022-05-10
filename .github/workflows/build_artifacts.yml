@@ -23,3 +23,6 @@ jobs:
       with:
         name: elf binary
         path: build/main
+        
+    - name: run binary
+      run: chmod +x build/main && ./build/main
