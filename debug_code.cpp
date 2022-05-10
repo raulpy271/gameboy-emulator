@@ -20,14 +20,34 @@ int main(int argc, char *argv[])
 {
   gameboy::Console game;
   Byte rom_data[32 * 1024];
-  string file_path = "roms-example/hello-world.gb";
+  string file_path = "/home/raul/Programming/hello-world-asm/hello-world.gb";
   utils::read_rom_from_file(rom_data, file_path);
   game.initialize_registers();
   game.load_rom(rom_data);
+  bool finding_breakpoint = false;
+  bool finding_opcode = false;
   char user_digit;
   unsigned int user_addr;
   unsigned int user_value;
   while (true) {
+    if (finding_breakpoint) {
+      if (game.cpu.reg.PC != user_addr) {
+        game.run_a_instruction_cycle();
+        continue;
+      }
+      else {
+        finding_breakpoint = false;
+      }
+    }
+    if (finding_opcode) {
+      if (game.mem.GetInAddr(game.cpu.reg.PC) != user_addr) {
+        game.run_a_instruction_cycle();
+        continue;
+      }
+      else {
+        finding_opcode = false;
+      }
+    }
     print_registers(game);
     std::cout << "Input: ";
     std::cin >> user_digit;
@@ -36,6 +56,23 @@ int main(int argc, char *argv[])
     }
     if (user_digit == 'n') {
       game.run_a_instruction_cycle();
+      continue;
+    }
+    if (user_digit == 'b') {
+      std::cin >> user_addr;
+      finding_breakpoint = true;
+      continue;
+    }
+    if (user_digit == 'j') {
+      std::cin >> user_value;
+      for (int i = 0; i < user_value; i++) {
+        game.run_a_instruction_cycle();
+      }
+      continue;
+    }
+    if (user_digit == 'o') {
+      std::cin >> user_addr;
+      finding_opcode = true;
       continue;
     }
     if (user_digit == 'g') {
