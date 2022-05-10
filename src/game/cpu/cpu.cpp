@@ -273,6 +273,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::LD_A_B_Instruction(mem);
     break;
 
+  case (LD_A_D):
+    CPU::LD_A_D_Instruction(mem);
+    break;
+
   case (LD_A_E):
     CPU::LD_A_E_Instruction(mem);
     break;
