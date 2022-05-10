@@ -9,7 +9,7 @@
 
 namespace utils {
 
-void read_rom_from_file(Byte* rom, std::string file_path);
+bool read_rom_from_file(Byte* rom, std::string file_path);
 
 }
 
