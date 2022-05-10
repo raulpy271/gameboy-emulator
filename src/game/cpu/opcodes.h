@@ -70,6 +70,8 @@
 
 #define LD_aHL_A 0x77
 
+#define LD_aHL_C 0x71
+
 #define LD_aHL_D 0x72
 
 #define LD_aHL_E 0x73
