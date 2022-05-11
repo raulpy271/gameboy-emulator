@@ -8,35 +8,11 @@
 
 namespace gameboy {
 
-void CPU::BIT_0_A_Instruction(Memory* mem) {
-  BIT_X_A_Instruction(&reg.F, reg.A, &reg.PC, 0);
-}
-
 void CPU::RES_0_A_Instruction(Memory* mem) {
   std::bitset<8> A_bitset(reg.A);
   A_bitset.set(0, false);
   reg.A = A_bitset.to_ulong();
   reg.PC += 2;
-}
-
-void CPU::BIT_1_A_Instruction(Memory* mem) {
-  BIT_X_A_Instruction(&reg.F, reg.A, &reg.PC, 1);
-}
-
-void CPU::BIT_2_A_Instruction(Memory* mem) {
-  BIT_X_A_Instruction(&reg.F, reg.A, &reg.PC, 2);
-}
-
-void CPU::BIT_3_A_Instruction(Memory* mem) {
-  BIT_X_A_Instruction(&reg.F, reg.A, &reg.PC, 3);
-}
-
-void CPU::BIT_7_A_Instruction(Memory* mem) {
-  BIT_X_A_Instruction(&reg.F, reg.A, &reg.PC, 7);
-}
-
-void CPU::BIT_2_B_Instruction(Memory* mem) {
-  BIT_X_A_Instruction(&reg.F, reg.B, &reg.PC, 2);
 }
 
 void CPU::RR_A_Instruction(Memory* mem) {

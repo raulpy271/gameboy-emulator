@@ -540,32 +540,32 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
   Byte opcode = mem->GetInAddr(reg.PC + 1);
   switch (opcode)
   {
-  case (BIT_0_A):
-    CPU::BIT_0_A_Instruction(mem);
-    break;
-
   case (RES_0_A):
     CPU::RES_0_A_Instruction(mem);
     break;
 
+  case (BIT_0_A):
+    BIT_X_R_MACRO(0, A);
+    break;
+
   case (BIT_1_A):
-    CPU::BIT_1_A_Instruction(mem);
+    BIT_X_R_MACRO(1, A);
     break;
 
   case (BIT_2_A):
-    CPU::BIT_2_A_Instruction(mem);
+    BIT_X_R_MACRO(2, A);
     break;
 
   case (BIT_3_A):
-    CPU::BIT_3_A_Instruction(mem);
+    BIT_X_R_MACRO(3, A);
     break;
 
   case (BIT_7_A):
-    CPU::BIT_7_A_Instruction(mem);
+    BIT_X_R_MACRO(7, A);
     break;
 
   case (BIT_2_B):
-    CPU::BIT_2_B_Instruction(mem);
+    BIT_X_R_MACRO(2, B);
     break;
 
   case (RR_A):

@@ -5,6 +5,8 @@
 #include "../primitives.h"
 #include "../memory.h"
 
+#define BIT_X_R_MACRO(X, R) BIT_X_A_Instruction(&reg.F, reg.R, &reg.PC, X);
+
 namespace gameboy {
 
 void INC_X_Instruction(Byte* X, Byte* F, Address* PC);
