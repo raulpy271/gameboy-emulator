@@ -20,6 +20,8 @@
 
 #define BIT_2_B 0x50
 
+#define BIT_3_B 0x58
+
 #define BIT_4_B 0x60
 
 #define BIT_5_B 0x68
