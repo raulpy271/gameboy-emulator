@@ -31,6 +31,10 @@ void CPU::BIT_3_A_Instruction(Memory* mem) {
   BIT_X_A_Instruction(&reg.F, reg.A, &reg.PC, 3);
 }
 
+void CPU::BIT_7_A_Instruction(Memory* mem) {
+  BIT_X_A_Instruction(&reg.F, reg.A, &reg.PC, 7);
+}
+
 void CPU::RR_A_Instruction(Memory* mem) {
   bool carry = utils::carry_flag(&reg.F);
   bool reg_A_end_with_zero = reg.A % 2 == 0;
