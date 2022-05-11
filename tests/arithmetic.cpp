@@ -114,6 +114,21 @@ TEST(ArithmeticInstructions, OR_A_B_instruction_affect_zero_flag) {
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
 }
 
+TEST(ArithmeticInstructions, OR_A_d8_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, OR_A_d8);
+  game.mem.SetInAddr(0x101, 0b01000101);
+  game.cpu.reg.A = 0b00000100;
+  game.cpu.reg.F = 0x0;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.A, 0b01000101);
+  EXPECT_EQ(game.cpu.reg.F, 0x0);
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+}
+
 TEST(ArithmeticInstructions, AND_A_A_instruction) {
   gameboy::Console game;
   game.initialize_registers();

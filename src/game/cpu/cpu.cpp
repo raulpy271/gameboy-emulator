@@ -425,6 +425,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::OR_A_B_Instruction(mem);
     break;
 
+  case (OR_A_d8):
+    CPU::OR_A_d8_Instruction(mem);
+    break;
+
   case (AND_A_A):
     CPU::AND_A_A_Instruction(mem);
     break;
