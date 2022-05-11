@@ -145,6 +145,7 @@ class CPU {
 
   void BIT_0_A_Instruction(Memory* mem);
   void RES_0_A_Instruction(Memory* mem);
+  void RES_0_aHL_Instruction(Memory* mem);
   void BIT_1_A_Instruction(Memory* mem);
   void BIT_2_A_Instruction(Memory* mem);
   void BIT_3_A_Instruction(Memory* mem);

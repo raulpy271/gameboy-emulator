@@ -45,6 +45,11 @@ void CPU::RR_A_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::RES_0_aHL_Instruction(Memory* mem) {
+  ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, false, 0);
+  reg.PC += 2;
+}
+
 void CPU::RES_7_aHL_Instruction(Memory* mem) {
   ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, false, 7);
   reg.PC += 2;
