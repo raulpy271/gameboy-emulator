@@ -158,6 +158,8 @@
 
 #define LD_B_L 0x45
 
+#define LD_D_H 0x54
+
 #define LD_B_aHL 0x46
 
 #define LD_C_aHL 0x4E

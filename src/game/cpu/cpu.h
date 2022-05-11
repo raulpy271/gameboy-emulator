@@ -100,6 +100,7 @@ class CPU {
   void LD_B_E_Instruction(Memory* mem);
   void LD_B_H_Instruction(Memory* mem);
   void LD_B_L_Instruction(Memory* mem);
+  void LD_D_H_Instruction(Memory* mem);
   void LD_B_aHL_Instruction(Memory* mem);
   void LD_C_aHL_Instruction(Memory* mem);
   void LD_D_aHL_Instruction(Memory* mem);
