@@ -145,14 +145,8 @@ class CPU {
   void execute_prefixed_instruction(Memory* mem);
 
 
-  void BIT_0_A_Instruction(Memory* mem);
   void RES_0_A_Instruction(Memory* mem);
   void RES_0_aHL_Instruction(Memory* mem);
-  void BIT_1_A_Instruction(Memory* mem);
-  void BIT_2_A_Instruction(Memory* mem);
-  void BIT_3_A_Instruction(Memory* mem);
-  void BIT_7_A_Instruction(Memory* mem);
-  void BIT_2_B_Instruction(Memory* mem);
   void RR_A_Instruction(Memory* mem);
   void RES_7_aHL_Instruction(Memory* mem);
   void RES_1_aHL_Instruction(Memory* mem);

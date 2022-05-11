@@ -568,6 +568,10 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     BIT_X_R_MACRO(2, B);
     break;
 
+  case (BIT_4_B):
+    BIT_X_R_MACRO(4, B);
+    break;
+
   case (RR_A):
     CPU::RR_A_Instruction(mem);
     break;
