@@ -130,6 +130,8 @@
 
 #define LD_L_C 0x69
 
+#define LD_L_E 0x6B
+
 #define LD_A_H 0x7C
 
 #define LD_A_C 0x79
