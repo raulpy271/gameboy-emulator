@@ -26,6 +26,8 @@
 
 #define BIT_5_B 0x68
 
+#define BIT_7_aHL 0x7E
+
 #define RR_A 0x1F
 
 #define RES_7_aHL 0xBE

@@ -243,6 +243,37 @@ TEST(PrefixedInstructions, BIT_4_B_instruction) {
   EXPECT_EQ(utils::carry_flag(&game.cpu.reg.F), true);
 }
 
+TEST(PrefixedInstructions, BIT_7_aHL_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.cpu.reg.F = 0;
+  game.cpu.reg.H = 0xff;
+  game.cpu.reg.L = 0xfe;
+  game.mem.SetInAddr(0x100, OPCODE_PREFIX);
+  game.mem.SetInAddr(0x101, BIT_7_aHL);
+  game.mem.SetInAddr(0x102, OPCODE_PREFIX);
+  game.mem.SetInAddr(0x103, BIT_7_aHL);
+  game.mem.SetInAddr(0xfffe, 0);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::carry_flag(&game.cpu.reg.F), false);
+
+  game.cpu.reg.F = 0b00010000;
+  game.mem.SetInAddr(0xfffe, 0b10000000);
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x104);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::carry_flag(&game.cpu.reg.F), true);
+}
+
 TEST(PrefixedInstructions, RR_A_instruction) {
   gameboy::Console game;
   game.initialize_registers();

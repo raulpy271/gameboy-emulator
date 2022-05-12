@@ -15,6 +15,12 @@ void CPU::RES_0_A_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::BIT_7_aHL_Instruction(Memory* mem) {
+  Address addr = utils::create_address_from_two_bytes(reg.H, reg.L);
+  Byte value = mem->GetInAddr(addr);
+  BIT_X_A_Instruction(&reg.F, value, &reg.PC, 7);
+}
+
 void CPU::RR_A_Instruction(Memory* mem) {
   bool carry = utils::carry_flag(&reg.F);
   bool reg_A_end_with_zero = reg.A % 2 == 0;
