@@ -26,10 +26,6 @@ class CPU {
   void DI_Instruction(Memory* mem);
   void JP_a16_Instruction(Memory* mem);
   void JP_HL_Instruction(Memory* mem);
-  void LD_d8_Instruction(Memory* mem);
-  void LD_B_d8_Instruction(Memory* mem);
-  void LD_C_d8_Instruction(Memory* mem);
-  void LD_D_d8_Instruction(Memory* mem);
   void LD_a8_A_Instruction(Memory* mem);
   void LD_a16_A_Instruction(Memory* mem);
   void LD_A_a16_Instruction(Memory* mem);

@@ -70,19 +70,23 @@ void CPU::execute_intruction(Memory* mem) {
     break;
   
   case (LD_d8):
-    CPU::LD_d8_Instruction(mem);
+    LD_R_d8_MACRO(A);
     break;
 
   case (LD_B_d8):
-    CPU::LD_B_d8_Instruction(mem);
+    LD_R_d8_MACRO(B);
     break;
 
   case (LD_C_d8):
-    CPU::LD_C_d8_Instruction(mem);
+    LD_R_d8_MACRO(C);
     break;
 
   case (LD_D_d8):
-    CPU::LD_D_d8_Instruction(mem);
+    LD_R_d8_MACRO(D);
+    break;
+
+  case (LD_E_d8):
+    LD_R_d8_MACRO(E);
     break;
 
   case (LD_a8_A):

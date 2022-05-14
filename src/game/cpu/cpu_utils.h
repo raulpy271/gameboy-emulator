@@ -7,6 +7,8 @@
 
 #define BIT_X_R_MACRO(X, R) BIT_X_A_Instruction(&reg.F, reg.R, &reg.PC, X);
 
+#define LD_R_d8_MACRO(R) LD_X_d8_Instruction(mem, &reg.PC, &reg.R);
+
 namespace gameboy {
 
 void INC_X_Instruction(Byte* X, Byte* F, Address* PC);
