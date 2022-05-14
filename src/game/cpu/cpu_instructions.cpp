@@ -597,6 +597,16 @@ void CPU::XOR_A_C_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::XOR_A_d8_Instruction(Memory* mem) {
+  Byte d8 = mem->GetInAddr(reg.PC + 1);
+  reg.A = reg.A ^ d8;
+  reg.F = 0x0;
+  if (reg.A == 0) {
+    utils::set_zero_flag(&reg.F, true);
+  }
+  reg.PC += 2;
+}
+
 void CPU::JP_NZ_a16_Instruction(Memory* mem) {
   if (utils::zero_flag(&reg.F)) {
     reg.PC += 3;

@@ -204,6 +204,8 @@
 
 #define XOR_A_C 0xA9
 
+#define XOR_A_d8 0xEE
+
 #define JR_NZ_s8 0x20
 
 #define JR_Z_s8 0x28
