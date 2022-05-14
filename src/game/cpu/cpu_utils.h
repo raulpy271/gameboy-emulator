@@ -33,6 +33,8 @@ void POP_XX_Instruction(Memory* mem, Address* SP, Byte* higher_byte, Byte* lower
 
 void BIT_X_A_Instruction(Byte* F, Byte A, Address* PC, int X);
 
+void SetSUBFlags(Byte* F, Byte X, Byte Y);
+
 void ChangeBitValueFromMemory_Instruction(Memory* mem, Byte higher_byte, Byte lower_byte, bool value, int position);
 
 }

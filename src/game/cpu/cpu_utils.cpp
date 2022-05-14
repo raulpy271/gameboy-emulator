@@ -129,4 +129,18 @@ void POP_XX_Instruction(Memory* mem, Address* SP, Byte* higher_byte, Byte* lower
   *PC = (*PC) + 1;
 }
 
+void SetSUBFlags(Byte* F, Byte X, Byte Y) {
+  *F = 0b01000000;
+  Byte X_lower_part = X & 0xf;
+  Byte Y_lower_part = Y & 0xf;
+  if (X < Y) {
+    utils::set_carry_flag(F, true);
+  }
+  if ((X_lower_part) < (Y_lower_part)) {
+    utils::set_half_carry_flag(F, true);
+  }
+  Byte diff = X - Y;
+  utils::set_zero_flag(F, !((bool)diff));
+}
+
 }
