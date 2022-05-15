@@ -546,6 +546,12 @@ void CPU::execute_intruction(Memory* mem) {
     std::cout << "After opcode: " << (unsigned int) mem->GetInAddr(reg.PC + 1) << std::endl;
     break;
   }
+  if (opcode == OPCODE_PREFIX) {
+    opcode = mem->GetInAddr(reg.PC + 1);
+    reg.PC += instructions.GetSize(opcode, true);
+  } else {
+    reg.PC += instructions.GetSize(opcode, false);
+  }
 }
 
 void CPU::execute_prefixed_instruction(Memory* mem) {
@@ -648,7 +654,6 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     std::cout << "Invalid prefixed opcode: " << (unsigned int) opcode << std::endl;
     break;
   }
-  reg.PC += instructions.GetSize(opcode, true);
 
 }
 

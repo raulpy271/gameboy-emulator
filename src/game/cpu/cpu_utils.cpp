@@ -90,7 +90,6 @@ void LD_X_d8_Instruction(Memory* mem, Address* PC, Byte* X) {
   Address add_of_value = (*PC) + 1;
   Byte value_to_load_in_C = mem->GetInAddr(add_of_value);
   *X = value_to_load_in_C;
-  *PC = (*PC) + 2;
 }
 
 void BIT_X_A_Instruction(Byte* F, Byte A, Address* PC, int X) {
