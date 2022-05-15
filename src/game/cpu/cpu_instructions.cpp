@@ -740,6 +740,11 @@ void CPU::CCF_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::RLCA_Instruction(Memory* mem) {
+  SLA_A_Instruction(mem);
+  utils::set_zero_flag(&reg.F, false);
+}
+
 void CPU::CPL_Instruction(Memory* mem) {
   reg.A = reg.A ^ 0xFF;
   utils::set_half_carry_flag(&reg.F, true);

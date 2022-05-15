@@ -137,6 +137,7 @@ class CPU {
   void RET_NC_Instruction(Memory* mem);
   void JR_s8_Instruction(Memory* mem);
   void CCF_Instruction(Memory* mem);
+  void RLCA_Instruction(Memory* mem);
   void CPL_Instruction(Memory* mem);
   void RST_0x28_Instruction(Memory* mem);
   

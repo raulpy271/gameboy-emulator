@@ -240,6 +240,8 @@
 
 #define CCF 0x3F
 
+#define RLCA 0x07
+
 #define CPL 0x2F
 
 #define RST_0x28 0xEF
