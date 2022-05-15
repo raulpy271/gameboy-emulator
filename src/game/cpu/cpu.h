@@ -3,8 +3,9 @@
 #define GAME_CPU_H_
 
 #include "../primitives.h"
-#include "../memory.h"
 #include "interrupts.h"
+#include "instructions_size.h"
+#include "../memory.h"
 
 namespace gameboy {
 
@@ -157,6 +158,8 @@ class CPU {
   void SRL_B_Instruction(Memory* mem);
   void SLA_A_Instruction(Memory* mem);
   void SWAP_A_Instruction(Memory* mem);
+
+  InstructionsSize instructions;
 
  public:
   struct Registers reg;

@@ -12,7 +12,6 @@ void CPU::RES_0_A_Instruction(Memory* mem) {
   std::bitset<8> A_bitset(reg.A);
   A_bitset.set(0, false);
   reg.A = A_bitset.to_ulong();
-  reg.PC += 2;
 }
 
 void CPU::BIT_7_aHL_Instruction(Memory* mem) {
@@ -28,42 +27,34 @@ void CPU::RR_A_Instruction(Memory* mem) {
   reg.A = reg.A >> 1 | (carry << 7);
   utils::set_carry_flag(&reg.F, !reg_A_end_with_zero);
   utils::set_zero_flag(&reg.F, !(bool)reg.A);
-  reg.PC += 2;
 }
 
 void CPU::RES_0_aHL_Instruction(Memory* mem) {
   ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, false, 0);
-  reg.PC += 2;
 }
 
 void CPU::RES_7_aHL_Instruction(Memory* mem) {
   ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, false, 7);
-  reg.PC += 2;
 }
 
 void CPU::RES_1_aHL_Instruction(Memory* mem) {
   ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, false, 1);
-  reg.PC += 2;
 }
 
 void CPU::SET_7_aHL_Instruction(Memory* mem) {
   ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, true, 7);
-  reg.PC += 2;
 }
 
 void CPU::SET_4_aHL_Instruction(Memory* mem) {
   ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, true, 4);
-  reg.PC += 2;
 }
 
 void CPU::SET_1_aHL_Instruction(Memory* mem) {
   ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, true, 1);
-  reg.PC += 2;
 }
 
 void CPU::SET_0_aHL_Instruction(Memory* mem) {
   ChangeBitValueFromMemory_Instruction(mem, reg.H, reg.L, true, 0);
-  reg.PC += 2;
 }
 
 void CPU::SRL_A_Instruction(Memory* mem) {
@@ -77,7 +68,6 @@ void CPU::SRL_A_Instruction(Memory* mem) {
   if (reg.A == 0) {
     utils::set_zero_flag(&reg.F, true);
   }
-  reg.PC += 2;
 }
 
 void CPU::SRL_B_Instruction(Memory* mem) {
@@ -91,7 +81,6 @@ void CPU::SRL_B_Instruction(Memory* mem) {
   if (reg.B == 0) {
     utils::set_zero_flag(&reg.F, true);
   }
-  reg.PC += 2;
 }
 
 void CPU::SLA_A_Instruction(Memory* mem) {
@@ -106,7 +95,6 @@ void CPU::SLA_A_Instruction(Memory* mem) {
   if (reg.A == 0) {
     utils::set_zero_flag(&reg.F, true);
   }
-  reg.PC += 2;
 }
 
 void CPU::SWAP_A_Instruction(Memory* mem) {
@@ -121,7 +109,6 @@ void CPU::SWAP_A_Instruction(Memory* mem) {
   utils::set_subtract_flag(&reg.F, false);
   utils::set_half_carry_flag(&reg.F, false);
   utils::set_carry_flag(&reg.F, false);
-  reg.PC += 2;
 }
 
 }

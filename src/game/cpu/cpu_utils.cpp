@@ -98,7 +98,6 @@ void BIT_X_A_Instruction(Byte* F, Byte A, Address* PC, int X) {
   utils::set_zero_flag(F, !bit_X_is_one);
   utils::set_subtract_flag(F, false);
   utils::set_half_carry_flag(F, true);
-  *PC = (*PC) + 2;
 }
 
 void ChangeBitValueFromMemory_Instruction(Memory* mem, Byte higher_byte, Byte lower_byte, bool value, int position) {

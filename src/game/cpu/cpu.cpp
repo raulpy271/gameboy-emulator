@@ -648,6 +648,7 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     std::cout << "Invalid prefixed opcode: " << (unsigned int) opcode << std::endl;
     break;
   }
+  reg.PC += instructions.GetSize(opcode, true);
 
 }
 
