@@ -521,6 +521,13 @@ void CPU::SUB_A_d8_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::SBC_A_C_Instruction(Memory* mem) {
+  bool cy = utils::carry_flag(&reg.F);
+  SetSUBFlags(&reg.F, reg.A, reg.C + cy);
+  reg.A = reg.A - (reg.C + cy);
+  reg.PC += 1;
+}
+
 void CPU::ADD_HL_BC_Instruction(Memory* mem) {
   ADD_HL_XY_Instruction(&reg.H, &reg.L, &reg.B, &reg.C, &reg.F, &reg.PC);
 }

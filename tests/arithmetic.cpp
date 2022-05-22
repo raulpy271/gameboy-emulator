@@ -436,6 +436,60 @@ TEST(ArithmeticInstructions, SUB_A_d8_instruction) {
   EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), true);
 }
 
+TEST(ArithmeticInstructions, SBC_A_C_instruction_carry_flag_not_set) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, SBC_A_C);
+  game.cpu.reg.A = 10;
+  game.cpu.reg.C = 5;
+  utils::set_carry_flag(&game.cpu.reg.F, false);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.A, 10 - 5);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::carry_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), false);
+}
+
+TEST(ArithmeticInstructions, SBC_A_C_instruction_carry_flag_set) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, SBC_A_C);
+  game.cpu.reg.A = 10;
+  game.cpu.reg.C = 5;
+  utils::set_carry_flag(&game.cpu.reg.F, true);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.A, 10 - (5 + 1));
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::carry_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), false);
+}
+
+TEST(ArithmeticInstructions, SBC_A_C_instruction_setting_half_carry) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, SBC_A_C);
+  game.cpu.reg.A = 0b00001000;
+  game.cpu.reg.C = 0b00001000;
+  utils::set_carry_flag(&game.cpu.reg.F, true);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.A, (Byte)(0b00001000 - (0b00001001)));
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::carry_flag(&game.cpu.reg.F), true);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), true);
+}
+
 TEST(ArithmeticInstructions, ADD_HL_BC_instruction) {
   gameboy::Console game;
   game.initialize_registers();

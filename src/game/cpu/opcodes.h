@@ -186,6 +186,8 @@
 
 #define SUB_A_d8 0xD6
 
+#define SBC_A_C 0x99
+
 #define ADD_HL_BC 0x09
 
 #define ADD_HL_DE 0x19
