@@ -383,6 +383,11 @@ void CPU::LD_H_D_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
+void CPU::LD_H_d8_Instruction(Memory* mem) {
+  Byte value = mem->GetInAddr(reg.PC + 1);
+  reg.H = value;
+}
+
 void CPU::LD_L_A_Instruction(Memory* mem) {
   reg.L = reg.A;
   reg.PC += 1;
