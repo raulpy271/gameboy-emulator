@@ -13,7 +13,7 @@ namespace gameboy {
 
 void INC_X_Instruction(Byte* X, Byte* F, Address* PC);
 
-void DEC_X_Instruction(Byte* X, Byte* F, Address* PC);
+void DEC_X_Instruction(Byte* X, Byte* F);
 
 void ADD_X_Y_Instruction(Byte* X, Byte* Y, Byte* F);
 

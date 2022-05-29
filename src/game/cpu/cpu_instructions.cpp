@@ -314,19 +314,23 @@ void CPU::DEC_BC_Instruction(Memory* mem) {
 }
 
 void CPU::DEC_A_Instruction(Memory* mem) {
-  DEC_X_Instruction(&reg.A, &reg.F, &reg.PC);
+  DEC_X_Instruction(&reg.A, &reg.F);
 }
 
 void CPU::DEC_B_Instruction(Memory* mem) {
-  DEC_X_Instruction(&reg.B, &reg.F, &reg.PC);
+  DEC_X_Instruction(&reg.B, &reg.F);
 }
 
 void CPU::DEC_C_Instruction(Memory* mem) {
-  DEC_X_Instruction(&reg.C, &reg.F, &reg.PC);
+  DEC_X_Instruction(&reg.C, &reg.F);
+}
+
+void CPU::DEC_E_Instruction(Memory* mem) {
+  DEC_X_Instruction(&reg.E, &reg.F);
 }
 
 void CPU::DEC_L_Instruction(Memory* mem) {
-  DEC_X_Instruction(&reg.L, &reg.F, &reg.PC);
+  DEC_X_Instruction(&reg.L, &reg.F);
 }
 
 void CPU::DEC_aHL_Instruction(Memory* mem) {

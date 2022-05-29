@@ -18,7 +18,7 @@ void INC_X_Instruction(Byte* X, Byte* F, Address* PC) {
   *PC = (*PC) + 1;
 }
 
-void DEC_X_Instruction(Byte* X, Byte* F, Address* PC) {
+void DEC_X_Instruction(Byte* X, Byte* F) {
   if (((*X) & 0xf) == 0) {
     utils::set_half_carry_flag(F, true);
   } else {
@@ -27,7 +27,6 @@ void DEC_X_Instruction(Byte* X, Byte* F, Address* PC) {
   (*X) = (*X) - 1;
   utils::set_subtract_flag(F, true);
   utils::set_zero_flag(F, !((bool)(*X)));
-  *PC = (*PC) + 1;
 }
 
 void ADD_X_Y_Instruction(Byte* X, Byte* Y, Byte* F) {
