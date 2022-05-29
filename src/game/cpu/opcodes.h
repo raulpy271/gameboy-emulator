@@ -32,6 +32,8 @@
 
 #define CP_d8 0xFE
 
+#define CP_A_aHL 0xBE
+
 #define PUSH_BC 0xC5
 
 #define PUSH_AF 0xF5

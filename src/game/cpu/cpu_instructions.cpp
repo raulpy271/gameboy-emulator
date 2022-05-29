@@ -80,13 +80,13 @@ void CPU::LD_A_a8_Instruction(Memory* mem) {
 void CPU::CP_d8_Instruction(Memory* mem) {
   Address byte_to_compare_address = reg.PC + 1;
   Byte byte_to_compare =  mem->GetInAddr(byte_to_compare_address);
-  reg.F = 0;
-  if (byte_to_compare == reg.A) {
-    utils::set_zero_flag(&reg.F, true);
-  } else {
-    utils::set_zero_flag(&reg.F, false);
-  }
-  reg.PC = reg.PC + 2;
+  SetSUBFlags(&reg.F, reg.A, byte_to_compare);
+}
+
+void CPU::CP_A_aHL_Instruction(Memory* mem) {
+  Address byte_to_compare_address = utils::create_address_from_two_bytes(reg.H, reg.L);
+  Byte byte_to_compare =  mem->GetInAddr(byte_to_compare_address);
+  SetSUBFlags(&reg.F, reg.A, byte_to_compare);
 }
 
 void CPU::PUSH_BC_Instruction(Memory* mem) {

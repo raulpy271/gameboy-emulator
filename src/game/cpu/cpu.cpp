@@ -113,6 +113,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::CP_d8_Instruction(mem);
     break;
 
+  case (CP_A_aHL):
+    CPU::CP_A_aHL_Instruction(mem);
+    break;
+
   case (PUSH_AF):
     CPU::PUSH_AF_Instruction(mem);
     break;

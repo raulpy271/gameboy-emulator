@@ -19,6 +19,8 @@ InstructionsSize::InstructionsSize() : instructions{0} {
   instructions[DEC_C] = 1;
   instructions[DEC_E] = 1;
   instructions[DEC_L] = 1;
+  instructions[CP_d8] = 2;
+  instructions[CP_A_aHL] = 1;
 }
 
 unsigned int InstructionsSize::GetSize(int opcode, bool CBPrefix) {
