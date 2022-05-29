@@ -525,7 +525,13 @@ void CPU::SBC_A_C_Instruction(Memory* mem) {
   bool cy = utils::carry_flag(&reg.F);
   SetSUBFlags(&reg.F, reg.A, reg.C + cy);
   reg.A = reg.A - (reg.C + cy);
-  reg.PC += 1;
+}
+
+void CPU::SBC_A_d8_Instruction(Memory* mem) {
+  Byte value = mem->GetInAddr(reg.PC + 1);
+  bool cy = utils::carry_flag(&reg.F);
+  SetSUBFlags(&reg.F, reg.A, value + cy);
+  reg.A = reg.A - (value + cy);
 }
 
 void CPU::ADD_HL_BC_Instruction(Memory* mem) {
