@@ -414,15 +414,15 @@ void CPU::execute_intruction(Memory* mem) {
     break;
 
   case (ADD_A_A):
-    CPU::ADD_A_A_Instruction(mem);
+    ADD_X_Y_MACRO(A, A)
     break;
 
   case (ADD_A_B):
-    CPU::ADD_A_B_Instruction(mem);
+    ADD_X_Y_MACRO(A, B)
     break;
 
   case (ADD_A_L):
-    CPU::ADD_A_L_Instruction(mem);
+    ADD_X_Y_MACRO(A, L)
     break;
 
   case (ADD_A_d8):

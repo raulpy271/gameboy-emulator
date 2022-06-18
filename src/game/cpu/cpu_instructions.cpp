@@ -496,21 +496,6 @@ void CPU::LD_E_aHL_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
-void CPU::ADD_A_A_Instruction(Memory* mem) {
-  ADD_X_Y_Instruction(&reg.A, &reg.A, &reg.F);
-  reg.PC += 1;
-}
-
-void CPU::ADD_A_B_Instruction(Memory* mem) {
-  ADD_X_Y_Instruction(&reg.A, &reg.B, &reg.F);
-  reg.PC += 1;
-}
-
-void CPU::ADD_A_L_Instruction(Memory* mem) {
-  ADD_X_Y_Instruction(&reg.A, &reg.L, &reg.F);
-  reg.PC += 1;
-}
-
 void CPU::ADD_A_d8_Instruction(Memory* mem) {
   Byte value = mem->GetInAddr(reg.PC + 1);
   ADD_X_Y_Instruction(&reg.A, &value, &reg.F);

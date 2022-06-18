@@ -9,6 +9,8 @@
 
 #define LD_R_d8_MACRO(R) LD_X_d8_Instruction(mem, &reg.PC, &reg.R);
 
+#define ADD_X_Y_MACRO(X, Y) ADD_X_Y_Instruction(&reg.X, &reg.Y, &reg.F);
+
 namespace gameboy {
 
 void INC_X_Instruction(Byte* X, Byte* F, Address* PC);
