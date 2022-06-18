@@ -16,6 +16,8 @@
 
 #define BIT_3_A 0x5F
 
+#define BIT_6_A 0x77
+
 #define BIT_7_A 0x7F
 
 #define BIT_2_B 0x50

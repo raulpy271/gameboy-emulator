@@ -602,6 +602,10 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     BIT_X_R_MACRO(3, A);
     break;
 
+  case (BIT_6_A):
+    BIT_X_R_MACRO(6, A);
+    break;
+
   case (BIT_7_A):
     BIT_X_R_MACRO(7, A);
     break;
@@ -676,7 +680,7 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
 
   default:
     std::cout << "Invalid prefixed opcode: " << (unsigned int) opcode << std::endl;
-    break;
+    throw opcode;
   }
 
 }
