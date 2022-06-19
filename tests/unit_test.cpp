@@ -1163,6 +1163,31 @@ TEST(Instructions, JR_Z_s8_instruction_backward) {
   EXPECT_EQ(game.cpu.reg.PC, 0x102 - 0x9);
 }
 
+TEST(Instructions, JR_C_s8_instruction_carry_not_set) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, JR_C_s8);
+  game.mem.SetInAddr(0x101, 0x8);
+  game.cpu.reg.F = 0x0;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+}
+
+TEST(Instructions, JR_C_s8_instruction_forward) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, JR_C_s8);
+  game.mem.SetInAddr(0x101, 0x8);
+  game.cpu.reg.F = 0x0;
+  utils::set_carry_flag(&game.cpu.reg.F, true);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.PC, 0x102 + 0x8);
+}
+
 TEST(Instructions, JP_NZ_a16_instruction_zero) {
   gameboy::Console game;
   game.initialize_registers();

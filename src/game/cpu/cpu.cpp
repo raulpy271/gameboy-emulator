@@ -509,6 +509,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::JR_Z_s8_Instruction(mem);
     break;
 
+  case (JR_C_s8):
+    CPU::JR_C_s8_Instruction(mem);
+    break;
+
   case (JP_Z_a16):
     CPU::JP_Z_a16_Instruction(mem);
     break;

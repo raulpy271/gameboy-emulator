@@ -750,6 +750,14 @@ void CPU::JR_NZ_s8_Instruction(Memory* mem) {
   }
 }
 
+void CPU::JR_C_s8_Instruction(Memory* mem) {
+  if (utils::carry_flag(&reg.F)) {
+    JR_s8_Instruction(mem);
+  } else {
+    reg.PC += 2;
+  }
+}
+
 void CPU::CCF_Instruction(Memory* mem) {
   bool carry_flag_value = utils::carry_flag(&reg.F);
   utils::set_carry_flag(&reg.F, !carry_flag_value);

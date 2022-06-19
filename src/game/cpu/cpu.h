@@ -127,6 +127,7 @@ class CPU {
   void XOR_A_d8_Instruction(Memory* mem);
   void JR_NZ_s8_Instruction(Memory* mem);
   void JR_Z_s8_Instruction(Memory* mem);
+  void JR_C_s8_Instruction(Memory* mem);
   void JP_NZ_a16_Instruction(Memory* mem);
   void JP_Z_a16_Instruction(Memory* mem);
   void JP_NC_a16_Instruction(Memory* mem);
