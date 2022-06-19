@@ -124,6 +124,8 @@
 
 #define DEC_DE 0x1B
 
+#define DEC_HL 0x2B
+
 #define LD_A_B 0x78
 
 #define LD_A_D 0x7A
