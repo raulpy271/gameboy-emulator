@@ -98,6 +98,21 @@ void BIT_X_A_Instruction(Byte* F, Byte A, Address* PC, int X) {
   utils::set_half_carry_flag(F, true);
 }
 
+void SWAP_X_Instruction(Byte* F, Byte* X) {
+  Byte lower_nibble = (*X) & 0x0f;
+  Byte higher_nibble = ((*X) & 0xf0) >> 4;
+  *X = (lower_nibble << 4) | higher_nibble;
+  if ((*X) == 0) {
+    utils::set_zero_flag(F, true);
+  } else {
+    utils::set_zero_flag(F, false);
+  }
+  utils::set_subtract_flag(F, false);
+  utils::set_half_carry_flag(F, false);
+  utils::set_carry_flag(F, false);
+
+}
+
 void ChangeBitValueFromMemory_Instruction(Memory* mem, Byte higher_byte, Byte lower_byte, bool value, int position) {
   Address addr_to_change = utils::create_address_from_two_bytes(higher_byte, lower_byte);
   Byte value_to_change = mem->GetInAddr(addr_to_change);

@@ -687,7 +687,7 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     break;
 
   case (SWAP_A):
-    CPU::SWAP_A_Instruction(mem);
+    SWAP_X_MACRO(A);
     break;
 
   default:

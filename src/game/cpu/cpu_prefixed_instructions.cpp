@@ -97,18 +97,4 @@ void CPU::SLA_A_Instruction(Memory* mem) {
   }
 }
 
-void CPU::SWAP_A_Instruction(Memory* mem) {
-  Byte lower_nibble = reg.A & 0x0f;
-  Byte higher_nibble = (reg.A & 0xf0) >> 4;
-  reg.A = (lower_nibble << 4) | higher_nibble;
-  if (reg.A == 0) {
-    utils::set_zero_flag(&reg.F, true);
-  } else {
-    utils::set_zero_flag(&reg.F, false);
-  }
-  utils::set_subtract_flag(&reg.F, false);
-  utils::set_half_carry_flag(&reg.F, false);
-  utils::set_carry_flag(&reg.F, false);
-}
-
 }

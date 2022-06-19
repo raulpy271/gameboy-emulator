@@ -11,6 +11,8 @@
 
 #define ADD_X_Y_MACRO(X, Y) ADD_X_Y_Instruction(&reg.X, &reg.Y, &reg.F);
 
+#define SWAP_X_MACRO(X) SWAP_X_Instruction(&reg.F, &reg.X);
+
 namespace gameboy {
 
 void INC_X_Instruction(Byte* X, Byte* F, Address* PC);
@@ -34,6 +36,8 @@ void PUSH_XX_Instruction(Memory* mem, Address* SP, Byte higher_byte, Byte lower_
 void POP_XX_Instruction(Memory* mem, Address* SP, Byte* higher_byte, Byte* lower_byte, Address* PC);
 
 void BIT_X_A_Instruction(Byte* F, Byte A, Address* PC, int X);
+
+void SWAP_X_Instruction(Byte* F, Byte* X);
 
 void SetSUBFlags(Byte* F, Byte X, Byte Y);
 

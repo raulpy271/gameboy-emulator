@@ -161,7 +161,6 @@ class CPU {
   void SRL_A_Instruction(Memory* mem);
   void SRL_B_Instruction(Memory* mem);
   void SLA_A_Instruction(Memory* mem);
-  void SWAP_A_Instruction(Memory* mem);
 
   InstructionsSize instructions;
 
