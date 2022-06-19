@@ -273,6 +273,10 @@ void CPU::execute_intruction(Memory* mem) {
     DEC_X_Y_MACRO(B, C)
     break;
 
+  case (DEC_DE):
+    DEC_X_Y_MACRO(D, E)
+    break;
+
   case (DEC_A):
     CPU::DEC_A_Instruction(mem);
     break;

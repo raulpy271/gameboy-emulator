@@ -122,6 +122,8 @@
 
 #define DEC_BC 0x0B
 
+#define DEC_DE 0x1B
+
 #define LD_A_B 0x78
 
 #define LD_A_D 0x7A

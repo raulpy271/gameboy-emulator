@@ -956,6 +956,20 @@ TEST(ArithmeticInstructions, DEC_BC_instruction) {
   EXPECT_EQ(game.cpu.reg.PC, 0x102);
 }
 
+TEST(ArithmeticInstructions, DEC_DE_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, DEC_DE);
+  game.cpu.reg.D = 0x01;
+  game.cpu.reg.E = 0x01;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.D, 0x01);
+  EXPECT_EQ(game.cpu.reg.E, 0x00);
+  EXPECT_EQ(game.cpu.reg.PC, 0x101);
+}
+
 TEST(ArithmeticInstructions, DEC_A_instruction) {
   gameboy::Console game;
   game.initialize_registers();
