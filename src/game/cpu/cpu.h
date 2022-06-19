@@ -108,6 +108,7 @@ class CPU {
   void LD_D_aHL_Instruction(Memory* mem);
   void LD_E_aHL_Instruction(Memory* mem);
   void ADD_A_d8_Instruction(Memory* mem);
+  void ADC_A_C_Instruction(Memory* mem);
   void SUB_A_B_Instruction(Memory* mem);
   void SUB_A_d8_Instruction(Memory* mem);
   void SBC_A_C_Instruction(Memory* mem);

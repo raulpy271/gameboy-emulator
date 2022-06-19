@@ -188,6 +188,8 @@
 
 #define ADD_A_d8 0xC6
 
+#define ADC_A_C 0x89
+
 #define SUB_A_B 0x90
 
 #define SUB_A_d8 0xD6

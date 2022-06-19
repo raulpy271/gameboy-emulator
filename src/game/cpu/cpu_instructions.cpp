@@ -502,6 +502,12 @@ void CPU::ADD_A_d8_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
+void CPU::ADC_A_C_Instruction(Memory* mem) {
+  bool cy = utils::carry_flag(&reg.F);
+  Byte value = reg.C + cy;
+  ADD_X_Y_Instruction(&reg.A, &value, &reg.F);
+}
+
 void CPU::SUB_A_B_Instruction(Memory* mem) {
   SetSUBFlags(&reg.F, reg.A, reg.B);
   reg.A = reg.A - reg.B;

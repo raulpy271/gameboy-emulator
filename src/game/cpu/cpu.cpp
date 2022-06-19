@@ -429,6 +429,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::ADD_A_d8_Instruction(mem);
     break;
 
+  case (ADC_A_C):
+    CPU::ADC_A_C_Instruction(mem);
+    break;
+
   case (SUB_A_B):
     CPU::SUB_A_B_Instruction(mem);
     break;
