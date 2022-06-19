@@ -618,6 +618,10 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     BIT_X_R_MACRO(7, A);
     break;
 
+  case (BIT_0_B):
+    BIT_X_R_MACRO(0, B);
+    break;
+
   case (BIT_2_B):
     BIT_X_R_MACRO(2, B);
     break;

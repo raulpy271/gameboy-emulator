@@ -22,6 +22,8 @@
 
 #define BIT_7_A 0x7F
 
+#define BIT_0_B 0x40
+
 #define BIT_2_B 0x50
 
 #define BIT_3_B 0x58
