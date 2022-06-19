@@ -56,4 +56,6 @@
 
 #define SWAP_A 0x37
 
+#define SWAP_E 0x33
+
 #endif  // GAME_PREFIXED_OPCODES_H_

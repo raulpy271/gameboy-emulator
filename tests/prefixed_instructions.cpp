@@ -582,3 +582,20 @@ TEST(PrefixedInstructions, SWAP_A_instruction_zero_flag) {
   EXPECT_EQ(utils::carry_flag(&game.cpu.reg.F), false);
   EXPECT_EQ(game.cpu.reg.PC, 0x102);
 }
+
+TEST(PrefixedInstructions, SWAP_E_instruction) {
+  gameboy::Console game;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, OPCODE_PREFIX);
+  game.mem.SetInAddr(0x101, SWAP_E);
+  game.cpu.reg.E = 0b11001011;
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.E, 0b10111100);
+  EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::half_carry_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(utils::carry_flag(&game.cpu.reg.F), false);
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+}

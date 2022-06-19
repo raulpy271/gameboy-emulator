@@ -690,6 +690,10 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     SWAP_X_MACRO(A);
     break;
 
+  case (SWAP_E):
+    SWAP_X_MACRO(E);
+    break;
+
   default:
     std::cout << "Invalid prefixed opcode: " << (unsigned int) opcode << std::endl;
     throw opcode;
