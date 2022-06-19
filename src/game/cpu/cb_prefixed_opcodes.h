@@ -24,6 +24,8 @@
 
 #define BIT_0_B 0x40
 
+#define BIT_1_B 0x48
+
 #define BIT_2_B 0x50
 
 #define BIT_3_B 0x58
