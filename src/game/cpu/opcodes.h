@@ -188,6 +188,8 @@
 
 #define ADD_A_B 0x80
 
+#define ADD_A_D 0x82
+
 #define ADD_A_L 0x85
 
 #define ADD_A_d8 0xC6

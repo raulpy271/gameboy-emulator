@@ -429,6 +429,10 @@ void CPU::execute_intruction(Memory* mem) {
     ADD_X_Y_MACRO(A, B)
     break;
 
+  case (ADD_A_D):
+    ADD_X_Y_MACRO(A, D)
+    break;
+
   case (ADD_A_L):
     ADD_X_Y_MACRO(A, L)
     break;

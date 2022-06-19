@@ -30,6 +30,7 @@ InstructionsSize::InstructionsSize() : instructions{0} {
   instructions[LD_H_d8] = 2;
   instructions[ADD_A_A] = 1;
   instructions[ADD_A_B] = 1;
+  instructions[ADD_A_D] = 1;
   instructions[ADD_A_L] = 1;
   instructions[ADC_A_C] = 1;
 }
