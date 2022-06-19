@@ -194,6 +194,8 @@
 
 #define SUB_A_d8 0xD6
 
+#define SUB_A_aHL 0x96
+
 #define SBC_A_C 0x99
 
 #define SBC_A_d8 0xDE

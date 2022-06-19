@@ -111,6 +111,7 @@ class CPU {
   void ADC_A_C_Instruction(Memory* mem);
   void SUB_A_B_Instruction(Memory* mem);
   void SUB_A_d8_Instruction(Memory* mem);
+  void SUB_A_aHL_Instruction(Memory* mem);
   void SBC_A_C_Instruction(Memory* mem);
   void SBC_A_d8_Instruction(Memory* mem);
   void ADD_HL_BC_Instruction(Memory* mem);

@@ -511,14 +511,19 @@ void CPU::ADC_A_C_Instruction(Memory* mem) {
 void CPU::SUB_A_B_Instruction(Memory* mem) {
   SetSUBFlags(&reg.F, reg.A, reg.B);
   reg.A = reg.A - reg.B;
-  reg.PC += 1;
 }
 
 void CPU::SUB_A_d8_Instruction(Memory* mem) {
   Byte value = mem->GetInAddr(reg.PC + 1);
   SetSUBFlags(&reg.F, reg.A, value);
   reg.A = reg.A - value;
-  reg.PC += 2;
+}
+
+void CPU::SUB_A_aHL_Instruction(Memory* mem) {
+  Address addr = utils::create_address_from_two_bytes(reg.H, reg.L);
+  Byte value = mem->GetInAddr(addr);
+  SetSUBFlags(&reg.F, reg.A, value);
+  reg.A = reg.A - value;
 }
 
 void CPU::SBC_A_C_Instruction(Memory* mem) {
