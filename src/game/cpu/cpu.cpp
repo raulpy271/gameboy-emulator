@@ -270,7 +270,7 @@ void CPU::execute_intruction(Memory* mem) {
     break;
 
   case (DEC_BC):
-    CPU::DEC_BC_Instruction(mem);
+    DEC_X_Y_MACRO(B, C)
     break;
 
   case (DEC_A):

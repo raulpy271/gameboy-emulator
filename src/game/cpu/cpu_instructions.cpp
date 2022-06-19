@@ -308,11 +308,6 @@ void CPU::INC_HL_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
-void CPU::DEC_BC_Instruction(Memory* mem) {
-  utils::decrement_registers_pair(&reg.B, &reg.C);
-  reg.PC += 1;
-}
-
 void CPU::DEC_A_Instruction(Memory* mem) {
   DEC_X_Instruction(&reg.A, &reg.F);
 }

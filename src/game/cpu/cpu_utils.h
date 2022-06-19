@@ -13,6 +13,8 @@
 
 #define SWAP_X_MACRO(X) SWAP_X_Instruction(&reg.F, &reg.X);
 
+#define DEC_X_Y_MACRO(X, Y) utils::decrement_registers_pair(&reg.X, &reg.Y);
+
 namespace gameboy {
 
 void INC_X_Instruction(Byte* X, Byte* F, Address* PC);
