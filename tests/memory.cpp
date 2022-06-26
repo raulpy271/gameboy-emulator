@@ -144,6 +144,22 @@ TEST(Memory, get_and_set_in_vram) {
   EXPECT_EQ(mem.GetInAddr(0x9FFF), 0x60);
 }
 
+TEST(Memory, forbids_write_in_ROM) {
+  Byte rom_data[32 * 1024] = {0};
+  gameboy::Memory mem;
+  mem.load_rom(rom_data);
+
+  EXPECT_EQ(mem.GetInAddr(0x0100), 0);
+
+  mem.SetInAddr(0x0100, 5);
+
+  EXPECT_EQ(mem.GetInAddr(0x0100), 0);
+
+  mem.SetInAddr(0x0100, 5, true);
+
+  EXPECT_EQ(mem.GetInAddr(0x0100), 5);
+}
+
 TEST(Memory, get_and_set_in_OAM) {
   gameboy::Memory mem;
 
@@ -186,11 +202,11 @@ TEST(Memory, get_and_set_in_cartridge_ram) {
 
 TEST(Memory, writing_to_DMA) {
   gameboy::Memory mem;
-  Address source = 0x3000;
-  Byte source_high_byte = 0x30;
+  Address source = 0x9000;
+  Byte source_high_byte = 0x90;
   Byte value_in_source = 0x5;
 
-  for (Address i = source; i <= 0x309F; i++) {
+  for (Address i = source; i <= 0x909F; i++) {
     mem.SetInAddr(i, value_in_source);
   }
 
@@ -203,10 +219,10 @@ TEST(Memory, writing_to_DMA) {
 
 TEST(Memory, writing_to_DMA_random_data) {
   gameboy::Memory mem;
-  Address source = 0x3000;
-  Byte source_high_byte = 0x30;
+  Address source = 0x8000;
+  Byte source_high_byte = 0x80;
 
-  for (Address i = source; i <= 0x309F; i++) {
+  for (Address i = source; i <= 0x809F; i++) {
     if (i % 2 == 0) {
       mem.SetInAddr(i, 2);
     } else {

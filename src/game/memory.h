@@ -29,7 +29,7 @@ class Memory {
 
   Byte GetInAddr(Address add);
 
-  void SetInAddr(Address add, Byte byte_to_insert);
+  void SetInAddr(Address add, Byte byte_to_insert, bool enable_writing_to_rom = false);
 
   void IncrementDivRegister();
 

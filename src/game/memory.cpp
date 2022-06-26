@@ -70,7 +70,7 @@ Byte Memory::GetInAddr(Address add) {
   }
 };
 
-void Memory::SetInAddr(Address add, Byte byte_to_insert) {
+void Memory::SetInAddr(Address add, Byte byte_to_insert, bool enable_writing_to_rom) /* enable_writing_to_rom = false */ {
   if (add == rP1) {
     IO_REG_and_HRAM_and_IE[add - 0xFF00] = keypad.WriteOnP1Register(byte_to_insert);
     return;
@@ -86,7 +86,11 @@ void Memory::SetInAddr(Address add, Byte byte_to_insert) {
   switch (Memory::choose_segment(add))
   {
   case MemorySegment::CARTRIDGE_ROM:
-    cartridge_ROM[add] = byte_to_insert;
+    if (enable_writing_to_rom) {
+      cartridge_ROM[add] = byte_to_insert;
+    } else {
+      std::cout << "Can't write in " << add << std::endl;
+    }
     return;
   case MemorySegment::CARTRIDGE_RAM:
     cartridge_RAM[add - 0xA000] = byte_to_insert;
