@@ -308,26 +308,6 @@ void CPU::INC_HL_Instruction(Memory* mem) {
   reg.PC += 1;
 }
 
-void CPU::DEC_A_Instruction(Memory* mem) {
-  DEC_X_Instruction(&reg.A, &reg.F);
-}
-
-void CPU::DEC_B_Instruction(Memory* mem) {
-  DEC_X_Instruction(&reg.B, &reg.F);
-}
-
-void CPU::DEC_C_Instruction(Memory* mem) {
-  DEC_X_Instruction(&reg.C, &reg.F);
-}
-
-void CPU::DEC_E_Instruction(Memory* mem) {
-  DEC_X_Instruction(&reg.E, &reg.F);
-}
-
-void CPU::DEC_L_Instruction(Memory* mem) {
-  DEC_X_Instruction(&reg.L, &reg.F);
-}
-
 void CPU::DEC_aHL_Instruction(Memory* mem) {
   Address addr = utils::create_address_from_two_bytes(reg.H, reg.L);
   Byte value = mem->GetInAddr(addr);
