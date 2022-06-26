@@ -10,6 +10,10 @@ A gameboy emulator written in C++ using [GTK+](https://www.gtk.org/) gui interfa
 
 # Screenshoots
 
+![Hello World screenshot](/assets/hello-world.png)
+
+![Tetris screenshot](/assets/tetris.png)
+
 # How to use
 
 # References
