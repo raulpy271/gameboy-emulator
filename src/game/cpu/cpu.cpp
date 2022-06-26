@@ -485,6 +485,10 @@ void CPU::execute_intruction(Memory* mem) {
     OR_X_Y_MACRO(A, B);
     break;
 
+  case (OR_A_D):
+    OR_X_Y_MACRO(A, D);
+    break;
+
   case (OR_A_d8):
     CPU::OR_A_d8_Instruction(mem);
     break;

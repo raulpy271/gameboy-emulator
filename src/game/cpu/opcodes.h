@@ -222,6 +222,8 @@
 
 #define OR_A_C 0xB1
 
+#define OR_A_D 0xB2
+
 #define OR_A_d8 0xF6
 
 #define XOR_A_A 0xAF
