@@ -10,7 +10,7 @@
 TEST(ArithmeticInstructions, XOR_A_C_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, XOR_A_C);
+  game.mem.SetInAddr(0x100, XOR_A_C, true);
   game.cpu.reg.A = 0b11100101;
   game.cpu.reg.C = 0b11010100;
 
@@ -27,7 +27,7 @@ TEST(ArithmeticInstructions, XOR_A_C_instruction) {
 TEST(ArithmeticInstructions, XOR_A_C_instruction_zero_flag) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, XOR_A_C);
+  game.mem.SetInAddr(0x100, XOR_A_C, true);
   game.cpu.reg.A = 0xf0;
   game.cpu.reg.C = 0xf0;
 
@@ -44,7 +44,7 @@ TEST(ArithmeticInstructions, XOR_A_C_instruction_zero_flag) {
 TEST(ArithmeticInstructions, XOR_A_A_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, XOR_A_A);
+  game.mem.SetInAddr(0x100, XOR_A_A, true);
   game.cpu.reg.A = 0b00000100;
 
   game.cpu.execute_intruction(&game.mem);
@@ -57,8 +57,8 @@ TEST(ArithmeticInstructions, XOR_A_A_instruction) {
 TEST(ArithmeticInstructions, XOR_A_d8_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, XOR_A_d8);
-  game.mem.SetInAddr(0x101, 0b11010100);
+  game.mem.SetInAddr(0x100, XOR_A_d8, true);
+  game.mem.SetInAddr(0x101, 0b11010100, true);
   game.cpu.reg.A = 0b11100101;
 
   game.cpu.execute_intruction(&game.mem);
@@ -74,7 +74,7 @@ TEST(ArithmeticInstructions, XOR_A_d8_instruction) {
 TEST(ArithmeticInstructions, OR_A_C_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, OR_A_C);
+  game.mem.SetInAddr(0x100, OR_A_C, true);
   game.cpu.reg.A = 0b00000100;
   game.cpu.reg.C = 0b01000101;
   game.cpu.reg.F = 0x0;
@@ -89,7 +89,7 @@ TEST(ArithmeticInstructions, OR_A_C_instruction) {
 TEST(ArithmeticInstructions, OR_A_C_instruction_affect_zero_flag) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, OR_A_C);
+  game.mem.SetInAddr(0x100, OR_A_C, true);
   game.cpu.reg.A = 0x0;
   game.cpu.reg.C = 0x0;
   game.cpu.reg.F = 0x0;
@@ -104,7 +104,7 @@ TEST(ArithmeticInstructions, OR_A_C_instruction_affect_zero_flag) {
 TEST(ArithmeticInstructions, OR_A_B_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, OR_A_B);
+  game.mem.SetInAddr(0x100, OR_A_B, true);
   game.cpu.reg.A = 0b00000100;
   game.cpu.reg.B = 0b01000101;
   game.cpu.reg.F = 0x0;
@@ -119,7 +119,7 @@ TEST(ArithmeticInstructions, OR_A_B_instruction) {
 TEST(ArithmeticInstructions, OR_A_B_instruction_affect_zero_flag) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, OR_A_B);
+  game.mem.SetInAddr(0x100, OR_A_B, true);
   game.cpu.reg.A = 0x0;
   game.cpu.reg.B = 0x0;
   game.cpu.reg.F = 0x0;
@@ -134,8 +134,8 @@ TEST(ArithmeticInstructions, OR_A_B_instruction_affect_zero_flag) {
 TEST(ArithmeticInstructions, OR_A_d8_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, OR_A_d8);
-  game.mem.SetInAddr(0x101, 0b01000101);
+  game.mem.SetInAddr(0x100, OR_A_d8, true);
+  game.mem.SetInAddr(0x101, 0b01000101, true);
   game.cpu.reg.A = 0b00000100;
   game.cpu.reg.F = 0x0;
 
@@ -149,7 +149,7 @@ TEST(ArithmeticInstructions, OR_A_d8_instruction) {
 TEST(ArithmeticInstructions, AND_A_A_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, AND_A_A);
+  game.mem.SetInAddr(0x100, AND_A_A, true);
   game.cpu.reg.A = 0b00000100;
   game.cpu.reg.F = 0x0;
 
@@ -166,7 +166,7 @@ TEST(ArithmeticInstructions, AND_A_A_instruction) {
 TEST(ArithmeticInstructions, AND_A_C_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, AND_A_C);
+  game.mem.SetInAddr(0x100, AND_A_C, true);
   game.cpu.reg.A = 0b11000100;
   game.cpu.reg.C = 0b10100100;
 
@@ -183,8 +183,8 @@ TEST(ArithmeticInstructions, AND_A_C_instruction) {
 TEST(ArithmeticInstructions, AND_A_d8_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, AND_A_d8);
-  game.mem.SetInAddr(0x101, 0b10111010);
+  game.mem.SetInAddr(0x100, AND_A_d8, true);
+  game.mem.SetInAddr(0x101, 0b10111010, true);
   game.cpu.reg.A = 0b00100111;
   game.cpu.reg.F = 0x0;
 
@@ -201,8 +201,8 @@ TEST(ArithmeticInstructions, AND_A_d8_instruction) {
 TEST(ArithmeticInstructions, AND_A_d8_instruction_zero_flag) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, AND_A_d8);
-  game.mem.SetInAddr(0x101, 0b11110000);
+  game.mem.SetInAddr(0x100, AND_A_d8, true);
+  game.mem.SetInAddr(0x101, 0b11110000, true);
   game.cpu.reg.A = 0b00001111;
   game.cpu.reg.F = 0x0;
 
@@ -219,8 +219,8 @@ TEST(ArithmeticInstructions, AND_A_d8_instruction_zero_flag) {
 TEST(ArithmeticInstructions, ADD_A_A_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADD_A_A);
-  game.mem.SetInAddr(0x101, ADD_A_A);
+  game.mem.SetInAddr(0x100, ADD_A_A, true);
+  game.mem.SetInAddr(0x101, ADD_A_A, true);
   game.cpu.reg.A = 0x20;
 
   game.cpu.execute_intruction(&game.mem);
@@ -241,8 +241,8 @@ TEST(ArithmeticInstructions, ADD_A_A_instruction) {
 TEST(ArithmeticInstructions, ADD_A_B_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADD_A_B);
-  game.mem.SetInAddr(0x101, ADD_A_B);
+  game.mem.SetInAddr(0x100, ADD_A_B, true);
+  game.mem.SetInAddr(0x101, ADD_A_B, true);
   game.cpu.reg.A = 0x20;
   game.cpu.reg.B = 0xa0;
 
@@ -265,8 +265,8 @@ TEST(ArithmeticInstructions, ADD_A_B_instruction) {
 TEST(ArithmeticInstructions, ADD_A_B_instruction_carry_flag) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADD_A_B);
-  game.mem.SetInAddr(0x101, ADD_A_B);
+  game.mem.SetInAddr(0x100, ADD_A_B, true);
+  game.mem.SetInAddr(0x101, ADD_A_B, true);
   game.cpu.reg.A = 0xf0;
   game.cpu.reg.B = 0xc0;
 
@@ -287,8 +287,8 @@ TEST(ArithmeticInstructions, ADD_A_B_instruction_carry_flag) {
 TEST(ArithmeticInstructions, ADD_A_B_instruction_half_carry_flag) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADD_A_B);
-  game.mem.SetInAddr(0x101, ADD_A_B);
+  game.mem.SetInAddr(0x100, ADD_A_B, true);
+  game.mem.SetInAddr(0x101, ADD_A_B, true);
   game.cpu.reg.A = 0xf0;
   game.cpu.reg.B = 0x01;
 
@@ -309,7 +309,7 @@ TEST(ArithmeticInstructions, ADD_A_B_instruction_half_carry_flag) {
 TEST(ArithmeticInstructions, ADD_A_D_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADD_A_D);
+  game.mem.SetInAddr(0x100, ADD_A_D, true);
   game.cpu.reg.A = 0x20;
   game.cpu.reg.D = 0x10;
 
@@ -323,7 +323,7 @@ TEST(ArithmeticInstructions, ADD_A_D_instruction) {
 TEST(ArithmeticInstructions, ADC_A_C_instruction_carry_not_set) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADC_A_C);
+  game.mem.SetInAddr(0x100, ADC_A_C, true);
   game.cpu.reg.A = 0b0010;
   game.cpu.reg.C = 0b0100;
   game.cpu.reg.F = 0;
@@ -339,7 +339,7 @@ TEST(ArithmeticInstructions, ADC_A_C_instruction_carry_not_set) {
 TEST(ArithmeticInstructions, ADC_A_C_instruction_carry_set) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADC_A_C);
+  game.mem.SetInAddr(0x100, ADC_A_C, true);
   game.cpu.reg.A = 0b1000;
   game.cpu.reg.C = 0b0111;
   game.cpu.reg.F = 0;
@@ -357,8 +357,8 @@ TEST(ArithmeticInstructions, ADC_A_C_instruction_carry_set) {
 TEST(ArithmeticInstructions, ADD_A_L_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADD_A_L);
-  game.mem.SetInAddr(0x101, ADD_A_L);
+  game.mem.SetInAddr(0x100, ADD_A_L, true);
+  game.mem.SetInAddr(0x101, ADD_A_L, true);
   game.cpu.reg.A = 0x20;
   game.cpu.reg.L = 0xa0;
 
@@ -381,8 +381,8 @@ TEST(ArithmeticInstructions, ADD_A_L_instruction) {
 TEST(ArithmeticInstructions, ADD_A_d8_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADD_A_d8);
-  game.mem.SetInAddr(0x101, 0x5);
+  game.mem.SetInAddr(0x100, ADD_A_d8, true);
+  game.mem.SetInAddr(0x101, 0x5, true);
   game.cpu.reg.A = 0x0f;
 
   game.cpu.execute_intruction(&game.mem);
@@ -395,7 +395,7 @@ TEST(ArithmeticInstructions, ADD_A_d8_instruction) {
 TEST(ArithmeticInstructions, SUB_A_B_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, SUB_A_B);
+  game.mem.SetInAddr(0x100, SUB_A_B, true);
   game.cpu.reg.A = 0x9;
   game.cpu.reg.B = 0x5;
 
@@ -410,8 +410,8 @@ TEST(ArithmeticInstructions, SUB_A_B_instruction) {
 TEST(ArithmeticInstructions, SUB_A_B_instruction_zero_flag) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, SUB_A_B);
-  game.mem.SetInAddr(0x101, SUB_A_B);
+  game.mem.SetInAddr(0x100, SUB_A_B, true);
+  game.mem.SetInAddr(0x101, SUB_A_B, true);
   game.cpu.reg.A = 0x8;
   game.cpu.reg.B = 0x4;
 
@@ -430,8 +430,8 @@ TEST(ArithmeticInstructions, SUB_A_B_instruction_zero_flag) {
 TEST(ArithmeticInstructions, SUB_A_B_instruction_carry_flag) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, SUB_A_B);
-  game.mem.SetInAddr(0x101, SUB_A_B);
+  game.mem.SetInAddr(0x100, SUB_A_B, true);
+  game.mem.SetInAddr(0x101, SUB_A_B, true);
   game.cpu.reg.A = 0x8;
   game.cpu.reg.B = 0x5;
 
@@ -450,8 +450,8 @@ TEST(ArithmeticInstructions, SUB_A_B_instruction_half_carry_flag) {
   gameboy::Console game;
   Byte expected_result;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, SUB_A_B);
-  game.mem.SetInAddr(0x101, SUB_A_B);
+  game.mem.SetInAddr(0x100, SUB_A_B, true);
+  game.mem.SetInAddr(0x101, SUB_A_B, true);
   game.cpu.reg.A = 0b00001000;
   game.cpu.reg.B = 0b00000100;
   expected_result = game.cpu.reg.A - game.cpu.reg.B;
@@ -473,8 +473,8 @@ TEST(ArithmeticInstructions, SUB_A_B_instruction_half_carry_flag) {
 TEST(ArithmeticInstructions, SUB_A_d8_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, SUB_A_d8);
-  game.mem.SetInAddr(0x101, 5);
+  game.mem.SetInAddr(0x100, SUB_A_d8, true);
+  game.mem.SetInAddr(0x101, 5, true);
   game.cpu.reg.A = 0xfa;
 
   game.cpu.execute_intruction(&game.mem);
@@ -487,10 +487,10 @@ TEST(ArithmeticInstructions, SUB_A_d8_instruction) {
 TEST(ArithmeticInstructions, SUB_A_aHL_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, SUB_A_aHL);
-  game.mem.SetInAddr(0x0105, 0x5);
+  game.mem.SetInAddr(0x100, SUB_A_aHL, true);
+  game.mem.SetInAddr(0x8105, 0x5);
   game.cpu.reg.A = 0xfa;
-  game.cpu.reg.H = 0x01;
+  game.cpu.reg.H = 0x81;
   game.cpu.reg.L = 0x05;
 
   game.cpu.execute_intruction(&game.mem);
@@ -503,7 +503,7 @@ TEST(ArithmeticInstructions, SUB_A_aHL_instruction) {
 TEST(ArithmeticInstructions, SBC_A_C_instruction_carry_flag_not_set) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, SBC_A_C);
+  game.mem.SetInAddr(0x100, SBC_A_C, true);
   game.cpu.reg.A = 10;
   game.cpu.reg.C = 5;
   utils::set_carry_flag(&game.cpu.reg.F, false);
@@ -521,7 +521,7 @@ TEST(ArithmeticInstructions, SBC_A_C_instruction_carry_flag_not_set) {
 TEST(ArithmeticInstructions, SBC_A_C_instruction_carry_flag_set) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, SBC_A_C);
+  game.mem.SetInAddr(0x100, SBC_A_C, true);
   game.cpu.reg.A = 10;
   game.cpu.reg.C = 5;
   utils::set_carry_flag(&game.cpu.reg.F, true);
@@ -539,7 +539,7 @@ TEST(ArithmeticInstructions, SBC_A_C_instruction_carry_flag_set) {
 TEST(ArithmeticInstructions, SBC_A_C_instruction_setting_half_carry) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, SBC_A_C);
+  game.mem.SetInAddr(0x100, SBC_A_C, true);
   game.cpu.reg.A = 0b00001000;
   game.cpu.reg.C = 0b00001000;
   utils::set_carry_flag(&game.cpu.reg.F, true);
@@ -557,8 +557,8 @@ TEST(ArithmeticInstructions, SBC_A_C_instruction_setting_half_carry) {
 TEST(ArithmeticInstructions, SBC_A_d8_instruction_carry_flag_not_set) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, SBC_A_d8);
-  game.mem.SetInAddr(0x101, 5);
+  game.mem.SetInAddr(0x100, SBC_A_d8, true);
+  game.mem.SetInAddr(0x101, 5, true);
   game.cpu.reg.A = 10;
   utils::set_carry_flag(&game.cpu.reg.F, false);
 
@@ -575,7 +575,7 @@ TEST(ArithmeticInstructions, SBC_A_d8_instruction_carry_flag_not_set) {
 TEST(ArithmeticInstructions, ADD_HL_BC_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADD_HL_BC);
+  game.mem.SetInAddr(0x100, ADD_HL_BC, true);
   game.cpu.reg.H = 0x20;
   game.cpu.reg.L = 0x01;
 
@@ -610,7 +610,7 @@ TEST(ArithmeticInstructions, ADD_HL_BC_instruction) {
 TEST(ArithmeticInstructions, ADD_HL_BC_instruction_overflow) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADD_HL_BC);
+  game.mem.SetInAddr(0x100, ADD_HL_BC, true);
   game.cpu.reg.H = 0xff;
   game.cpu.reg.L = 0x01;
 
@@ -630,7 +630,7 @@ TEST(ArithmeticInstructions, ADD_HL_BC_instruction_overflow) {
 TEST(ArithmeticInstructions, ADD_HL_BC_instruction_half_carry) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADD_HL_BC);
+  game.mem.SetInAddr(0x100, ADD_HL_BC, true);
   game.cpu.reg.H = 0x0f;
   game.cpu.reg.L = 0x00;
 
@@ -650,7 +650,7 @@ TEST(ArithmeticInstructions, ADD_HL_BC_instruction_half_carry) {
 TEST(ArithmeticInstructions, ADD_HL_DE_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADD_HL_DE);
+  game.mem.SetInAddr(0x100, ADD_HL_DE, true);
   game.cpu.reg.H = 0x20;
   game.cpu.reg.L = 0x01;
 
@@ -670,7 +670,7 @@ TEST(ArithmeticInstructions, ADD_HL_DE_instruction) {
 TEST(ArithmeticInstructions, ADD_HL_DE_instruction_half_carry) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, ADD_HL_DE);
+  game.mem.SetInAddr(0x100, ADD_HL_DE, true);
   game.cpu.reg.H = 0x0f;
   game.cpu.reg.L = 0x00;
 
@@ -690,8 +690,8 @@ TEST(ArithmeticInstructions, ADD_HL_DE_instruction_half_carry) {
 TEST(ArithmeticInstructions, INC_A_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_A);
-  game.mem.SetInAddr(0x101, INC_A);
+  game.mem.SetInAddr(0x100, INC_A, true);
+  game.mem.SetInAddr(0x101, INC_A, true);
   game.cpu.reg.A = 0xfe;
   game.cpu.reg.F = 0;
 
@@ -707,8 +707,8 @@ TEST(ArithmeticInstructions, INC_A_instruction) {
 TEST(ArithmeticInstructions, INC_A_instruction_flags) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_A);
-  game.mem.SetInAddr(0x101, INC_A);
+  game.mem.SetInAddr(0x100, INC_A, true);
+  game.mem.SetInAddr(0x101, INC_A, true);
   game.cpu.reg.A = 0b00001111;
   game.cpu.reg.F = 0;
 
@@ -733,8 +733,8 @@ TEST(ArithmeticInstructions, INC_A_instruction_flags) {
 TEST(ArithmeticInstructions, INC_B_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_B);
-  game.mem.SetInAddr(0x101, INC_B);
+  game.mem.SetInAddr(0x100, INC_B, true);
+  game.mem.SetInAddr(0x101, INC_B, true);
   game.cpu.reg.B = 0xfe;
   game.cpu.reg.F = 0;
 
@@ -750,8 +750,8 @@ TEST(ArithmeticInstructions, INC_B_instruction) {
 TEST(ArithmeticInstructions, INC_B_instruction_flags) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_B);
-  game.mem.SetInAddr(0x101, INC_B);
+  game.mem.SetInAddr(0x100, INC_B, true);
+  game.mem.SetInAddr(0x101, INC_B, true);
   game.cpu.reg.B = 0b00001111;
   game.cpu.reg.F = 0;
 
@@ -776,7 +776,7 @@ TEST(ArithmeticInstructions, INC_B_instruction_flags) {
 TEST(ArithmeticInstructions, INC_C_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_C);
+  game.mem.SetInAddr(0x100, INC_C, true);
   game.cpu.reg.C = 0b00001111;
   game.cpu.reg.F = 0;
 
@@ -792,7 +792,7 @@ TEST(ArithmeticInstructions, INC_C_instruction) {
 TEST(ArithmeticInstructions, INC_D_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_D);
+  game.mem.SetInAddr(0x100, INC_D, true);
   game.cpu.reg.D = 0b00001111;
   game.cpu.reg.F = 0;
 
@@ -808,7 +808,7 @@ TEST(ArithmeticInstructions, INC_D_instruction) {
 TEST(ArithmeticInstructions, INC_E_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_E);
+  game.mem.SetInAddr(0x100, INC_E, true);
   game.cpu.reg.E = 0b00001111;
   game.cpu.reg.F = 0;
 
@@ -824,7 +824,7 @@ TEST(ArithmeticInstructions, INC_E_instruction) {
 TEST(ArithmeticInstructions, INC_H_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_H);
+  game.mem.SetInAddr(0x100, INC_H, true);
   game.cpu.reg.H = 0b00001111;
   game.cpu.reg.F = 0;
 
@@ -840,7 +840,7 @@ TEST(ArithmeticInstructions, INC_H_instruction) {
 TEST(ArithmeticInstructions, INC_L_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_L);
+  game.mem.SetInAddr(0x100, INC_L, true);
   game.cpu.reg.L = 0b00001111;
   game.cpu.reg.F = 0;
 
@@ -856,15 +856,15 @@ TEST(ArithmeticInstructions, INC_L_instruction) {
 TEST(ArithmeticInstructions, INC_aHL_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_aHL);
-  game.mem.SetInAddr(0x150, 0b00001111);
-  game.cpu.reg.H = 0x01;
+  game.mem.SetInAddr(0x100, INC_aHL, true);
+  game.mem.SetInAddr(0x8850, 0b00001111, true);
+  game.cpu.reg.H = 0x88;
   game.cpu.reg.L = 0x50;
   game.cpu.reg.F = 0;
 
   game.cpu.execute_intruction(&game.mem);
 
-  EXPECT_EQ(game.mem.GetInAddr(0x150), 0b00010000);
+  EXPECT_EQ(game.mem.GetInAddr(0x8850), 0b00010000);
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
   EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), false);
   EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), false);
@@ -874,15 +874,15 @@ TEST(ArithmeticInstructions, INC_aHL_instruction) {
 TEST(ArithmeticInstructions, INC_aHL_instruction_flags) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_aHL);
-  game.mem.SetInAddr(0x150, 0b11111111);
-  game.cpu.reg.H = 0x01;
+  game.mem.SetInAddr(0x100, INC_aHL, true);
+  game.mem.SetInAddr(0x8850, 0b11111111, true);
+  game.cpu.reg.H = 0x88;
   game.cpu.reg.L = 0x50;
   game.cpu.reg.F = 0;
 
   game.cpu.execute_intruction(&game.mem);
 
-  EXPECT_EQ(game.mem.GetInAddr(0x150), 0);
+  EXPECT_EQ(game.mem.GetInAddr(0x8850), 0);
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
   EXPECT_EQ(utils::zero_flag(&game.cpu.reg.F), true);
   EXPECT_EQ(utils::subtract_flag(&game.cpu.reg.F), false);
@@ -892,8 +892,8 @@ TEST(ArithmeticInstructions, INC_aHL_instruction_flags) {
 TEST(ArithmeticInstructions, INC_BC_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_BC);
-  game.mem.SetInAddr(0x101, INC_BC);
+  game.mem.SetInAddr(0x100, INC_BC, true);
+  game.mem.SetInAddr(0x101, INC_BC, true);
   game.cpu.reg.B = 0x01;
   game.cpu.reg.C = 0xff;
   game.cpu.execute_intruction(&game.mem);
@@ -912,8 +912,8 @@ TEST(ArithmeticInstructions, INC_BC_instruction) {
 TEST(ArithmeticInstructions, INC_DE_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_DE);
-  game.mem.SetInAddr(0x101, INC_DE);
+  game.mem.SetInAddr(0x100, INC_DE, true);
+  game.mem.SetInAddr(0x101, INC_DE, true);
   game.cpu.reg.D = 0x01;
   game.cpu.reg.E = 0xff;
   game.cpu.execute_intruction(&game.mem);
@@ -932,8 +932,8 @@ TEST(ArithmeticInstructions, INC_DE_instruction) {
 TEST(ArithmeticInstructions, INC_HL_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, INC_HL);
-  game.mem.SetInAddr(0x101, INC_HL);
+  game.mem.SetInAddr(0x100, INC_HL, true);
+  game.mem.SetInAddr(0x101, INC_HL, true);
   game.cpu.reg.H = 0x01;
   game.cpu.reg.L = 0xff;
 
@@ -953,8 +953,8 @@ TEST(ArithmeticInstructions, INC_HL_instruction) {
 TEST(ArithmeticInstructions, DEC_BC_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, DEC_BC);
-  game.mem.SetInAddr(0x101, DEC_BC);
+  game.mem.SetInAddr(0x100, DEC_BC, true);
+  game.mem.SetInAddr(0x101, DEC_BC, true);
   game.cpu.reg.B = 0x01;
   game.cpu.reg.C = 0x01;
   game.cpu.execute_intruction(&game.mem);
@@ -973,7 +973,7 @@ TEST(ArithmeticInstructions, DEC_BC_instruction) {
 TEST(ArithmeticInstructions, DEC_DE_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, DEC_DE);
+  game.mem.SetInAddr(0x100, DEC_DE, true);
   game.cpu.reg.D = 0x01;
   game.cpu.reg.E = 0x01;
 
@@ -987,7 +987,7 @@ TEST(ArithmeticInstructions, DEC_DE_instruction) {
 TEST(ArithmeticInstructions, DEC_HL_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, DEC_HL);
+  game.mem.SetInAddr(0x100, DEC_HL, true);
   game.cpu.reg.H = 0x01;
   game.cpu.reg.L = 0x01;
 
@@ -1001,8 +1001,8 @@ TEST(ArithmeticInstructions, DEC_HL_instruction) {
 TEST(ArithmeticInstructions, DEC_A_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, DEC_A);
-  game.mem.SetInAddr(0x101, DEC_A);
+  game.mem.SetInAddr(0x100, DEC_A, true);
+  game.mem.SetInAddr(0x101, DEC_A, true);
   game.cpu.reg.A = 0x02;
   game.cpu.reg.F = 0x0;
   game.cpu.execute_intruction(&game.mem);
@@ -1024,7 +1024,7 @@ TEST(ArithmeticInstructions, DEC_A_instruction) {
 TEST(ArithmeticInstructions, DEC_A_half_carry_set) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, DEC_A);
+  game.mem.SetInAddr(0x100, DEC_A, true);
   game.cpu.reg.A = 0b00100000;
   game.cpu.reg.F = 0x0;
   game.cpu.execute_intruction(&game.mem);
@@ -1039,8 +1039,8 @@ TEST(ArithmeticInstructions, DEC_A_half_carry_set) {
 TEST(ArithmeticInstructions, DEC_B_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, DEC_B);
-  game.mem.SetInAddr(0x101, DEC_B);
+  game.mem.SetInAddr(0x100, DEC_B, true);
+  game.mem.SetInAddr(0x101, DEC_B, true);
   game.cpu.reg.B = 0x02;
   game.cpu.reg.F = 0x0;
   game.cpu.execute_intruction(&game.mem);
@@ -1062,8 +1062,8 @@ TEST(ArithmeticInstructions, DEC_B_instruction) {
 TEST(ArithmeticInstructions, DEC_C_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, DEC_C);
-  game.mem.SetInAddr(0x101, DEC_C);
+  game.mem.SetInAddr(0x100, DEC_C, true);
+  game.mem.SetInAddr(0x101, DEC_C, true);
   game.cpu.reg.C = 0x02;
   game.cpu.reg.F = 0x0;
   game.cpu.execute_intruction(&game.mem);
@@ -1088,8 +1088,8 @@ TEST(ArithmeticInstructions, DEC_C_instruction) {
 TEST(ArithmeticInstructions, DEC_E_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, DEC_E);
-  game.mem.SetInAddr(0x101, DEC_E);
+  game.mem.SetInAddr(0x100, DEC_E, true);
+  game.mem.SetInAddr(0x101, DEC_E, true);
   game.cpu.reg.E = 0x02;
   game.cpu.reg.F = 0x0;
   game.cpu.execute_intruction(&game.mem);
@@ -1114,7 +1114,7 @@ TEST(ArithmeticInstructions, DEC_E_instruction) {
 TEST(ArithmeticInstructions, DEC_C_half_carry_set) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, DEC_C);
+  game.mem.SetInAddr(0x100, DEC_C, true);
   game.cpu.reg.C = 0b00100000;
   game.cpu.reg.F = 0x0;
   game.cpu.execute_intruction(&game.mem);
@@ -1129,8 +1129,8 @@ TEST(ArithmeticInstructions, DEC_C_half_carry_set) {
 TEST(ArithmeticInstructions, DEC_aHL_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, DEC_aHL);
-  game.mem.SetInAddr(0x101, DEC_aHL);
+  game.mem.SetInAddr(0x100, DEC_aHL, true);
+  game.mem.SetInAddr(0x101, DEC_aHL, true);
   game.mem.SetInAddr(0xFE00, 0x2);
   game.cpu.reg.F = 0x0;
   game.cpu.reg.H = 0xFE;
@@ -1158,8 +1158,8 @@ TEST(ArithmeticInstructions, DEC_aHL_instruction) {
 TEST(ArithmeticInstructions, DEC_L_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, DEC_L);
-  game.mem.SetInAddr(0x101, DEC_L);
+  game.mem.SetInAddr(0x100, DEC_L, true);
+  game.mem.SetInAddr(0x101, DEC_L, true);
   game.cpu.reg.L = 0x02;
   game.cpu.reg.F = 0x0;
   game.cpu.execute_intruction(&game.mem);
@@ -1184,7 +1184,7 @@ TEST(ArithmeticInstructions, DEC_L_instruction) {
 TEST(ArithmeticInstructions, DEC_aHL_half_carry_set) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, DEC_aHL);
+  game.mem.SetInAddr(0x100, DEC_aHL, true);
   game.mem.SetInAddr(0xFE00, 0b00100000);
   game.cpu.reg.F = 0x0;
   game.cpu.reg.H = 0xFE;
