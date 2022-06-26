@@ -17,11 +17,15 @@
 
 #define DEC_X_MACRO(X) DEC_X_Instruction(&reg.X, &reg.F);
 
+#define OR_X_Y_MACRO(X, Y) OR_X_Y_Instruction(&reg.X, &reg.Y, &reg.F);
+
 namespace gameboy {
 
 void INC_X_Instruction(Byte* X, Byte* F, Address* PC);
 
 void DEC_X_Instruction(Byte* X, Byte* F);
+
+void OR_X_Y_Instruction(Byte* X, Byte* Y, Byte* F);
 
 void ADD_X_Y_Instruction(Byte* X, Byte* Y, Byte* F);
 

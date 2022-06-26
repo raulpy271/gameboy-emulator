@@ -29,6 +29,14 @@ void DEC_X_Instruction(Byte* X, Byte* F) {
   utils::set_zero_flag(F, !((bool)(*X)));
 }
 
+void OR_X_Y_Instruction(Byte* X,Byte* Y, Byte* F) {
+  *X = (*X) | (*Y);
+  *F = 0x0;
+  if ((*X) == 0) {
+    utils::set_zero_flag(F, true);
+  }
+}
+
 void ADD_X_Y_Instruction(Byte* X, Byte* Y, Byte* F) {
   *F = 0;
   if (*X + *Y > 0xff) {

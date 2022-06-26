@@ -544,32 +544,9 @@ void CPU::AND_A_d8_Instruction(Memory* mem) {
   reg.PC += 2;
 }
 
-void CPU::OR_A_B_Instruction(Memory* mem) {
-  reg.A = reg.A | reg.B;
-  reg.F = 0x0;
-  if (reg.A == 0) {
-    utils::set_zero_flag(&reg.F, true);
-  }
-  reg.PC += 1;
-}
-
-void CPU::OR_A_C_Instruction(Memory* mem) {
-  reg.A = reg.A | reg.C;
-  reg.F = 0x0;
-  if (reg.A == 0) {
-    utils::set_zero_flag(&reg.F, true);
-  }
-  reg.PC += 1;
-}
-
 void CPU::OR_A_d8_Instruction(Memory* mem) {
   Byte value = mem->GetInAddr(reg.PC + 1);
-  reg.A = reg.A | value;
-  reg.F = 0x0;
-  if (reg.A == 0) {
-    utils::set_zero_flag(&reg.F, true);
-  }
-  reg.PC += 2;
+  OR_X_Y_Instruction(&reg.A, &value, &reg.F);
 }
 
 void CPU::XOR_A_A_Instruction(Memory* mem) {

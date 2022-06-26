@@ -478,11 +478,11 @@ void CPU::execute_intruction(Memory* mem) {
     break;
 
   case (OR_A_C):
-    CPU::OR_A_C_Instruction(mem);
+    OR_X_Y_MACRO(A, C);
     break;
 
   case (OR_A_B):
-    CPU::OR_A_B_Instruction(mem);
+    OR_X_Y_MACRO(A, B);
     break;
 
   case (OR_A_d8):
