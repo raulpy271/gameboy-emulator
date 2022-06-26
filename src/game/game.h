@@ -24,8 +24,6 @@ class Console {
 
   void run_a_instruction_cycle();
 
-  void load_rom(Byte* rom);
-
   void HandleBottonEvent(Botton botton, BottonEventType type);
 
   void ScanLineAndSTATInterruptions();

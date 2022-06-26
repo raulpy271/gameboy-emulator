@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     auto app = Gtk::Application::create("org.gameboy-emulator.base");
     gameboy::Console game;
     game.initialize_registers();
-    game.load_rom(rom_data);
+    game.mem.load_rom(rom_data);
     GameBoyWindow window(&game);
     return app->run(window);
   } else {

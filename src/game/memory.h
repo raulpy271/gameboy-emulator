@@ -25,6 +25,8 @@ class Memory {
 
   Keypad keypad;
 
+  void load_rom(Byte* rom);
+
   Byte GetInAddr(Address add);
 
   void SetInAddr(Address add, Byte byte_to_insert);

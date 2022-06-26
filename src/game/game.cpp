@@ -89,12 +89,6 @@ void Console::run_a_instruction_cycle() {
   }
 }
 
-void Console::load_rom(Byte* rom) {
-  for (int i = 0; i < (32 * 1024); i++) {
-    mem.SetInAddr(i, rom[i]);
-  }
-}
-
 void Console::HandleBottonEvent(Botton botton, BottonEventType type) {
   if (type == BottonEventType::PRESS) {
     mem.keypad.PressBotton(botton);

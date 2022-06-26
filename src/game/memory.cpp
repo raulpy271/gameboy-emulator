@@ -9,6 +9,13 @@
 
 namespace gameboy {
 
+void Memory::load_rom(Byte* rom) {
+  for (int i = 0; i < (32 * 1024); i++) {
+    cartridge_ROM[i] = rom[i];
+  }
+}
+
+
 MemorySegment Memory::choose_segment(Address add) {
   if (add < 0x8000) {
     return MemorySegment::CARTRIDGE_ROM;
