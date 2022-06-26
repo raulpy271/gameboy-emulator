@@ -116,6 +116,8 @@
 
 #define DEC_E 0x1D
 
+#define DEC_H 0x25
+
 #define DEC_L 0x2D
 
 #define DEC_aHL 0x35

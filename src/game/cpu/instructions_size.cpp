@@ -21,6 +21,7 @@ InstructionsSize::InstructionsSize() : instructions{0} {
   instructions[DEC_B] = 1;
   instructions[DEC_C] = 1;
   instructions[DEC_E] = 1;
+  instructions[DEC_H] = 1;
   instructions[DEC_L] = 1;
   instructions[DEC_BC] = 1;
   instructions[DEC_DE] = 1;

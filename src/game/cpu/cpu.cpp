@@ -282,23 +282,27 @@ void CPU::execute_intruction(Memory* mem) {
     break;
 
   case (DEC_A):
-    CPU::DEC_A_Instruction(mem);
+    DEC_X_MACRO(A);
     break;
 
   case (DEC_B):
-    CPU::DEC_B_Instruction(mem);
+    DEC_X_MACRO(B);
     break;
 
   case (DEC_C):
-    CPU::DEC_C_Instruction(mem);
+    DEC_X_MACRO(C);
     break;
 
   case (DEC_E):
-    CPU::DEC_E_Instruction(mem);
+    DEC_X_MACRO(E);
+    break;
+
+  case (DEC_H):
+    DEC_X_MACRO(H);
     break;
 
   case (DEC_L):
-    CPU::DEC_L_Instruction(mem);
+    DEC_X_MACRO(L);
     break;
 
   case (DEC_aHL):

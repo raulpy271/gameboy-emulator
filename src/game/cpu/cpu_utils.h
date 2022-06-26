@@ -15,6 +15,8 @@
 
 #define DEC_X_Y_MACRO(X, Y) utils::decrement_registers_pair(&reg.X, &reg.Y);
 
+#define DEC_X_MACRO(X) DEC_X_Instruction(&reg.X, &reg.F);
+
 namespace gameboy {
 
 void INC_X_Instruction(Byte* X, Byte* F, Address* PC);
