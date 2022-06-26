@@ -10,7 +10,7 @@
 TEST(Interrupts, IE_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, IE);
+  game.mem.SetInAddr(0x100, IE, true);
   game.cpu.execute_intruction(&game.mem);
 
   EXPECT_EQ(game.cpu.reg.PC, 0x101);
@@ -20,8 +20,8 @@ TEST(Interrupts, IE_instruction) {
 TEST(Interrupts, DI_instruction) {
   gameboy::Console game;
   game.initialize_registers();
-  game.mem.SetInAddr(0x100, IE);
-  game.mem.SetInAddr(0x101, DI);
+  game.mem.SetInAddr(0x100, IE, true);
+  game.mem.SetInAddr(0x101, DI, true);
 
   game.cpu.execute_intruction(&game.mem);
   game.cpu.execute_intruction(&game.mem);
@@ -47,7 +47,7 @@ TEST(Interrupts, get_next_interrupt) {
   game.initialize_registers();
   game.mem.SetInAddr(rIF, 0b00000010);
   game.mem.SetInAddr(rIE, 0b00000010);
-  game.mem.SetInAddr(0x100, IE);
+  game.mem.SetInAddr(0x100, IE, true);
   game.run_a_instruction_cycle();
 
   interrupt = game.cpu.GetNextInterrupt(&game.mem);
@@ -67,7 +67,7 @@ TEST(Interrupts, get_next_interrupt_without_interrupt_enable) {
   game.initialize_registers();
   game.mem.SetInAddr(rIF, 0b00000001);
   game.mem.SetInAddr(rIE, 0b00000010);
-  game.mem.SetInAddr(0x100, IE);
+  game.mem.SetInAddr(0x100, IE, true);
 
   game.run_a_instruction_cycle();
 
@@ -83,11 +83,11 @@ TEST(Interrupts, vblank_handling) {
   Address old_sp = game.cpu.reg.SP;
   game.cpu.reg.A = 0x00;
   game.cpu.reg.C = 0x10;
-  game.mem.SetInAddr(vblank_addr + 0, LD_A_C);
-  game.mem.SetInAddr(vblank_addr + 1, RET);
+  game.mem.SetInAddr(vblank_addr + 0, LD_A_C, true);
+  game.mem.SetInAddr(vblank_addr + 1, RET, true);
   game.mem.SetInAddr(rIF, 0b00000001);
   game.mem.SetInAddr(rIE, 0b00000001);
-  game.mem.SetInAddr(0x100, IE);
+  game.mem.SetInAddr(0x100, IE, true);
 
   game.run_a_instruction_cycle();
 
@@ -116,11 +116,11 @@ TEST(Interrupts, RETI_instruction) {
   Address old_sp = game.cpu.reg.SP;
   game.cpu.reg.A = 0x00;
   game.cpu.reg.C = 0x10;
-  game.mem.SetInAddr(vblank_addr + 0, LD_A_C);
-  game.mem.SetInAddr(vblank_addr + 1, RETI);
+  game.mem.SetInAddr(vblank_addr + 0, LD_A_C, true);
+  game.mem.SetInAddr(vblank_addr + 1, RETI, true);
   game.mem.SetInAddr(rIF, 0b00000001);
   game.mem.SetInAddr(rIE, 0b00000001);
-  game.mem.SetInAddr(0x100, IE);
+  game.mem.SetInAddr(0x100, IE, true);
 
   game.run_a_instruction_cycle();
 
