@@ -16,7 +16,7 @@ A gameboy emulator written in C++ using [GTK+](https://www.gtk.org/) gui interfa
 
 # How to setup
 
-## Compiling the binary
+## Compiling the code
 
 First of all, install the dependencies executing the script:
 
@@ -28,7 +28,7 @@ apt-get -y install g++
 apt-get -y install cmake libgtk-3-dev libgtkmm-3.0-dev
 ```
 
-After that, run the following commands to compile the binary:
+After that, run the following commands to compile the source code:
 
 ```sh
 export COMPILE_GUI=true 
