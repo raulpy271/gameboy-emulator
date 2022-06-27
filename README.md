@@ -14,7 +14,39 @@ A gameboy emulator written in C++ using [GTK+](https://www.gtk.org/) gui interfa
 
 ![Tetris screenshot](/assets/tetris.png)
 
-# How to use
+# How to setup
+
+## Compiling the binary
+
+First of all, install the dependencies executing the script:
+
+```sh
+apt-get update
+
+apt-get -y install g++ 
+
+apt-get -y install cmake libgtk-3-dev libgtkmm-3.0-dev
+```
+
+After that, run the following commands to compile the binary:
+
+```sh
+export COMPILE_GUI=true 
+
+make generate-buildsystem
+
+make build-cmake
+```
+
+Now, the executable is ready, the following command starts the emulation:
+
+```sh
+./build/main <path_of_a_rom_file>
+```
+
+## Using a pre-compiled binary
+
+> In progress(feel free to add this method of setup)
 
 # References
 
