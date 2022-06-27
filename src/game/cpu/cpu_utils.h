@@ -19,6 +19,8 @@
 
 #define OR_X_Y_MACRO(X, Y) OR_X_Y_Instruction(&reg.X, &reg.Y, &reg.F);
 
+#define CP_X_Y_MACRO(X, Y) SetSUBFlags(&reg.F, reg.X, reg.Y);
+
 namespace gameboy {
 
 void INC_X_Instruction(Byte* X, Byte* F, Address* PC);

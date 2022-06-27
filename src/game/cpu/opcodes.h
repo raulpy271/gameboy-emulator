@@ -30,6 +30,8 @@
 
 #define LD_aC_A 0xE2
 
+#define CP_A_C 0xB9
+
 #define CP_d8 0xFE
 
 #define CP_A_aHL 0xBE
