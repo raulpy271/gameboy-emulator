@@ -94,6 +94,19 @@ TEST(Instructions, LD_E_d8_instruction) {
   EXPECT_EQ(game.cpu.reg.PC, 0x102);
 }
 
+TEST(Instructions, LD_L_d8_instruction) {
+  gameboy::Console game;
+  int to_load = 0x50;
+  game.initialize_registers();
+  game.mem.SetInAddr(0x100, LD_L_d8, true);
+  game.mem.SetInAddr(0x101, to_load, true);
+
+  game.cpu.execute_intruction(&game.mem);
+
+  EXPECT_EQ(game.cpu.reg.L, to_load);
+  EXPECT_EQ(game.cpu.reg.PC, 0x102);
+}
+
 TEST(Instructions, LD_a8_A_instruction) {
   gameboy::Console game;
   game.initialize_registers();
