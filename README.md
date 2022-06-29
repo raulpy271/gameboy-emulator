@@ -10,7 +10,7 @@ A gameboy emulator written in C++ using [GTK+](https://www.gtk.org/) gui interfa
 
 # Screenshoots
 
-![Playing Tetris](/assets/playing_tetris.png)
+![Playing Tetris](/assets/playing_tetris.gif)
 
 ![Tetris screenshot](/assets/tetris.png)
 
