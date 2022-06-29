@@ -485,6 +485,10 @@ void CPU::execute_intruction(Memory* mem) {
     CPU::ADD_HL_DE_Instruction(mem);
     break;
 
+  case (OR_A_A):
+    OR_X_Y_MACRO(A, A);
+    break;
+
   case (OR_A_C):
     OR_X_Y_MACRO(A, C);
     break;
