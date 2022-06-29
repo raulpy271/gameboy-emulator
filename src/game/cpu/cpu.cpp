@@ -690,6 +690,14 @@ void CPU::execute_prefixed_instruction(Memory* mem) {
     BIT_X_R_MACRO(0, C);
     break;
 
+  case (BIT_4_C):
+    BIT_X_R_MACRO(4, C);
+    break;
+
+  case (BIT_5_C):
+    BIT_X_R_MACRO(5, C);
+    break;
+
   case (BIT_7_aHL):
     CPU::BIT_7_aHL_Instruction(mem);
     break;

@@ -40,6 +40,10 @@
 
 #define BIT_0_C 0x41
 
+#define BIT_4_C 0x61
+
+#define BIT_5_C 0x69
+
 #define BIT_7_aHL 0x7E
 
 #define RR_A 0x1F
