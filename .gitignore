@@ -2,4 +2,4 @@
 build/*
 objects/*
 roms-example/*.sav
-
+.vimconfig
